@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Community Guidelines — Risenow Recovery</title>
+<meta name="description" content="The Risenow community guidelines. How we treat each other, what we expect, and what this space is built for." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,400&family=Barlow+Condensed:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --black:    #080A0F;
+  --black-2:  #0D1117;
+  --black-3:  #131920;
+  --border:   rgba(255,255,255,0.07);
+  --white:    #FFFFFF;
+  --muted:    rgba(255,255,255,0.22);
+  --gold:     #C9A84C;
+  --gold-2:   #E8C76A;
+  --gold-dim: rgba(201,168,76,0.15);
+  --gold-glow:rgba(201,168,76,0.2);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Barlow',sans-serif;background:var(--black);color:var(--white);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 3rem;background:rgba(8,10,15,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.logo{display:flex;align-items:center;gap:0.6rem}
+.logo-mark{width:30px;height:30px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.logo-mark svg{width:18px;height:18px;stroke:var(--black);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.logo-name{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--white)}
+.nav-links{display:flex;gap:2.5rem}
+.nav-links a{font-size:0.82rem;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--muted);transition:color 0.2s}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{font-family:'Barlow Condensed',sans-serif;font-size:0.85rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:0.55rem 1.4rem;background:var(--gold);color:var(--black);border-radius:6px;transition:background 0.2s}
+.nav-cta:hover{background:var(--gold-2)}
+
+/* PAGE HEADER */
+.page-header{background:var(--black-2);border-bottom:1px solid var(--border);padding:5rem 3rem 4rem;text-align:center;position:relative;overflow:hidden}
+.page-header::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:400px;height:400px;background:radial-gradient(circle,var(--gold-glow) 0%,transparent 70%);pointer-events:none}
+.page-kicker{display:inline-flex;align-items:center;gap:0.6rem;font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
+.page-kicker::before,.page-kicker::after{content:'';width:24px;height:2px;background:var(--gold)}
+.page-header h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,5.5rem);line-height:0.95;letter-spacing:2px;color:var(--white);margin-bottom:1.2rem}
+.page-header p{font-size:1rem;font-weight:300;color:rgba(255,255,255,0.5);max-width:560px;margin:0 auto;line-height:1.75}
+.last-updated{font-size:0.75rem;color:rgba(255,255,255,0.2);margin-top:1.5rem;letter-spacing:0.5px}
+
+/* CONTENT */
+.content-wrap{max-width:800px;margin:0 auto;padding:5rem 2rem 6rem}
+.guideline-section{margin-bottom:4rem;padding-bottom:4rem;border-bottom:1px solid var(--border)}
+.guideline-section:last-of-type{border-bottom:none;margin-bottom:0}
+.section-num{font-family:'Bebas Neue',sans-serif;font-size:4rem;line-height:1;color:rgba(201,168,76,0.1);margin-bottom:0.2rem}
+.section-label{font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;display:flex;align-items:center;gap:0.6rem}
+.section-label::before{content:'';width:20px;height:2px;background:var(--gold)}
+.guideline-section h2{font-family:'Barlow Condensed',sans-serif;font-size:1.8rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--white);margin-bottom:1.2rem;line-height:1.1}
+.guideline-section p{font-size:0.97rem;font-weight:300;line-height:1.8;color:rgba(255,255,255,0.65);margin-bottom:1rem}
+.guideline-section p:last-child{margin-bottom:0}
+
+/* Rule list */
+.rule-list{list-style:none;margin:1.5rem 0;display:flex;flex-direction:column;gap:0}
+.rule-item{display:grid;grid-template-columns:auto 1fr;gap:1rem;padding:1.2rem 0;border-bottom:1px solid var(--border);align-items:start}
+.rule-item:last-child{border-bottom:none}
+.rule-icon{width:32px;height:32px;background:var(--gold-dim);border:1px solid rgba(201,168,76,0.2);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.9rem;flex-shrink:0;margin-top:0.1rem}
+.rule-icon.red{background:rgba(180,40,40,0.12);border-color:rgba(180,40,40,0.2)}
+.rule-title{font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--white);margin-bottom:0.3rem}
+.rule-desc{font-size:0.88rem;font-weight:300;color:rgba(255,255,255,0.5);line-height:1.65}
+
+/* Callout */
+.callout{background:var(--gold-dim);border:1px solid rgba(201,168,76,0.2);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:1.4rem 1.6rem;margin:2rem 0}
+.callout p{font-size:0.95rem;font-style:italic;color:rgba(255,255,255,0.75);line-height:1.7;margin:0}
+
+/* Consequences table */
+.consequence-table{width:100%;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin:1.5rem 0}
+.ct-row{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--border)}
+.ct-row:last-child{border-bottom:none}
+.ct-header{background:var(--black-3)}
+.ct-cell{padding:0.9rem 1.1rem;font-size:0.85rem;color:rgba(255,255,255,0.55);font-weight:300;border-right:1px solid var(--border)}
+.ct-cell:last-child{border-right:none}
+.ct-header .ct-cell{font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+
+/* FOOTER */
+footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding:2rem 3rem;border-top:1px solid var(--border);background:var(--black-2)}
+.footer-logo{font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
+.footer-links{display:flex;gap:2rem;flex-wrap:wrap}
+.footer-links a{font-size:0.8rem;font-weight:400;color:var(--muted);transition:color 0.2s;letter-spacing:0.5px}
+.footer-links a:hover{color:var(--white)}
+.footer-copy{font-size:0.78rem;color:rgba(255,255,255,0.15)}
+
+@media(max-width:700px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  .page-header{padding:3.5rem 1.5rem 3rem}
+  .content-wrap{padding:3rem 1.5rem 4rem}
+  footer{padding:1.5rem;flex-direction:column;align-items:flex-start}
+  .ct-row{grid-template-columns:1fr}
+  .ct-cell{border-right:none;border-bottom:1px solid var(--border)}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="/">
+    <div class="logo-mark">
+      <svg viewBox="0 0 16 16"><polyline points="2,12 8,4 14,12"/><line x1="8" y1="4" x2="8" y2="14"/></svg>
+    </div>
+    <span class="logo-name">Risenow</span>
+  </a>
+  <div class="nav-links">
+    <a href="/#why">Why Risenow</a>
+    <a href="/#features">Features</a>
+    <a href="/#pied-recovery">PIED Recovery</a>
+    <a href="/#community">Community</a>
+    <a href="/#support">Support</a>
+  </div>
+  <a class="nav-cta" href="/#start">Start Free →</a>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-kicker">Risenow Recovery</div>
+  <h1>Community<br>Guidelines</h1>
+  <p>This is a space built on honesty, anonymity, and mutual respect. These guidelines exist to keep it that way — for every man who finds this community at his lowest moment.</p>
+  <div class="last-updated">Last updated: May 2026</div>
+</div>
+
+<!-- CONTENT -->
+<div class="content-wrap">
+
+  <div class="guideline-section">
+    <div class="section-num">01</div>
+    <div class="section-label">The Foundation</div>
+    <h2>What This Space Is Built For</h2>
+    <p>The Risenow community exists for one purpose — to support men who have decided enough is enough. Every feature, every rule, and every decision about how this space operates comes back to that purpose.</p>
+    <p>Men come here at difficult moments. Some are at the beginning. Some are returning after a setback. Some are months in and still finding it hard. The common thread is the decision to change — and the need for a space where that decision is met with honesty rather than judgment.</p>
+    <div class="callout"><p>"You do not need to have it figured out to be here. You need to have made the decision. This community is for what comes after that."</p></div>
+    <p>The anonymity is intentional. You are a username. Nothing else identifies you here. That anonymity is what makes the honesty possible — and the honesty is what makes the community worth being part of.</p>
+  </div>
+
+  <div class="guideline-section">
+    <div class="section-num">02</div>
+    <div class="section-label">The Rules</div>
+    <h2>What We Expect From Every Member</h2>
+    <p>These are not suggestions. They are the terms on which this community operates. Every member is held to the same standard regardless of how long they have been here.</p>
+    <ul class="rule-list">
+      <div class="rule-item">
+        <div class="rule-icon">✓</div>
+        <div><div class="rule-title">Be honest</div><div class="rule-desc">Share what is actually happening — not the version you think people want to hear. A hard day posted honestly helps more men than a highlight reel. The community is built on truthful accounts, setbacks included.</div></div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-icon">✓</div>
+        <div><div class="rule-title">Protect the anonymity of others</div><div class="rule-desc">What is shared in this community stays in this community. Do not screenshot, share, or reference another member's posts outside this space. Every man here has trusted this community with something personal. Respect that trust.</div></div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-icon">✓</div>
+        <div><div class="rule-title">Respond with respect</div><div class="rule-desc">When someone shares a difficult day, respond the way you would want someone to respond to you. No lectures. No shame. No "you should have known better." Support first, always.</div></div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-icon">✓</div>
+        <div><div class="rule-title">Stay on topic</div><div class="rule-desc">This community is specifically about porn recovery, PIED, and the habits and relationships affected by long-term use. Keep posts relevant. There are better places for everything else.</div></div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-icon">✓</div>
+        <div><div class="rule-title">Come back after a setback</div><div class="rule-desc">A setback is not the end of your membership here. Post it, reset the counter, and keep going. The men who reach 90 days almost universally have resets in their history. Returning is the move.</div></div>
+      </div>
+    </ul>
+  </div>
+
+  <div class="guideline-section">
+    <div class="section-num">03</div>
+    <div class="section-label">Boundaries</div>
+    <h2>What Is Not Allowed Here</h2>
+    <p>The following behaviours are incompatible with this community. They will be addressed immediately and will result in removal where necessary.</p>
+    <ul class="rule-list">
+      <div class="rule-item">
+        <div class="rule-icon red">✗</div>
+        <div><div class="rule-title">Shaming or judging other members</div><div class="rule-desc">There is no place here for making another man feel worse about where he is. Every person in this community is working on something difficult. That deserves respect, not criticism.</div></div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-icon red">✗</div>
+        <div><div class="rule-title">Sharing explicit or triggering content</div><div class="rule-desc">This is a recovery community. Posting or linking to pornographic, sexually explicit, or triggering content of any kind is strictly prohibited — including descriptions, links, images, and references to specific content.</div></div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-icon red">✗</div>
+        <div><div class="rule-title">Unsolicited advice or prescriptive responses</div><div class="rule-desc">Unless someone has asked for your input, do not prescribe what they should be doing. Sharing your own experience is welcome. Telling someone what their experience means or what they need to do is not.</div></div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-icon red">✗</div>
+        <div><div class="rule-title">Promotion, spam, or self-promotion</div><div class="rule-desc">No affiliate links, no product promotion, no soliciting clients or followers, no spam of any kind. If you have a resource you genuinely believe helps, contact us directly.</div></div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-icon red">✗</div>
+        <div><div class="rule-title">Attempting to identify other members</div><div class="rule-desc">Do not attempt to connect a username to a real identity. Do not ask for personal information. Any attempt to undermine the anonymity of any member will result in immediate removal.</div></div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-icon red">✗</div>
+        <div><div class="rule-title">Harassment of any kind</div><div class="rule-desc">Any form of harassment toward any member will result in immediate and permanent removal with no opportunity for appeal.</div></div>
+      </div>
+    </ul>
+  </div>
+
+  <div class="guideline-section">
+    <div class="section-num">04</div>
+    <div class="section-label">Enforcement</div>
+    <h2>What Happens When Guidelines Are Broken</h2>
+    <p>These guidelines are enforced consistently and without exception. The severity of the response depends on the nature of the breach.</p>
+    <div class="consequence-table">
+      <div class="ct-row ct-header">
+        <div class="ct-cell">Breach type</div>
+        <div class="ct-cell">First occurrence</div>
+        <div class="ct-cell">Repeated or severe</div>
+      </div>
+      <div class="ct-row">
+        <div class="ct-cell">Off-topic or spam post</div>
+        <div class="ct-cell">Post removed. No action.</div>
+        <div class="ct-cell">Warning issued.</div>
+      </div>
+      <div class="ct-row">
+        <div class="ct-cell">Shaming or disrespectful response</div>
+        <div class="ct-cell">Post removed. Warning issued.</div>
+        <div class="ct-cell">Temporary suspension.</div>
+      </div>
+      <div class="ct-row">
+        <div class="ct-cell">Explicit or triggering content</div>
+        <div class="ct-cell">Immediate removal. Account review.</div>
+        <div class="ct-cell">Permanent removal.</div>
+      </div>
+      <div class="ct-row">
+        <div class="ct-cell">Harassment or identity breach</div>
+        <div class="ct-cell">Immediate permanent removal.</div>
+        <div class="ct-cell">No appeal.</div>
+      </div>
+    </div>
+    <p>If you believe a post or member has breached these guidelines, use the report function or contact us directly. We review every report.</p>
+  </div>
+
+  <div class="guideline-section">
+    <div class="section-num">05</div>
+    <div class="section-label">Important</div>
+    <h2>A Note on Mental Health and Crisis Support</h2>
+    <p>This community is a peer support space, not a substitute for professional mental health care. The men here can offer genuine understanding and solidarity — but they are not therapists, counsellors, or crisis workers.</p>
+    <p>If you are experiencing thoughts of self-harm or suicide, please reach out to a professional service immediately. In Kenya: <strong style="color:var(--white)">Befrienders Kenya — +254 722 178 177</strong>. International: <strong style="color:var(--white)">findahelpline.com</strong> lists crisis lines for every country.</p>
+    <div class="callout"><p>If you see a post that suggests someone may be in crisis, do not ignore it. Use the report function immediately. Responding with care while also flagging it is the right move.</p></div>
+    <p>Recovery from long-term pornography use can surface difficult emotions — anxiety, depression, shame, grief. These are real and they deserve professional attention alongside community support.</p>
+  </div>
+
+  <div class="guideline-section">
+    <div class="section-num">06</div>
+    <div class="section-label">The Spirit of This Space</div>
+    <h2>What We Are Building Here</h2>
+    <p>Rules describe the floor. This section describes the ceiling — what this community looks like when it is working as intended.</p>
+    <p>A man posts on Day 1 and someone on Day 60 responds with exactly what he needed to hear — not a lecture, not a list of tips, just honest acknowledgement that Day 1 is the hardest and that the community is here for Day 2 as well.</p>
+    <p>A man has a setback and posts it honestly. The responses do not pile on. They recognise the act of returning as the thing that matters most — and they say so.</p>
+    <p>A man reaches 90 days. The community marks it the way it deserves — not with hollow congratulations but with the specific recognition that 90 days of this particular fight is genuinely hard-won.</p>
+    <p>That is the community we are building. These guidelines exist to protect it.</p>
+    <div class="callout"><p>"Built for men who decided enough is enough. The community is what comes after the decision."</p></div>
+  </div>
+
+  <div style="text-align:center;padding-top:2rem">
+    <a href="/" style="font-family:'Barlow Condensed',sans-serif;font-size:0.85rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);border-bottom:1px solid rgba(201,168,76,0.3);padding-bottom:2px">← Back to Risenow</a>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Risenow</div>
+  <div class="footer-links">
+    <a href="/#pied-recovery">PIED Recovery</a>
+    <a href="/#faq">FAQ</a>
+    <a href="/#support">Support Us</a>
+    <a href="/community-guidelines.html">Community Guidelines</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="https://iquitporn.com">Blog</a>
+  </div>
+  <div class="footer-copy">Built for men who decided enough is enough.</div>
+</footer>
+
+</body>
+</html>
