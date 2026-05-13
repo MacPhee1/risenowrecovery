@@ -1444,7 +1444,7 @@ details.faq-item[open] .faq-chevron { transform: rotate(180deg); }
             <span class="support-custom-prefix">$</span>
             <input type="number" class="support-custom-input" id="sDonCustom2" placeholder="Other amount" min="1" oninput="sDonCustomInput()" />
           </div>
-          <div class="support-monthly-note" id="sDonMonthlyNote">
+          <div class="support-monthly-note" id="sDonMonthlyNote2">
             Monthly supporters are the backbone of Risenow. Your recurring contribution means we can plan ahead, build more, and keep the lights on. Cancel anytime.
           </div>
           <a class="support-donate-btn" id="sDonBtn" href="https://buy.stripe.com/00w8wP7zu0Na3BicDmcZa03" target="_blank" rel="noopener">
@@ -1564,35 +1564,68 @@ const S_STRIPE = {
   once:    { 5: 'https://buy.stripe.com/4gM7sL7zucvSdbScDmcZa02', 15: 'https://buy.stripe.com/00w8wP7zu0Na3BicDmcZa03', 25: 'https://buy.stripe.com/3cI3cv4nieE0go41YIcZa04' },
   monthly: { 5: 'https://buy.stripe.com/9B6aEXbPKeE09ZG8n6cZa05', 15: 'https://buy.stripe.com/dRm3cv072eE05JqdHqcZa06', 25: 'https://buy.stripe.com/eVqcN5dXSanK4Fm5aUcZa07' }
 };
-let sDonTypeVal = 'once', sDonAmtVal = 15;
+
+let sDonTypeVal = 'once';
+let sDonAmtVal = 15;
 
 function sDonType(type, el) {
   sDonTypeVal = type;
+  // Update all tabs
   document.querySelectorAll('.support-tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById('sDonMonthlyNote').style.display = type === 'monthly' ? 'block' : 'none';
+  document.querySelectorAll('.support-tab').forEach(t => {
+    if ((type === 'once' && t.textContent.trim() === 'Give once') ||
+        (type === 'monthly' && t.textContent.trim() === 'Give monthly')) {
+      t.classList.add('active');
+    }
+  });
+  // Show/hide monthly notes
+  ['sDonMonthlyNote', 'sDonMonthlyNote2'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.style.display = type === 'monthly' ? 'block' : 'none';
+  });
   sDonUpdate();
 }
 
 function sDonAmtSelect(amt, el) {
   sDonAmtVal = amt;
+  // Deselect all amount buttons and select clicked one
   document.querySelectorAll('.support-amt').forEach(b => b.classList.remove('selected'));
   el.classList.add('selected');
-  document.getElementById('sDonCustom').value = '';
+  // Clear custom inputs
+  ['sDonCustom', 'sDonCustom2'].forEach(function(id) {
+    var input = document.getElementById(id);
+    if (input) input.value = '';
+  });
   sDonUpdate();
 }
 
 function sDonCustomInput() {
-  const val = parseFloat(document.getElementById('sDonCustom').value);
-  document.querySelectorAll('.support-amt').forEach(b => b.classList.remove('selected'));
-  if (val && val > 0) { sDonAmt = val; sDonUpdate(); }
+  // Find whichever custom input has a value
+  var val = 0;
+  ['sDonCustom', 'sDonCustom2'].forEach(function(id) {
+    var input = document.getElementById(id);
+    if (input && input.value) val = parseFloat(input.value);
+  });
+  if (val && val > 0) {
+    sDonAmtVal = val;
+    document.querySelectorAll('.support-amt').forEach(b => b.classList.remove('selected'));
+    sDonUpdate();
+  }
 }
 
 function sDonUpdate() {
-  const label = sDonTypeVal === 'monthly' ? \`Support with \$\${sDonAmt}/month\` : \`Support with \$\${sDonAmt}\`;
-  document.getElementById('sDonBtnText').textContent = label;
-  const link = S_STRIPE[sDonTypeVal][sDonAmtVal];
-  document.getElementById('sDonBtn').href = link || '#';
+  var amt = sDonAmtVal;
+  var label = sDonTypeVal === 'monthly' ? 'Support with $' + amt + '/month' : 'Support with $' + amt;
+  var link = (S_STRIPE[sDonTypeVal] && S_STRIPE[sDonTypeVal][amt]) ? S_STRIPE[sDonTypeVal][amt] : '#';
+  // Update all donate buttons and their text
+  ['sDonBtnText', 'sDonBtnText2'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = label;
+  });
+  ['sDonBtn', 'sDonBtn2'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.href = link;
+  });
 }
 </script>
 </body>
