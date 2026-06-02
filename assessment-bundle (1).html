@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Risenow Recovery Assessment Bundle — All Three Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0d1b2a;
+    --navy-mid: #1a2e42;
+    --navy-light: #243b55;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-pale: #f5e9c8;
+    --cream: #faf7f0;
+    --text: #1a1a2e;
+    --text-muted: #5a6072;
+    --text-light: #8a92a6;
+    --border: rgba(201,168,76,0.2);
+    --border-light: rgba(0,0,0,0.08);
+    --white: #ffffff;
+    --danger: #c0392b;
+    --success: #1a7a4a;
+    --warning: #b07d2a;
+    --r: 12px;
+  }
+
+  html { font-size: 16px; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 20px 80px;
+  }
+
+  .container { width: 100%; max-width: 680px; }
+
+  /* HEADER */
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 48px;
+  }
+  .logo { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--navy); letter-spacing: -0.02em; }
+  .logo span { color: var(--gold); }
+  .secure-badge { font-size: 12px; color: var(--text-light); display: flex; align-items: center; gap: 5px; }
+  .secure-badge svg { width: 14px; height: 14px; opacity: 0.6; }
+
+  /* SCREENS */
+  .screen { display: none; }
+  .screen.active { display: block; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* LANDING */
+  .eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .hero-title { font-family: 'DM Serif Display', serif; font-size: 42px; line-height: 1.1; color: var(--navy); letter-spacing: -0.02em; margin-bottom: 20px; }
+  .hero-title em { font-style: italic; color: var(--gold); }
+  .hero-body { font-size: 16px; line-height: 1.75; color: var(--text-muted); margin-bottom: 36px; max-width: 540px; }
+
+  /* TOOL CARDS */
+  .tools-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 36px; }
+  .tool-card {
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--r);
+    padding: 20px 22px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+  }
+  .tool-num {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: var(--gold-light);
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .tool-info { flex: 1; }
+  .tool-title { font-size: 15px; font-weight: 500; color: var(--navy); margin-bottom: 4px; }
+  .tool-desc { font-size: 13px; color: var(--text-muted); line-height: 1.55; margin-bottom: 10px; }
+  .tool-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 9px;
+    border-radius: 20px;
+    background: var(--gold-pale);
+    color: var(--warning);
+  }
+  .tool-price {
+    font-size: 13px;
+    color: var(--text-light);
+    text-decoration: line-through;
+    white-space: nowrap;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  /* PRICING BLOCK */
+  .pricing-block {
+    background: var(--navy);
+    border-radius: var(--r);
+    padding: 28px;
+    margin-bottom: 16px;
+  }
+  .pricing-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .pricing-left {}
+  .pricing-label { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 6px; }
+  .pricing-amount { font-family: 'DM Serif Display', serif; font-size: 52px; color: var(--gold-light); line-height: 1; }
+  .pricing-was { font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 4px; }
+  .pricing-was span { text-decoration: line-through; }
+  .savings-badge {
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .pricing-includes { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 18px; }
+  .pricing-includes-label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 12px; }
+  .include-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 0;
+    font-size: 14px;
+    color: rgba(255,255,255,0.75);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .include-row:last-child { border-bottom: none; }
+  .include-check-sm {
+    width: 16px;
+    height: 16px;
+    background: rgba(201,168,76,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .include-check-sm svg { width: 8px; height: 8px; color: var(--gold); }
+
+  /* BUTTONS */
+  .btn-primary {
+    width: 100%;
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    border-radius: var(--r);
+    padding: 16px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-primary:active { transform: translateY(0); }
+  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+  .disclaimer { font-size: 12px; color: var(--text-light); text-align: center; margin-top: 14px; line-height: 1.6; }
+
+  /* PAYWALL */
+  .paywall-wrap { text-align: center; }
+  .paywall-lock { width: 64px; height: 64px; background: var(--navy); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; }
+  .paywall-lock svg { width: 28px; height: 28px; color: var(--gold-light); }
+  .paywall-title { font-family: 'DM Serif Display', serif; font-size: 30px; color: var(--navy); margin-bottom: 12px; }
+  .paywall-body { font-size: 15px; color: var(--text-muted); line-height: 1.7; max-width: 460px; margin: 0 auto 28px; }
+  .paywall-price-row { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 20px; }
+  .paywall-amount { font-family: 'DM Serif Display', serif; font-size: 52px; color: var(--navy); line-height: 1; }
+  .paywall-amount-detail { text-align: left; }
+  .paywall-amount-detail strong { display: block; font-size: 14px; font-weight: 500; color: var(--navy); }
+  .paywall-amount-detail span { font-size: 12px; color: var(--text-light); }
+  #card-element { background: var(--white); border: 1px solid var(--border-light); border-radius: var(--r); padding: 14px 16px; margin-bottom: 14px; transition: border-color 0.2s; }
+  #card-element.StripeElement--focus { border-color: var(--gold); }
+  #card-errors { color: var(--danger); font-size: 13px; margin-bottom: 12px; min-height: 18px; }
+  .stripe-note { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 12px; color: var(--text-light); margin-top: 10px; }
+  .stripe-note svg { width: 14px; height: 14px; opacity: 0.5; }
+
+  /* ASSESSMENT HUB */
+  .hub-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .hub-title { font-family: 'DM Serif Display', serif; font-size: 32px; color: var(--navy); margin-bottom: 8px; letter-spacing: -0.02em; }
+  .hub-body { font-size: 15px; color: var(--text-muted); line-height: 1.65; margin-bottom: 32px; }
+  .hub-cards { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+  .hub-card {
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--r);
+    padding: 22px 24px;
+    cursor: pointer;
+    transition: all 0.18s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .hub-card:hover { border-color: var(--gold); transform: translateX(3px); }
+  .hub-card.completed { border-color: var(--success); background: #f2fbf6; }
+  .hub-card.active-now { border-color: var(--gold); background: var(--gold-pale); }
+  .hub-card-left { flex: 1; }
+  .hub-card-num { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light); margin-bottom: 4px; }
+  .hub-card.completed .hub-card-num { color: var(--success); }
+  .hub-card.active-now .hub-card-num { color: var(--gold); }
+  .hub-card-title { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--navy); margin-bottom: 3px; }
+  .hub-card-desc { font-size: 13px; color: var(--text-muted); line-height: 1.45; }
+  .hub-card-right { flex-shrink: 0; }
+  .status-badge {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 20px;
+  }
+  .status-badge.done { background: #e2f5ea; color: var(--success); }
+  .status-badge.start { background: var(--gold-pale); color: var(--warning); }
+  .status-badge.pending { background: rgba(0,0,0,0.04); color: var(--text-light); }
+
+  /* QUIZ */
+  .progress-wrap { margin-bottom: 40px; }
+  .progress-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .progress-label { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light); }
+  .progress-fraction { font-size: 13px; color: var(--text-light); }
+  .progress-track { height: 2px; background: rgba(0,0,0,0.08); border-radius: 2px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-light)); border-radius: 2px; transition: width 0.5s cubic-bezier(0.4,0,0.2,1); }
+  .quiz-tool-label { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(201,168,76,0.7); margin-bottom: 6px; }
+  .q-category { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+  .q-text { font-family: 'DM Serif Display', serif; font-size: 26px; line-height: 1.3; color: var(--navy); margin-bottom: 10px; letter-spacing: -0.01em; }
+  .q-sub { font-size: 14px; color: var(--text-muted); line-height: 1.65; margin-bottom: 28px; padding-left: 14px; border-left: 2px solid var(--border); }
+  .options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
+  .opt { background: var(--white); border: 1px solid var(--border-light); border-radius: var(--r); padding: 16px 20px; text-align: left; cursor: pointer; transition: all 0.18s; display: flex; align-items: center; gap: 14px; }
+  .opt:hover { border-color: var(--gold); background: var(--gold-pale); transform: translateX(3px); }
+  .opt.selected { border-color: var(--gold); background: var(--gold-pale); }
+  .opt-indicator { width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid rgba(0,0,0,0.15); flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.18s; }
+  .opt.selected .opt-indicator { background: var(--gold); border-color: var(--gold); }
+  .opt.selected .opt-indicator::after { content: ''; width: 6px; height: 6px; background: var(--navy); border-radius: 50%; display: block; }
+  .opt-text { font-size: 15px; color: var(--text); line-height: 1.4; }
+  .opt.selected .opt-text { color: var(--navy); font-weight: 500; }
+  .nav-row { display: flex; align-items: center; justify-content: space-between; }
+  .btn-back { background: none; border: 1px solid var(--border-light); border-radius: 8px; padding: 10px 18px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text-muted); cursor: pointer; transition: all 0.15s; }
+  .btn-back:hover { border-color: var(--text-muted); color: var(--text); }
+  .btn-next { background: var(--navy); border: none; border-radius: 8px; padding: 12px 28px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: var(--white); cursor: pointer; transition: all 0.18s; }
+  .btn-next:hover:not(:disabled) { background: var(--navy-mid); }
+  .btn-next:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  /* LOADING */
+  .loading-wrap { text-align: center; padding: 60px 0; }
+  .spinner { width: 40px; height: 40px; border: 2px solid var(--border-light); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 20px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-text { font-size: 15px; color: var(--text-muted); }
+
+  /* RESULT */
+  .result-header { margin-bottom: 28px; }
+  .result-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .result-title { font-family: 'DM Serif Display', serif; font-size: 32px; color: var(--navy); letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 8px; }
+  .result-subtitle { font-size: 15px; color: var(--text-muted); line-height: 1.65; }
+  .score-band { border-radius: var(--r); padding: 22px 26px; margin-bottom: 24px; }
+  .score-band.low { background: #eaf6f0; border: 1px solid #b8e0cc; }
+  .score-band.moderate { background: #fef6e4; border: 1px solid #f0d48a; }
+  .score-band.high { background: #fdf0ee; border: 1px solid #e8bab4; }
+  .score-band.very-high { background: #f9ebeb; border: 1px solid #dda8a6; }
+  .band-label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 5px; }
+  .score-band.low .band-label { color: var(--success); }
+  .score-band.moderate .band-label { color: var(--warning); }
+  .score-band.high .band-label, .score-band.very-high .band-label { color: var(--danger); }
+  .band-title { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--navy); margin-bottom: 6px; }
+  .band-body { font-size: 14px; line-height: 1.65; color: var(--text-muted); }
+  .scores-grid { display: grid; gap: 10px; margin-bottom: 24px; }
+  .scores-grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .scores-grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .score-card { background: var(--white); border: 1px solid var(--border-light); border-radius: var(--r); padding: 14px; text-align: center; }
+  .score-num { font-family: 'DM Serif Display', serif; font-size: 30px; color: var(--navy); line-height: 1; margin-bottom: 3px; }
+  .score-num span { font-size: 13px; color: var(--text-light); }
+  .score-card-label { font-size: 11px; color: var(--text-light); line-height: 1.4; }
+  .section-heading { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light); margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border-light); }
+  .findings-list { margin-bottom: 24px; }
+  .finding-item { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid var(--border-light); }
+  .finding-item:last-child { border-bottom: none; }
+  .finding-dot { width: 9px; height: 9px; border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
+  .finding-title { font-size: 14px; font-weight: 500; color: var(--navy); margin-bottom: 2px; }
+  .finding-note { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+  .context-panel { background: var(--navy); border-radius: var(--r); padding: 22px 26px; margin-bottom: 24px; }
+  .context-panel h3 { font-family: 'DM Serif Display', serif; font-size: 17px; color: var(--gold-light); margin-bottom: 7px; }
+  .context-panel p { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.65; }
+  .diff-panel { background: var(--navy); border-radius: var(--r); padding: 22px 26px; margin-bottom: 24px; }
+  .diff-panel h3 { font-family: 'DM Serif Display', serif; font-size: 17px; color: var(--gold-light); margin-bottom: 7px; }
+  .diff-panel p { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.65; margin-bottom: 14px; }
+  .diff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .diff-col { background: rgba(255,255,255,0.06); border-radius: 8px; padding: 12px 14px; }
+  .diff-col-title { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+  .diff-col.pied .diff-col-title { color: var(--gold); }
+  .diff-col.pa .diff-col-title { color: #7ab8f5; }
+  .diff-col ul { list-style: none; }
+  .diff-col li { font-size: 12px; color: rgba(255,255,255,0.7); padding: 4px 0 4px 12px; border-bottom: 1px solid rgba(255,255,255,0.06); position: relative; line-height: 1.4; }
+  .diff-col li:last-child { border-bottom: none; }
+  .diff-col li::before { content: '—'; position: absolute; left: 0; opacity: 0.4; }
+  .steps-list { margin-bottom: 24px; }
+  .step-item { display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid var(--border-light); }
+  .step-item:last-child { border-bottom: none; }
+  .step-num { width: 26px; height: 26px; border-radius: 50%; background: var(--gold-pale); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; color: var(--gold); flex-shrink: 0; margin-top: 1px; }
+  .step-title { font-size: 14px; font-weight: 500; color: var(--navy); margin-bottom: 3px; }
+  .step-body { font-size: 13px; color: var(--text-muted); line-height: 1.55; }
+  .next-tool-block { background: linear-gradient(135deg, var(--navy), var(--navy-mid)); border-radius: var(--r); padding: 26px; margin-bottom: 14px; }
+  .next-tool-block h3 { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--white); margin-bottom: 6px; }
+  .next-tool-block p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.6; margin-bottom: 16px; }
+  .btn-next-tool { background: var(--gold); color: var(--navy); border: none; border-radius: 8px; padding: 12px 22px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.18s; }
+  .btn-next-tool:hover { background: var(--gold-light); }
+  .cta-block { background: linear-gradient(135deg, var(--navy), var(--navy-mid)); border-radius: var(--r); padding: 26px; margin-bottom: 14px; }
+  .cta-block h3 { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--white); margin-bottom: 6px; }
+  .cta-block p { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.65; margin-bottom: 16px; }
+  .btn-cta { display: inline-block; background: var(--gold); color: var(--navy); border: none; border-radius: 8px; padding: 12px 22px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.18s; text-decoration: none; }
+  .btn-cta:hover { background: var(--gold-light); }
+  .btn-restart { width: 100%; background: none; border: 1px solid var(--border-light); border-radius: var(--r); padding: 12px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text-muted); cursor: pointer; transition: all 0.15s; margin-top: 10px; }
+  .btn-restart:hover { border-color: var(--text-muted); color: var(--text); }
+  .result-divider { height: 1px; background: var(--border-light); margin: 28px 0; }
+
+  /* ALL DONE */
+  .all-done-icon { width: 72px; height: 72px; background: #e2f5ea; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; }
+  .all-done-icon svg { width: 32px; height: 32px; color: var(--success); }
+  .all-done-title { font-family: 'DM Serif Display', serif; font-size: 34px; color: var(--navy); text-align: center; margin-bottom: 12px; }
+  .all-done-body { font-size: 15px; color: var(--text-muted); line-height: 1.7; text-align: center; margin-bottom: 32px; }
+  .summary-cards { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+  .summary-card { background: var(--white); border: 1px solid var(--border-light); border-radius: var(--r); padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: all 0.15s; }
+  .summary-card:hover { border-color: var(--gold); }
+  .summary-card-title { font-size: 14px; font-weight: 500; color: var(--navy); }
+  .summary-card-band { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .summary-card-arrow { font-size: 18px; color: var(--text-light); }
+
+  @media (max-width: 560px) {
+    .hero-title { font-size: 32px; }
+    .diff-grid { grid-template-columns: 1fr; }
+    .scores-grid-4 { grid-template-columns: 1fr 1fr; }
+    .q-text { font-size: 22px; }
+  }
+
+  .result-save-note { background: var(--gold-pale); border: 1px solid var(--gold); border-radius: var(--r); padding: 14px 16px; font-size: 13px; color: var(--navy); line-height: 1.55; margin-bottom: 12px; }
+  .result-save-note strong { font-weight: 600; }
+  .btn-download { width: 100%; background: var(--gold); color: var(--navy); border: none; border-radius: var(--r); padding: 15px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; transition: all 0.15s; margin-bottom: 10px; }
+  .btn-download:hover { background: var(--gold-light); }
+  #print-header { display: none; }
+  @media print {
+    #print-header { display: block !important; }
+    body { background: #fff; }
+    .secure-badge, .result-save-note, .btn-download, .btn-restart, .cta-block, #alldone-cta { display: none !important; }
+    .container { max-width: 100%; padding: 0; }
+    .screen { display: none !important; }
+    #screen-alldone { display: block !important; }
+    @page { margin: 1.5cm; }
+  }
+
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header class="site-header">
+    <div class="logo">Rise<span>now</span></div>
+    <div class="secure-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Secure assessment
+    </div>
+  </header>
+
+  <!-- LANDING -->
+  <div class="screen active" id="screen-landing">
+    <div class="eyebrow">Risenow Recovery · Assessment Bundle</div>
+    <h1 class="hero-title">Three assessments. <em>One honest picture.</em></h1>
+    <p class="hero-body">Each tool measures a different dimension of the same pattern. Together they give you the complete picture — what is happening, how serious it is, and where to start.</p>
+
+    <div class="tools-list">
+      <div class="tool-card">
+        <div class="tool-num">1</div>
+        <div class="tool-info">
+          <div class="tool-title">Am I watching too much porn?</div>
+          <div class="tool-desc">20 questions across frequency, escalation, compulsion, and life impact. Four independent scores and a personalised action plan.</div>
+          <div class="tool-tags">
+            <span class="tag">Frequency</span>
+            <span class="tag">Escalation</span>
+            <span class="tag">Compulsion</span>
+            <span class="tag">Life impact</span>
+          </div>
+        </div>
+        <div class="tool-price">$14.99</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-num">2</div>
+        <div class="tool-info">
+          <div class="tool-title">Am I masturbating too much?</div>
+          <div class="tool-desc">20 questions covering frequency, compulsion patterns, emotional triggers, and real-world costs. Separates habit from compulsion.</div>
+          <div class="tool-tags">
+            <span class="tag">Frequency</span>
+            <span class="tag">Compulsion</span>
+            <span class="tag">Emotional triggers</span>
+            <span class="tag">Impact</span>
+          </div>
+        </div>
+        <div class="tool-price">$14.99</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-num">3</div>
+        <div class="tool-info">
+          <div class="tool-title">Do I have PIED?</div>
+          <div class="tool-desc">20 questions distinguishing pornography-induced erectile dysfunction from performance anxiety. PIED score, anxiety score, and recovery roadmap.</div>
+          <div class="tool-tags">
+            <span class="tag">PIED vs anxiety</span>
+            <span class="tag">Physical response</span>
+            <span class="tag">Recovery roadmap</span>
+          </div>
+        </div>
+        <div class="tool-price">$14.99</div>
+      </div>
+    </div>
+
+    <div class="pricing-block">
+      <div class="pricing-top">
+        <div class="pricing-left">
+          <div class="pricing-label">Bundle price · One-time</div>
+          <div class="pricing-amount">$34.99</div>
+          <div class="pricing-was">Individual price: <span>$44.97</span></div>
+        </div>
+        <div class="savings-badge">Save $19.98</div>
+      </div>
+      <div class="pricing-includes">
+        <div class="pricing-includes-label">What you get</div>
+        <div class="include-row">
+          <div class="include-check-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          All three 20-question assessments — 60 questions total
+        </div>
+        <div class="include-row">
+          <div class="include-check-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          Detailed result for each tool with specific findings from your answers
+        </div>
+        <div class="include-row">
+          <div class="include-check-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          Three personalised action plans — one per tool
+        </div>
+        <div class="include-row">
+          <div class="include-check-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          PIED vs performance anxiety split with recovery roadmap
+        </div>
+        <div class="include-row">
+          <div class="include-check-sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          Complete summary dashboard with all three results side by side
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-primary" onclick="goToPaywall()">Get the bundle — $34.99 →</button>
+    <p class="disclaimer">One-time payment. No subscription. All three assessments unlocked immediately after payment.</p>
+  </div>
+
+  <!-- PAYWALL -->
+  <div class="screen" id="screen-paywall">
+    <div class="paywall-wrap">
+      <div class="paywall-lock">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <h2 class="paywall-title">Unlock the bundle</h2>
+      <p class="paywall-body">One payment unlocks all three assessments. Complete them in any order, return to your results at any time.</p>
+      <div class="paywall-price-row">
+        <div class="paywall-amount">$34.99</div>
+        <div class="paywall-amount-detail">
+          <strong>One-time · All three tools</strong>
+          <span>Save $19.98 vs individual prices</span>
+        </div>
+      </div>
+      <button class="btn-primary" id="btn-pay" onclick="handlePayment()">Pay $34.99 and unlock all three →</button>
+      <div class="stripe-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Secured by Stripe · Your card details never touch our servers
+      </div>
+    </div>
+  </div>
+
+  <!-- HUB — shown after payment, between assessments -->
+  <div class="screen" id="screen-hub">
+    <div class="hub-eyebrow">Risenow Recovery · Assessment Bundle</div>
+    <h2 class="hub-title">Your assessments</h2>
+    <p class="hub-body" id="hub-body">Select an assessment to begin. You can complete them in any order.</p>
+    <div class="hub-cards" id="hub-cards"></div>
+    <button class="btn-restart" onclick="restart()">← Start over</button>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="screen" id="screen-quiz">
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span class="progress-label" id="progress-label"></span>
+        <span class="progress-fraction" id="progress-fraction"></span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+      </div>
+    </div>
+    <div class="quiz-tool-label" id="quiz-tool-label"></div>
+    <div class="q-category" id="q-category"></div>
+    <h2 class="q-text" id="q-text"></h2>
+    <p class="q-sub" id="q-sub"></p>
+    <div class="options" id="options"></div>
+    <div class="nav-row">
+      <button class="btn-back" id="btn-back" onclick="goBack()">← Back</button>
+      <button class="btn-next" id="btn-next" onclick="goNext()" disabled>Continue →</button>
+    </div>
+  </div>
+
+  <!-- LOADING -->
+  <div class="screen" id="screen-loading">
+    <div class="loading-wrap">
+      <div class="spinner"></div>
+      <p class="loading-text" id="loading-text">Analysing your responses…</p>
+    </div>
+  </div>
+
+  <!-- RESULT (individual) -->
+  <div class="screen" id="screen-result">
+    <div id="result-content"></div>
+  </div>
+
+  <!-- ALL DONE -->
+  <div class="screen" id="screen-alldone">
+    <div class="all-done-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+    </div>
+    <h2 class="all-done-title">All three complete</h2>
+    <p class="all-done-body">Your results are below. Each assessment measured a different dimension — together they give you the complete picture of where you are and where to start.</p>
+    <div class="summary-cards" id="summary-cards"></div>
+    <div class="result-save-note">
+      <strong>Save your results.</strong> These results are not emailed to you. Download a copy to keep before you close this page.
+    </div>
+    <button class="btn-download" onclick="downloadResult()">⬇ Download my results (PDF)</button>
+    <div id="alldone-cta"></div>
+    <button class="btn-restart" onclick="restart()">← Start over</button>
+  </div>
+
+</div>
+
+<script>
+// ─── CONFIG ──────────────────────────────────────────────────────
+const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/cNifZhaLGcvSc7O1YIcZa0f';
+const PAYMENT_ENDPOINT = '/api/create-payment-intent';
+
+// ─── TOOL DEFINITIONS ─────────────────────────────────────────────
+const TOOLS = [
+  {
+    id: 'porn',
+    name: 'Am I watching too much porn?',
+    shortName: 'Porn use',
+    desc: '20 questions · Frequency, escalation, compulsion, life impact',
+  },
+  {
+    id: 'mast',
+    name: 'Am I masturbating too much?',
+    shortName: 'Masturbation',
+    desc: '20 questions · Frequency, compulsion, emotional triggers, impact',
+  },
+  {
+    id: 'pied',
+    name: 'Do I have PIED?',
+    shortName: 'PIED',
+    desc: '20 questions · PIED vs performance anxiety, recovery roadmap',
+  }
+];
+
+// ─── QUESTIONS ────────────────────────────────────────────────────
+
+const QUESTIONS = {
+
+porn: [
+  { id:'hist_start', category:'History', text:'How old were you when you first started watching pornography?', sub:'Select the option that best matches your experience.', opts:[{t:'18 or older',freq:0,esc:0,comp:0,impact:0},{t:'15 to 17',freq:1,esc:0,comp:0,impact:0},{t:'12 to 14',freq:2,esc:0,comp:0,impact:0},{t:'Under 12',freq:3,esc:0,comp:0,impact:0}] },
+  { id:'hist_duration', category:'History', text:'How long have you been watching pornography regularly?', sub:'Regular means at least a few times per month sustained over time.', opts:[{t:'Less than a year',freq:0,esc:0,comp:0,impact:0},{t:'1 to 3 years',freq:1,esc:0,comp:0,impact:0},{t:'3 to 7 years',freq:2,esc:0,comp:0,impact:0},{t:'More than 7 years',freq:3,esc:0,comp:0,impact:0}] },
+  { id:'freq_current', category:'Frequency', text:'How often do you currently watch pornography?', sub:'Select the option that best describes your typical pattern over the past month.', opts:[{t:'A few times a month or less',freq:0,esc:0,comp:0,impact:0},{t:'Once or twice a week',freq:1,esc:0,comp:0,impact:0},{t:'Most days',freq:2,esc:0,comp:0,impact:0},{t:'Multiple times a day',freq:3,esc:0,comp:1,impact:0}] },
+  { id:'freq_time', category:'Frequency', text:'On a day when you watch pornography, how much time do you typically spend in total?', sub:'Include browsing, selecting content, and viewing time combined.', opts:[{t:'Under 20 minutes',freq:0,esc:0,comp:0,impact:0},{t:'20 to 45 minutes',freq:1,esc:0,comp:0,impact:0},{t:'45 minutes to 2 hours',freq:2,esc:0,comp:1,impact:1},{t:'More than 2 hours',freq:3,esc:0,comp:2,impact:2}] },
+  { id:'freq_devices', category:'Frequency', text:'On how many different devices or platforms do you typically access pornography?', sub:'Select the option that best describes your current pattern.', opts:[{t:'One device, one platform',freq:0,esc:0,comp:0,impact:0},{t:'One device, multiple platforms',freq:1,esc:0,comp:0,impact:0},{t:'Multiple devices',freq:2,esc:0,comp:1,impact:0},{t:'Multiple devices and platforms',freq:3,esc:0,comp:1,impact:0}] },
+  { id:'esc_content', category:'Escalation', text:'How has the type of content you seek changed since you began watching pornography?', sub:'Select the option that most accurately describes the direction and degree of change.', opts:[{t:'No change — the same type of content as always',freq:0,esc:0,comp:0,impact:0},{t:'Somewhat different from when I started',freq:0,esc:1,comp:0,impact:0},{t:'Noticeably different from when I started',freq:0,esc:2,comp:0,impact:0},{t:'Significantly different from when I started',freq:0,esc:3,comp:0,impact:0}] },
+  { id:'esc_arousal', category:'Escalation', text:'How does content that used to be satisfying feel now?', sub:'Select the option that best describes your experience with content you previously found arousing.', opts:[{t:'Still satisfying — no change',freq:0,esc:0,comp:0,impact:0},{t:'Slightly less satisfying than before',freq:0,esc:1,comp:0,impact:0},{t:'Noticeably less satisfying than before',freq:0,esc:2,comp:1,impact:0},{t:'No longer satisfying at all',freq:0,esc:3,comp:1,impact:0}] },
+  { id:'esc_novelty', category:'Escalation', text:'How much time do you spend searching for new content versus returning to content you have seen before?', sub:'Select the option that best describes your typical viewing session.', opts:[{t:'Mostly returning to content I have seen before',freq:0,esc:0,comp:0,impact:0},{t:'A mix of familiar and new content',freq:0,esc:1,comp:0,impact:0},{t:'Mostly searching for new content',freq:0,esc:2,comp:1,impact:0},{t:'Almost entirely searching for new content',freq:0,esc:3,comp:2,impact:0}] },
+  { id:'esc_platforms', category:'Escalation', text:'Has your use moved from free content to paid platforms, live content, or interactive formats?', sub:'Select the option that best describes how your access patterns have changed.', opts:[{t:'No — free content only throughout',freq:0,esc:0,comp:0,impact:0},{t:'Occasionally accessed paid content',freq:0,esc:1,comp:0,impact:0},{t:'Regularly use paid platforms or live content',freq:0,esc:2,comp:1,impact:1},{t:'Primarily use paid, live, or interactive content',freq:0,esc:3,comp:2,impact:2}] },
+  { id:'comp_control', category:'Compulsion', text:'When you have decided to stop or reduce your use, what has happened?', sub:'Think of specific times you intended to stop or cut back and select the most accurate option.', opts:[{t:'I stopped or reduced without difficulty',freq:0,esc:0,comp:0,impact:0},{t:'I mostly managed with some lapses',freq:0,esc:0,comp:1,impact:0},{t:'I found it difficult and often did not follow through',freq:0,esc:0,comp:2,impact:1},{t:'I was unable to stop despite intending to',freq:0,esc:0,comp:3,impact:2}] },
+  { id:'comp_trigger', category:'Compulsion', text:'What most often precedes an urge to watch pornography?', sub:'Select the option that best describes what is typically happening just before the urge arises.', opts:[{t:'A specific choice I make in a relaxed state',freq:0,esc:0,comp:0,impact:0},{t:'A mix of deliberate choice and habit',freq:0,esc:0,comp:1,impact:0},{t:'Stress, boredom, loneliness, or discomfort',freq:0,esc:0,comp:2,impact:1},{t:'Emotional states more often than physical desire',freq:0,esc:0,comp:3,impact:1}] },
+  { id:'comp_automatic', category:'Compulsion', text:'How would you describe how a viewing session typically begins?', sub:'Select the option that most accurately reflects your experience.', opts:[{t:'I make a deliberate decision each time',freq:0,esc:0,comp:0,impact:0},{t:'Sometimes I find myself doing it without a clear decision',freq:0,esc:0,comp:1,impact:0},{t:'Often it begins before I have consciously decided',freq:0,esc:0,comp:2,impact:1},{t:'I am usually already watching before I have noticed the decision',freq:0,esc:0,comp:3,impact:1}] },
+  { id:'comp_preoccupation', category:'Compulsion', text:'During a typical day, how often do thoughts about pornography arise while you are doing other things?', sub:'Include urges, anticipation, or thoughts that appear when you are occupied with something else.', opts:[{t:'Rarely or never',freq:0,esc:0,comp:0,impact:0},{t:'Occasionally',freq:0,esc:0,comp:1,impact:0},{t:'Often during the day',freq:0,esc:0,comp:2,impact:1},{t:'Frequently throughout the day',freq:0,esc:0,comp:3,impact:2}] },
+  { id:'comp_mood', category:'Compulsion', text:'How do you feel when you go a day or more without watching pornography?', sub:'Select the option that most accurately describes your typical experience during periods of abstinence.', opts:[{t:'No different',freq:0,esc:0,comp:0,impact:0},{t:'Slightly restless or distracted',freq:0,esc:0,comp:1,impact:0},{t:'Noticeably irritable, anxious, or on edge',freq:0,esc:0,comp:2,impact:1},{t:'Significant difficulty functioning or concentrating',freq:0,esc:0,comp:3,impact:2}] },
+  { id:'impact_work', category:'Life impact', text:'How has pornography use affected your focus, productivity, or energy in work or daily life?', sub:'Select the option that best describes the effect on days when you watch pornography.', opts:[{t:'No effect',freq:0,esc:0,comp:0,impact:0},{t:'Occasionally feel less focused or energised',freq:0,esc:0,comp:0,impact:1},{t:'Regularly affects my concentration or energy',freq:0,esc:0,comp:0,impact:2},{t:'Meaningful impact on my productivity most days',freq:0,esc:0,comp:0,impact:3}] },
+  { id:'impact_sleep', category:'Life impact', text:'How often does pornography use displace sleep or other activities you intended to do?', sub:'Select the option that best describes how often it affects your time management.', opts:[{t:'Rarely or never',freq:0,esc:0,comp:0,impact:0},{t:'Occasionally cuts into sleep or other plans',freq:0,esc:0,comp:1,impact:1},{t:'Regularly displaces sleep, work, or other commitments',freq:0,esc:0,comp:2,impact:2},{t:'Frequently disrupts my schedule',freq:0,esc:0,comp:2,impact:3}] },
+  { id:'impact_after', category:'Life impact', text:'How do you typically feel in the period after watching pornography?', sub:'Select the option that most accurately describes your usual emotional state afterward.', opts:[{t:'Neutral or relaxed — no negative feelings',freq:0,esc:0,comp:0,impact:0},{t:'Occasionally mildly negative',freq:0,esc:0,comp:0,impact:1},{t:'Often feel guilt, regret, or self-criticism',freq:0,esc:0,comp:1,impact:2},{t:'Almost always feel significant negative emotions',freq:0,esc:0,comp:1,impact:3}] },
+  { id:'impact_concealment', category:'Life impact', text:'How much effort do you put into keeping your pornography use hidden?', sub:'Select the option that best describes your concealment behaviour.', opts:[{t:'Standard privacy — nothing unusual',freq:0,esc:0,comp:0,impact:0},{t:'Some active steps such as clearing history',freq:0,esc:0,comp:0,impact:1},{t:'Active concealment on a regular basis',freq:0,esc:0,comp:1,impact:2},{t:'Significant ongoing effort to conceal it',freq:0,esc:0,comp:2,impact:3}] },
+  { id:'rel_intimacy', category:'Relationships', text:'How has your interest in or experience of sex with a partner changed over this period?', sub:'If not currently in a relationship, answer based on your interest in partnered sex generally.', opts:[{t:'No change',freq:0,esc:0,comp:0,impact:0},{t:'Slightly less interested or engaged than before',freq:0,esc:0,comp:0,impact:1},{t:'Noticeably less interested than before',freq:0,esc:1,comp:1,impact:2},{t:'Significantly less interested than before',freq:0,esc:2,comp:1,impact:3}] },
+  { id:'rel_partner', category:'Relationships', text:'Has a partner ever raised a concern about your pornography use or your availability in the relationship?', sub:'If not in a relationship, select the first option.', opts:[{t:'Not in a relationship or no concern raised',freq:0,esc:0,comp:0,impact:0},{t:'Partner has mentioned it once or twice',freq:0,esc:0,comp:0,impact:2},{t:'Partner has raised it as a clear concern',freq:0,esc:0,comp:0,impact:3},{t:'It has been a significant source of conflict in the relationship',freq:0,esc:0,comp:0,impact:3}] }
+],
+
+mast: [
+  { id:'freq_current', category:'Frequency', text:'How often do you currently masturbate?', sub:'Select the option that best describes your typical pattern over the past month.', opts:[{t:'A few times a month or less',freq:0,comp:0,impact:0},{t:'Once or twice a week',freq:1,comp:0,impact:0},{t:'Once a day most days',freq:2,comp:0,impact:0},{t:'Multiple times a day',freq:3,comp:1,impact:1}] },
+  { id:'freq_peak', category:'Frequency', text:'Over your lifetime, what has your highest sustained frequency been?', sub:'Think of the period when frequency was at its highest and lasted more than a few weeks.', opts:[{t:'A few times a week at most',freq:0,comp:0,impact:0},{t:'Once a day',freq:1,comp:0,impact:0},{t:'Two to three times a day',freq:2,comp:1,impact:0},{t:'More than three times a day',freq:3,comp:2,impact:1}] },
+  { id:'freq_duration', category:'Frequency', text:'How long has your current pattern been consistent?', sub:'How long have you been masturbating at roughly this frequency?', opts:[{t:'Less than a month',freq:0,comp:0,impact:0},{t:'One to six months',freq:1,comp:0,impact:0},{t:'Six months to two years',freq:2,comp:1,impact:0},{t:'More than two years',freq:3,comp:1,impact:1}] },
+  { id:'freq_time', category:'Frequency', text:'On a typical day when you masturbate, how much total time does it take?', sub:'Include any time spent searching for or selecting content, and the act itself.', opts:[{t:'Under 15 minutes',freq:0,comp:0,impact:0},{t:'15 to 30 minutes',freq:1,comp:0,impact:0},{t:'30 minutes to an hour',freq:2,comp:1,impact:1},{t:'More than an hour',freq:3,comp:2,impact:2}] },
+  { id:'freq_change', category:'Frequency', text:'Compared to two years ago, how has your frequency changed?', sub:'Select the option that most accurately describes the direction and scale of change.', opts:[{t:'About the same as it has always been',freq:0,comp:0,impact:0},{t:'Somewhat higher than before',freq:1,comp:1,impact:0},{t:'Clearly higher than before',freq:2,comp:2,impact:1},{t:'Much higher — noticeably more than before',freq:3,comp:3,impact:1}] },
+  { id:'comp_control', category:'Compulsion', text:'When you have decided to stop or cut back, what happens?', sub:'Think of a specific recent time you intended to stop or reduce frequency.', opts:[{t:'I stopped without difficulty',freq:0,comp:0,impact:0},{t:'I mostly managed with occasional lapses',freq:0,comp:1,impact:0},{t:'I found it difficult and often did not succeed',freq:0,comp:2,impact:1},{t:'I was unable to stop despite intending to',freq:0,comp:3,impact:2}] },
+  { id:'comp_trigger', category:'Compulsion', text:'What most often precedes the urge to masturbate?', sub:'Select the option that best describes what is typically happening before the urge arises.', opts:[{t:'Physical arousal or sexual desire',freq:0,comp:0,impact:0},{t:'A mix — sometimes desire, sometimes other feelings',freq:0,comp:1,impact:0},{t:'Stress, boredom, anxiety, or emotional discomfort',freq:0,comp:2,impact:1},{t:'Emotional states more than physical desire',freq:0,comp:3,impact:2}] },
+  { id:'comp_ritual', category:'Compulsion', text:'How would you describe how a session typically begins?', sub:'Select the option that most accurately reflects your experience.', opts:[{t:'I make a deliberate decision each time',freq:0,comp:0,impact:0},{t:'Sometimes I find myself doing it without a clear decision',freq:0,comp:1,impact:0},{t:'Often it begins before I have consciously decided',freq:0,comp:2,impact:1},{t:'I am usually already in the process before I notice',freq:0,comp:3,impact:1}] },
+  { id:'comp_attempts', category:'Compulsion', text:'Have you ever tried to reduce or stop and found you could not?', sub:'Select the option that best matches your experience with attempts to change the habit.', opts:[{t:'I have never tried to reduce or stop',freq:0,comp:0,impact:0},{t:'I tried and succeeded without much difficulty',freq:0,comp:0,impact:0},{t:'I tried and failed once or twice',freq:0,comp:2,impact:0},{t:'I have tried multiple times and have not succeeded',freq:0,comp:3,impact:1}] },
+  { id:'comp_preoccupation', category:'Compulsion', text:'During a typical day, how often does the thought of masturbating enter your mind?', sub:'This includes anticipation, urges, or thoughts that arise while you are doing other things.', opts:[{t:'Rarely — it does not occupy my thoughts much',freq:0,comp:0,impact:0},{t:'Occasionally during the day',freq:0,comp:1,impact:0},{t:'Often — it comes to mind frequently',freq:0,comp:2,impact:1},{t:'Very frequently — it is a persistent presence',freq:0,comp:3,impact:2}] },
+  { id:'impact_relationships', category:'Life impact', text:'How has your interest in sexual activity with a partner changed over this period?', sub:'If you are not currently in a relationship, answer based on your interest in partnered sex generally.', opts:[{t:'No change — my interest is the same as before',freq:0,comp:0,impact:0},{t:'Slightly less interested than before',freq:0,comp:0,impact:1},{t:'Noticeably less interested in partnered sex',freq:0,comp:1,impact:2},{t:'Significantly less interested — I prefer solo activity',freq:0,comp:1,impact:3}] },
+  { id:'impact_function', category:'Life impact', text:'Have you noticed any changes in physical sensitivity or sexual function with a partner?', sub:'Select the option that best describes any physical changes you have observed.', opts:[{t:'No changes',freq:0,comp:0,impact:0},{t:'Slight reduction in sensitivity',freq:0,comp:0,impact:1},{t:'Noticeable changes affecting partnered sex',freq:0,comp:0,impact:2},{t:'Significant changes that regularly affect partnered sex',freq:0,comp:0,impact:3}] },
+  { id:'impact_work', category:'Life impact', text:'How would you describe your energy and focus on days when you masturbate?', sub:'Compare how you feel on days when you masturbate versus days when you do not.', opts:[{t:'No difference — energy and focus are unaffected',freq:0,comp:0,impact:0},{t:'Occasionally feel less energised afterward',freq:0,comp:0,impact:1},{t:'Regularly feel reduced energy or focus for several hours',freq:0,comp:0,impact:2},{t:'Most days feel a meaningful impact on productivity',freq:0,comp:0,impact:3}] },
+  { id:'impact_shame', category:'Life impact', text:'How do you typically feel in the hour after masturbating?', sub:'Select the option that most accurately describes your usual emotional state afterward.', opts:[{t:'Neutral or relaxed — no negative feelings',freq:0,comp:0,impact:0},{t:'Occasionally mildly negative',freq:0,comp:0,impact:1},{t:'Often feel guilt, regret, or self-criticism',freq:0,comp:1,impact:2},{t:'Almost always feel significant negative emotions',freq:0,comp:1,impact:3}] },
+  { id:'impact_secrecy', category:'Life impact', text:'How much effort do you put into keeping the habit private?', sub:'Select the option that best describes your behaviour around concealment.', opts:[{t:'No particular effort — standard privacy',freq:0,comp:0,impact:0},{t:'Some care — clearing history, timing',freq:0,comp:0,impact:0},{t:'Active concealment — explaining time, avoiding situations',freq:0,comp:1,impact:2},{t:'Significant effort — lying or missing commitments to conceal it',freq:0,comp:2,impact:3}] },
+  { id:'impact_mood', category:'Life impact', text:'How do you feel when you have not masturbated for a day or more?', sub:'Select the option that best describes your typical experience during periods of abstinence.', opts:[{t:'No different — mood is unaffected',freq:0,comp:0,impact:0},{t:'Slightly restless or distracted',freq:0,comp:1,impact:0},{t:'Noticeably irritable or anxious',freq:0,comp:2,impact:1},{t:'Significant difficulty functioning or concentrating',freq:0,comp:3,impact:2}] },
+  { id:'context_porn', category:'Context', text:'How often does pornography feature in your masturbation sessions?', sub:'Select the option that most accurately describes your current pattern.', opts:[{t:'Rarely or never',freq:0,comp:0,impact:0},{t:'Sometimes but not usually',freq:0,comp:0,impact:0},{t:'Most of the time',freq:0,comp:1,impact:1},{t:'Almost every time',freq:0,comp:2,impact:2}] },
+  { id:'context_timing', category:'Context', text:'When does masturbation typically happen in relation to your other activities?', sub:'Select the option that most accurately describes when sessions occur.', opts:[{t:'At times that do not conflict with other commitments',freq:0,comp:0,impact:0},{t:'Occasionally at the expense of sleep or other activities',freq:0,comp:1,impact:1},{t:'Regularly displaces sleep, work, or social time',freq:0,comp:2,impact:2},{t:'Frequently at times that cause clear problems',freq:0,comp:3,impact:3}] },
+  { id:'context_relationship', category:'Context', text:'If you are in a relationship, has your partner said anything about your sexual availability or frequency?', sub:'Select the option that best describes your situation. If not in a relationship, select the first option.', opts:[{t:'Not in a relationship or no comment made',freq:0,comp:0,impact:0},{t:'Partner has not raised any concern',freq:0,comp:0,impact:0},{t:'Partner has mentioned something once or twice',freq:0,comp:0,impact:2},{t:'Partner has raised it as a clear concern',freq:0,comp:1,impact:3}] },
+  { id:'context_honest', category:'Context', text:'In your own view, how would you describe your current relationship with masturbation?', sub:'Select the option that most honestly reflects your own assessment.', opts:[{t:'It is not something I consider a problem',freq:0,comp:0,impact:0},{t:'I am uncertain — I wanted an outside perspective',freq:0,comp:1,impact:1},{t:'I think it may be more than it should be',freq:0,comp:2,impact:2},{t:'I believe it is a problem I want to address',freq:0,comp:2,impact:2}] }
+],
+
+pied: [
+  { id:'use_duration', category:'Background', text:'How long have you been watching pornography regularly?', sub:'Select the option that best describes your history. Regular means at least weekly.', opts:[{t:'Less than 1 year',pied:0,pa:0},{t:'1–3 years',pied:1,pa:0},{t:'3–7 years',pied:2,pa:0},{t:'More than 7 years',pied:3,pa:0}] },
+  { id:'use_frequency', category:'Background', text:'At its heaviest, how often were you watching pornography?', sub:'Select the option that best describes the period of highest frequency, not necessarily now.', opts:[{t:'Less than once a week',pied:0,pa:0},{t:'A few times a week',pied:1,pa:0},{t:'Once a day',pied:2,pa:0},{t:'Multiple times daily',pied:3,pa:0}] },
+  { id:'escalation', category:'Background', text:'Has the type or intensity of content you seek changed over time?', sub:'Select the option that most accurately describes how your content preferences have shifted.', opts:[{t:'No change — the same content works as it always has',pied:0,pa:0},{t:'Slight drift toward different content',pied:1,pa:0},{t:'Noticeably different content than a few years ago',pied:2,pa:0},{t:'Content that differs significantly from what I started with',pied:3,pa:0}] },
+  { id:'erection_porn', category:'Physical response', text:'How reliable are your erections when watching pornography?', sub:'Select the option that best describes your typical experience.', opts:[{t:'Difficult to achieve even with pornography',pied:0,pa:1},{t:'Variable — sometimes strong, sometimes not',pied:1,pa:1},{t:'Usually strong, occasionally not',pied:2,pa:0},{t:'Consistently strong and reliable',pied:3,pa:0}] },
+  { id:'erection_partner', category:'Physical response', text:'How do erections with a real partner compare to erections with pornography?', sub:'Select the option that most accurately describes the difference between the two situations.', opts:[{t:'Same strength or stronger with a partner',pied:0,pa:0},{t:'Slightly weaker with a partner',pied:1,pa:1},{t:'Significantly weaker with a partner',pied:2,pa:2},{t:'Little or no response with a partner',pied:3,pa:2}] },
+  { id:'morning_wood', category:'Physical response', text:'How often do you experience morning erections?', sub:'Select the option that best describes your pattern over the past few months.', opts:[{t:'Most mornings',pied:0,pa:0},{t:'Occasionally',pied:1,pa:0},{t:'Rarely',pied:2,pa:0},{t:'Almost never or never',pied:3,pa:0}] },
+  { id:'solo_function', category:'Physical response', text:'Can you reach orgasm through masturbation without pornography?', sub:'Select the option that best describes what happens when you attempt this.', opts:[{t:'Yes — without difficulty',pied:0,pa:0},{t:'Yes but it takes noticeably longer',pied:1,pa:0},{t:'With considerable difficulty',pied:2,pa:0},{t:'Rarely or never able to without pornography',pied:3,pa:0}] },
+  { id:'sensitivity', category:'Physical response', text:'How has physical sensitivity changed compared to earlier in your life?', sub:'Select the option that most accurately describes any change you have noticed.', opts:[{t:'No change',pied:0,pa:0},{t:'Slightly less sensitive',pied:1,pa:0},{t:'Noticeably less sensitive',pied:2,pa:0},{t:'Significantly less sensitive — requires much more stimulation',pied:3,pa:0}] },
+  { id:'fantasy_use', category:'Mental engagement', text:'During sex with a partner, how often do you find yourself recalling pornography content?', sub:'Select the option that most accurately describes how often this occurs.', opts:[{t:'Never',pied:0,pa:0},{t:'Occasionally',pied:1,pa:0},{t:'Often',pied:2,pa:0},{t:'Almost always',pied:3,pa:0}] },
+  { id:'anticipation_anxiety', category:'Mental engagement', text:'In the time leading up to a sexual encounter, how do you typically feel?', sub:'Select the option that best describes your emotional state in the hours before sex.', opts:[{t:'Comfortable or neutral — no particular anxiety',pied:0,pa:0},{t:'Occasionally anxious, particularly after recent difficulties',pied:0,pa:1},{t:'Often anxious — this is a regular experience',pied:0,pa:2},{t:'Almost always anxious — I sometimes avoid encounters to avoid this feeling',pied:0,pa:3}] },
+  { id:'in_moment_anxiety', category:'Mental engagement', text:'During sex, how much of your attention is on your own performance rather than the experience itself?', sub:'Select the option that most accurately describes where your attention typically goes.', opts:[{t:'Rarely — I am mostly present in the experience',pied:0,pa:0},{t:'Occasionally notice myself monitoring',pied:0,pa:1},{t:'Often find myself watching how I am doing',pied:0,pa:2},{t:'Almost always focused on performance rather than experience',pied:0,pa:3}] },
+  { id:'arousal_real_vs_screen', category:'Mental engagement', text:'How does your level of arousal with a real partner compare to arousal with pornography?', sub:'Select the option that most honestly reflects the comparison.', opts:[{t:'More aroused by a real partner',pied:0,pa:0},{t:'About the same in both situations',pied:1,pa:0},{t:'Somewhat more aroused by pornography',pied:2,pa:0},{t:'Significantly more aroused by pornography',pied:3,pa:0}] },
+  { id:'new_partner', category:'Mental engagement', text:'With a new or unfamiliar partner, how does your erectile function compare to your regular partner?', sub:'If this has not applied to you, select the first option.', opts:[{t:'Has not applied to me',pied:0,pa:0},{t:'No difference',pied:0,pa:0},{t:'Somewhat better with a new partner',pied:2,pa:-1},{t:'Significantly better with a new partner',pied:3,pa:-2}] },
+  { id:'post_sex_withdrawal', category:'Relationship patterns', text:'After sex with a partner, how often do you feel an urge to watch pornography?', sub:'Select the option that best describes your typical experience after partnered sex.', opts:[{t:'Rarely or never',pied:0,pa:0},{t:'Occasionally',pied:1,pa:0},{t:'Often within the same day',pied:2,pa:0},{t:'Almost always, sometimes within the hour',pied:3,pa:0}] },
+  { id:'emotional_absence', category:'Relationship patterns', text:'During sex with a partner, how would you describe your emotional presence?', sub:'Select the option that most accurately reflects your typical experience.', opts:[{t:'Fully present',pied:0,pa:0},{t:'Mostly present, occasionally distracted',pied:1,pa:0},{t:'Often mentally elsewhere',pied:2,pa:1},{t:'Rarely present emotionally during sex',pied:3,pa:1}] },
+  { id:'avoidance', category:'Relationship patterns', text:'Have you avoided sexual situations with a partner?', sub:'Select the option that best describes whether and how often this has occurred.', opts:[{t:'Never',pied:0,pa:0},{t:'Occasionally',pied:1,pa:1},{t:'Often',pied:1,pa:2},{t:'Regularly — it has affected the relationship',pied:1,pa:3}] },
+  { id:'medication', category:'Relationship patterns', text:'Have you used Viagra, Cialis, or similar medication for erectile difficulties?', sub:'Select the option that best describes your history with ED medication.', opts:[{t:'Never',pied:0,pa:0},{t:'Tried it once or twice',pied:1,pa:1},{t:'Used it on several occasions',pied:2,pa:1},{t:'Use it regularly or have come to rely on it',pied:3,pa:1}] },
+  { id:'abstinence_test', category:'Recovery signals', text:'Have you ever stopped watching pornography for 30 days or more?', sub:'Select the option that best describes what happened when you stopped.', opts:[{t:'Never attempted stopping',pied:0,pa:0},{t:'Attempted but did not reach 30 days',pied:1,pa:0},{t:'Stopped for 30+ days and noticed no change in function',pied:0,pa:0},{t:'Stopped for 30+ days and noticed improvement in function',pied:3,pa:0}] },
+  { id:'stress_correlation', category:'Recovery signals', text:'How does your erectile function relate to your stress levels?', sub:'Select the option that most accurately describes the relationship between stress and function.', opts:[{t:'Similar regardless of stress level',pied:1,pa:-1},{t:'Slightly better when relaxed',pied:0,pa:1},{t:'Clearly better when relaxed, worse under pressure',pied:-1,pa:2},{t:'Very strongly linked — stress almost always causes difficulty',pied:-1,pa:3}] },
+  { id:'solo_vs_partner_gap', category:'Recovery signals', text:'During intimate moments with your partner — outside of pornography — how often do you feel spontaneous desire?', sub:'Select the option that most accurately describes your experience of unprompted desire for your partner.', opts:[{t:'Regularly — I feel spontaneous desire for my partner',pied:-1,pa:1},{t:'Sometimes',pied:0,pa:0},{t:'Rarely',pied:2,pa:0},{t:'Almost never',pied:3,pa:0}] }
+]
+
+};
+
+// ─── STATE ────────────────────────────────────────────────────────
+let paid = false;
+let completedTools = {};   // { porn: {...answers}, mast: {...answers}, pied: {...answers} }
+let activeTool = null;
+let currentQ = 0;
+let currentAnswers = {};
+
+// ─── NAVIGATION ───────────────────────────────────────────────────
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goToPaywall() {
+  showScreen('screen-paywall');
+}
+
+function handlePayment() {
+  const btn = document.getElementById('btn-pay');
+  btn.disabled = true;
+  btn.textContent = 'Redirecting to secure checkout…';
+  window.location.href = STRIPE_PAYMENT_LINK;
+}
+
+function onPaymentSuccess() {
+  paid = true;
+  showHub();
+}
+
+// Detect return from successful Stripe payment
+function checkPaidReturn() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('paid') === 'true') {
+    paid = true;
+    window.history.replaceState({}, document.title, window.location.pathname);
+    showHub();
+  }
+}
+
+// ─── HUB ──────────────────────────────────────────────────────────
+function showHub() {
+  const allDone = TOOLS.every(t => completedTools[t.id]);
+  if (allDone) { showAllDone(); return; }
+
+  const remaining = TOOLS.filter(t => !completedTools[t.id]);
+  document.getElementById('hub-body').textContent =
+    remaining.length === TOOLS.length
+      ? 'Select an assessment to begin. You can complete them in any order.'
+      : remaining.length === 1
+        ? 'One assessment remaining. Complete it to see your full summary.'
+        : remaining.length + ' assessments remaining.';
+
+  const container = document.getElementById('hub-cards');
+  container.innerHTML = '';
+  TOOLS.forEach((tool, i) => {
+    const done = !!completedTools[tool.id];
+    const isFirst = !done && TOOLS.slice(0, i).every(t => !!completedTools[t.id] || t.id === tool.id);
+    const card = document.createElement('div');
+    card.className = 'hub-card' + (done ? ' completed' : (isFirst ? ' active-now' : ''));
+    card.innerHTML = `
+      <div class="hub-card-left">
+        <div class="hub-card-num">${done ? '✓ Complete' : 'Assessment ' + (i + 1)}</div>
+        <div class="hub-card-title">${tool.name}</div>
+        <div class="hub-card-desc">${tool.desc}</div>
+      </div>
+      <div class="hub-card-right">
+        <span class="status-badge ${done ? 'done' : (isFirst ? 'start' : 'pending')}">${done ? 'View result' : (isFirst ? 'Start' : 'Pending')}</span>
+      </div>`;
+    card.onclick = () => done ? showResult(tool.id) : startTool(tool.id);
+    container.appendChild(card);
+  });
+
+  showScreen('screen-hub');
+}
+
+// ─── QUIZ ──────────────────────────────────────────────────────────
+function startTool(toolId) {
+  activeTool = toolId;
+  currentQ = 0;
+  currentAnswers = {};
+  renderQuestion();
+  showScreen('screen-quiz');
+}
+
+function renderQuestion() {
+  const qs = QUESTIONS[activeTool];
+  const q = qs[currentQ];
+  const tool = TOOLS.find(t => t.id === activeTool);
+  document.getElementById('quiz-tool-label').textContent = tool.shortName + ' assessment';
+  document.getElementById('q-category').textContent = q.category;
+  document.getElementById('q-text').textContent = q.text;
+  document.getElementById('q-sub').textContent = q.sub;
+  const pct = ((currentQ + 1) / qs.length) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-label').textContent = q.category;
+  document.getElementById('progress-fraction').textContent = (currentQ + 1) + ' / ' + qs.length;
+  const container = document.getElementById('options');
+  container.innerHTML = '';
+  q.opts.forEach((o, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt' + (currentAnswers[q.id] === i ? ' selected' : '');
+    btn.innerHTML = `<div class="opt-indicator"></div><span class="opt-text">${o.t}</span>`;
+    btn.onclick = () => selectOpt(i);
+    container.appendChild(btn);
+  });
+  document.getElementById('btn-next').disabled = currentAnswers[q.id] === undefined;
+  document.getElementById('btn-back').style.visibility = currentQ === 0 ? 'hidden' : 'visible';
+}
+
+function selectOpt(i) {
+  const q = QUESTIONS[activeTool][currentQ];
+  currentAnswers[q.id] = i;
+  document.querySelectorAll('.opt').forEach((b, idx) => b.classList.toggle('selected', idx === i));
+  document.getElementById('btn-next').disabled = false;
+}
+
+function goNext() {
+  const qs = QUESTIONS[activeTool];
+  if (currentAnswers[qs[currentQ].id] === undefined) return;
+  if (currentQ < qs.length - 1) {
+    currentQ++;
+    renderQuestion();
+  } else {
+    finishTool();
+  }
+}
+
+function goBack() {
+  if (currentQ === 0) { showHub(); return; }
+  currentQ--;
+  renderQuestion();
+}
+
+function finishTool() {
+  completedTools[activeTool] = { ...currentAnswers };
+  document.getElementById('loading-text').textContent = 'Analysing your responses…';
+  showScreen('screen-loading');
+  setTimeout(() => {
+    showResult(activeTool);
+  }, 1600);
+}
+
+// ─── RESULTS ──────────────────────────────────────────────────────
+function showResult(toolId) {
+  const answers = completedTools[toolId];
+  let html = '';
+
+  if (toolId === 'porn') html = buildPornResult(answers);
+  else if (toolId === 'mast') html = buildMastResult(answers);
+  else if (toolId === 'pied') html = buildPiedResult(answers);
+
+  const allDone = TOOLS.every(t => completedTools[t.id]);
+  const remaining = TOOLS.filter(t => !completedTools[t.id]);
+  const nextTool = remaining[0];
+
+  if (!allDone && nextTool) {
+    html += `<div class="next-tool-block">
+      <h3>Next: ${nextTool.name}</h3>
+      <p>${nextTool.desc}</p>
+      <button class="btn-next-tool" onclick="startTool('${nextTool.id}')">Begin next assessment →</button>
+    </div>`;
+  } else if (allDone) {
+    html += `<div class="next-tool-block">
+      <h3>All three complete</h3>
+      <p>View your complete summary with all three results side by side.</p>
+      <button class="btn-next-tool" onclick="showAllDone()">View full summary →</button>
+    </div>`;
+  }
+
+  html += `<button class="btn-restart" onclick="showHub()">← Back to assessments</button>`;
+
+  document.getElementById('result-content').innerHTML = html;
+  showScreen('screen-result');
+}
+
+// ─── PORN RESULT ──────────────────────────────────────────────────
+function buildPornResult(a) {
+  const qs = QUESTIONS.porn;
+  let freq=0,esc=0,comp=0,impact=0;
+  qs.forEach(q => { const idx=a[q.id]; if(idx===undefined)return; const o=q.opts[idx]; freq+=Math.max(0,o.freq||0); esc+=Math.max(0,o.esc||0); comp+=Math.max(0,o.comp||0); impact+=Math.max(0,o.impact||0); });
+  const freqPct=Math.round((freq/18)*100), escPct=Math.round((esc/16)*100), compPct=Math.round((comp/20)*100), impactPct=Math.round((impact/24)*100);
+  const overall=Math.round((freqPct+escPct+compPct+impactPct)/4);
+  let band,bandClass;
+  if(overall<20){band={label:'Low indicators',title:'No significant concern identified',body:'Your responses do not show a pattern of problematic use across the dimensions measured.'};bandClass='low';}
+  else if(overall<40){band={label:'Moderate indicators',title:'Some patterns worth understanding',body:'Your responses show moderate indicators across one or more dimensions. The breakdown below identifies which areas are most prominent.'};bandClass='moderate';}
+  else if(overall<65){band={label:'Strong indicators',title:'Pornography use is having a measurable effect',body:'Your responses show a clear pattern across multiple dimensions producing measurable costs in your life.'};bandClass='high';}
+  else{band={label:'High indicators',title:'This is significantly affecting your life',body:'Your responses indicate a high-impact pattern across frequency, escalation, compulsion, and life impact.'};bandClass='very-high';}
+  const findings=[];
+  if(a['esc_content']>=2)findings.push({title:'Content has changed significantly',note:'The type of content sought now is substantially different from when you began.',color:'#c0392b'});
+  if(a['esc_arousal']>=2)findings.push({title:'Previously satisfying content no longer works',note:'Content that was once sufficient no longer produces the same effect.',color:'#c0392b'});
+  if(a['comp_control']>=2)findings.push({title:'Difficulty stopping when intending to',note:'Multiple failed attempts to stop or reduce, despite genuine intention.',color:'#c0392b'});
+  if(a['comp_trigger']>=2)findings.push({title:'Emotional states as primary trigger',note:'The urge arising primarily in response to stress or discomfort rather than physical arousal.',color:'#b07d2a'});
+  if(a['comp_mood']>=2)findings.push({title:'Mood changes when abstaining',note:'Irritability or difficulty concentrating during periods of abstinence.',color:'#c0392b'});
+  if(a['rel_intimacy']>=2)findings.push({title:'Reduced interest in partnered sex',note:'A noticeable reduction in interest in or satisfaction with partnered sex.',color:'#c0392b'});
+  const scores=[{name:'frequency',pct:freqPct},{name:'escalation',pct:escPct},{name:'compulsion',pct:compPct},{name:'impact',pct:impactPct}];
+  const dominant=scores.reduce((a,b)=>a.pct>b.pct?a:b);
+  let html=`<div class="result-eyebrow">Am I watching too much porn?</div><h2 class="result-title">${band.title}</h2><p class="result-subtitle">${band.body}</p>`;
+  html+=`<div class="score-band ${bandClass}"><div class="band-label">${band.label}</div><div class="band-title">Overall: ${overall}%</div><div class="band-body">Based on 20 responses across history, frequency, escalation, compulsion, and impact.</div></div>`;
+  html+=`<div class="scores-grid scores-grid-4"><div class="score-card"><div class="score-num">${freqPct}<span>%</span></div><div class="score-card-label">Frequency</div></div><div class="score-card"><div class="score-num">${escPct}<span>%</span></div><div class="score-card-label">Escalation</div></div><div class="score-card"><div class="score-num">${compPct}<span>%</span></div><div class="score-card-label">Compulsion</div></div><div class="score-card"><div class="score-num">${impactPct}<span>%</span></div><div class="score-card-label">Life impact</div></div></div>`;
+  if(findings.length>0){html+=`<div class="section-heading">Key indicators</div><div class="findings-list">`;findings.forEach(f=>{html+=`<div class="finding-item"><div class="finding-dot" style="background:${f.color}"></div><div><div class="finding-title">${f.title}</div><div class="finding-note">${f.note}</div></div></div>`;});html+=`</div>`;}
+  return html;
+}
+
+// ─── MASTURBATION RESULT ──────────────────────────────────────────
+function buildMastResult(a) {
+  const qs=QUESTIONS.mast;
+  let freq=0,comp=0,impact=0;
+  qs.forEach(q=>{const idx=a[q.id];if(idx===undefined)return;const o=q.opts[idx];freq+=Math.max(0,o.freq||0);comp+=Math.max(0,o.comp||0);impact+=Math.max(0,o.impact||0);});
+  const freqPct=Math.round((freq/21)*100),compPct=Math.round((comp/33)*100),impactPct=Math.round((impact/36)*100);
+  const overall=Math.round((freqPct+compPct+impactPct)/3);
+  let band,bandClass;
+  if(overall<20){band={label:'No significant concern',title:'Masturbation does not appear to be a problem',body:'Your responses indicate a normal, managed pattern with no significant life impact.'};bandClass='low';}
+  else if(overall<40){band={label:'Mild concern',title:'Some patterns worth paying attention to',body:'Your responses show some early markers worth understanding before they develop further.'};bandClass='moderate';}
+  else if(overall<65){band={label:'Moderate concern',title:'The habit is having a measurable effect',body:'Your responses show a clear pattern of compulsive use and real-life impact across multiple areas.'};bandClass='high';}
+  else{band={label:'High concern',title:'This is significantly affecting your life',body:'Your responses indicate a high-compulsion, high-impact pattern that is costing you in multiple areas.'};bandClass='very-high';}
+  const findings=[];
+  if(a['freq_change']>=2)findings.push({title:'Frequency has increased over time',note:'Your pattern has escalated compared to where it started.',color:'#c0392b'});
+  if(a['comp_control']>=2)findings.push({title:'Loss of control when trying to stop',note:'The gap between intention and behaviour is present and consistent.',color:'#c0392b'});
+  if(a['comp_trigger']>=2)findings.push({title:'Emotional states as primary trigger',note:'The urge arising from stress or discomfort rather than physical desire.',color:'#b07d2a'});
+  if(a['impact_mood']>=2)findings.push({title:'Mood changes when abstaining',note:'Noticeable irritability or difficulty during periods of abstinence.',color:'#c0392b'});
+  if(a['impact_relationships']>=2)findings.push({title:'Reduced interest in partnered sex',note:'A measurable reduction in interest in or engagement with a partner.',color:'#c0392b'});
+  let html=`<div class="result-eyebrow">Am I masturbating too much?</div><h2 class="result-title">${band.title}</h2><p class="result-subtitle">${band.body}</p>`;
+  html+=`<div class="score-band ${bandClass}"><div class="band-label">${band.label}</div><div class="band-title">Overall: ${overall}%</div><div class="band-body">Based on 20 responses across frequency, compulsion, life impact, and context.</div></div>`;
+  html+=`<div class="scores-grid scores-grid-3"><div class="score-card"><div class="score-num">${freqPct}<span>%</span></div><div class="score-card-label">Frequency</div></div><div class="score-card"><div class="score-num">${compPct}<span>%</span></div><div class="score-card-label">Compulsion</div></div><div class="score-card"><div class="score-num">${impactPct}<span>%</span></div><div class="score-card-label">Life impact</div></div></div>`;
+  if(findings.length>0){html+=`<div class="section-heading">Key indicators</div><div class="findings-list">`;findings.forEach(f=>{html+=`<div class="finding-item"><div class="finding-dot" style="background:${f.color}"></div><div><div class="finding-title">${f.title}</div><div class="finding-note">${f.note}</div></div></div>`;});html+=`</div>`;}
+  return html;
+}
+
+// ─── PIED RESULT ──────────────────────────────────────────────────
+function buildPiedResult(a) {
+  const qs=QUESTIONS.pied;
+  let pied=0,pa=0;
+  qs.forEach(q=>{const idx=a[q.id];if(idx===undefined)return;const o=q.opts[idx];pied+=Math.max(0,o.pied||0);pa+=Math.max(0,o.pa||0);});
+  const piedPct=Math.round((pied/48)*100),paPct=Math.round((pa/24)*100);
+  const piedDominant=piedPct>paPct+15,paDominant=paPct>piedPct+15;
+  let band,bandClass;
+  if(piedPct<25&&paPct<25){band={label:'Low indicators',title:'PIED and performance anxiety are both unlikely',body:'Your responses do not show the established pattern for either condition.'};bandClass='low';}
+  else if(piedPct<50&&paPct<50){band={label:'Moderate indicators',title:'Some indicators present — worth taking seriously',body:'Your responses show a partial pattern. The breakdown below shows which signals are most prominent.'};bandClass='moderate';}
+  else{band={label:'Strong indicators',title:piedDominant?'Clear PIED pattern':paDominant?'Strong performance anxiety pattern':'Combined PIED and performance anxiety',body:piedDominant?'Your responses are strongly consistent with pornography-induced erectile dysfunction. PIED reverses with abstinence.':paDominant?'Your responses point more strongly to performance anxiety as the primary driver.':'Your responses show both PIED and performance anxiety — the most common combination.'};bandClass=piedPct>=60?'very-high':'high';}
+  const findings=[];
+  if(a['erection_porn']===3&&(a['erection_partner']===2||a['erection_partner']===3))findings.push({title:'The pornography/partner gap',note:'Strong erections with pornography, significant difficulty with a partner.',color:'#c0392b'});
+  if(a['morning_wood']===2||a['morning_wood']===3)findings.push({title:'Absent or rare morning erections',note:'Morning function reflects neurological baseline — its absence is informative.',color:'#c0392b'});
+  if(a['escalation']===2||a['escalation']===3)findings.push({title:'Content has changed significantly over time',note:'The type of content sought has shifted substantially from where it started.',color:'#c0392b'});
+  if(a['fantasy_use']===2||a['fantasy_use']===3)findings.push({title:'Recalling pornography during sex',note:'Using screen memory during partnered sex occurs frequently.',color:'#b07d2a'});
+  if(a['anticipation_anxiety']===2||a['anticipation_anxiety']===3)findings.push({title:'Anticipatory anxiety before encounters',note:'Anxiety in the lead-up to sex is a regular experience.',color:'#185fa5'});
+  if(a['in_moment_anxiety']===2||a['in_moment_anxiety']===3)findings.push({title:'Monitoring performance during sex',note:'Attention frequently on performance rather than the experience itself.',color:'#185fa5'});
+  if(a['abstinence_test']===3)findings.push({title:'Improvement noticed during past abstinence',note:'Sexual function improved when pornography use stopped for 30+ days.',color:'#1a7a4a'});
+  let html=`<div class="result-eyebrow">Do I have PIED?</div><h2 class="result-title">${band.title}</h2><p class="result-subtitle">${band.body}</p>`;
+  html+=`<div class="score-band ${bandClass}"><div class="band-label">${band.label}</div><div class="band-title">Score breakdown</div><div class="band-body">Based on 20 responses across background, physical response, mental engagement, relationship patterns, and recovery signals.</div></div>`;
+  html+=`<div class="scores-grid scores-grid-3"><div class="score-card"><div class="score-num">${piedPct}<span>%</span></div><div class="score-card-label">PIED indicators</div></div><div class="score-card"><div class="score-num">${paPct}<span>%</span></div><div class="score-card-label">Performance anxiety</div></div><div class="score-card"><div class="score-num">${a['use_duration']!==undefined?QUESTIONS.pied[0].opts[a['use_duration']].t.split(' ')[0]+(a['use_duration']===3?'+':''):'—'}</div><div class="score-card-label">Years of use</div></div></div>`;
+  if(piedPct>25||paPct>25){html+=`<div class="diff-panel"><h3>PIED vs performance anxiety</h3><p>These two conditions frequently arrive together. Your score split indicates ${piedDominant?'PIED as the primary driver':paDominant?'performance anxiety as the primary driver':'both conditions contributing significantly'}.</p><div class="diff-grid"><div class="diff-col pied"><div class="diff-col-title">PIED markers</div><ul><li>Strong with screen, absent in person</li><li>Absent morning erections</li><li>Escalation to different content</li><li>Novelty response with new partners</li><li>Recalling pornography during sex</li><li>Improves with abstinence</li></ul></div><div class="diff-col pa"><div class="diff-col-title">Performance anxiety markers</div><ul><li>Dread before encounters begin</li><li>Monitoring performance during sex</li><li>Worse with unfamiliar partners</li><li>Tracks strongly with stress levels</li><li>Spontaneous desire for partner present</li><li>Morning erections often normal</li></ul></div></div></div>`;}
+  if(findings.length>0){html+=`<div class="section-heading">Key indicators</div><div class="findings-list">`;findings.forEach(f=>{html+=`<div class="finding-item"><div class="finding-dot" style="background:${f.color}"></div><div><div class="finding-title">${f.title}</div><div class="finding-note">${f.note}</div></div></div>`;});html+=`</div>`;}
+  return html;
+}
+
+// ─── ALL DONE ─────────────────────────────────────────────────────
+function showAllDone() {
+  const container = document.getElementById('summary-cards');
+  container.innerHTML = '';
+
+  const getBand = (toolId) => {
+    const a = completedTools[toolId];
+    if (toolId === 'porn') {
+      const qs=QUESTIONS.porn; let freq=0,esc=0,comp=0,impact=0;
+      qs.forEach(q=>{const idx=a[q.id];if(idx===undefined)return;const o=q.opts[idx];freq+=Math.max(0,o.freq||0);esc+=Math.max(0,o.esc||0);comp+=Math.max(0,o.comp||0);impact+=Math.max(0,o.impact||0);});
+      const overall=Math.round(((freq/18+esc/16+comp/20+impact/24)/4)*100);
+      if(overall<20)return'No significant concern';if(overall<40)return'Moderate indicators';if(overall<65)return'Strong indicators';return'High indicators';
+    }
+    if (toolId === 'mast') {
+      const qs=QUESTIONS.mast; let freq=0,comp=0,impact=0;
+      qs.forEach(q=>{const idx=a[q.id];if(idx===undefined)return;const o=q.opts[idx];freq+=Math.max(0,o.freq||0);comp+=Math.max(0,o.comp||0);impact+=Math.max(0,o.impact||0);});
+      const overall=Math.round(((freq/21+comp/33+impact/36)/3)*100);
+      if(overall<20)return'No significant concern';if(overall<40)return'Mild concern';if(overall<65)return'Moderate concern';return'High concern';
+    }
+    if (toolId === 'pied') {
+      const qs=QUESTIONS.pied; let pied=0,pa=0;
+      qs.forEach(q=>{const idx=a[q.id];if(idx===undefined)return;const o=q.opts[idx];pied+=Math.max(0,o.pied||0);pa+=Math.max(0,o.pa||0);});
+      const piedPct=Math.round((pied/48)*100),paPct=Math.round((pa/24)*100);
+      if(piedPct<25&&paPct<25)return'Low indicators';if(piedPct<50&&paPct<50)return'Moderate indicators';return'Strong indicators';
+    }
+  };
+
+  TOOLS.forEach(tool => {
+    const band = getBand(tool.id);
+    const card = document.createElement('div');
+    card.className = 'summary-card';
+    card.innerHTML = `<div><div class="summary-card-title">${tool.name}</div><div class="summary-card-band">${band}</div></div><div class="summary-card-arrow">→</div>`;
+    card.onclick = () => showResult(tool.id);
+    container.appendChild(card);
+  });
+
+  document.getElementById('alldone-cta').innerHTML = `
+    <div class="cta-block">
+      <h3>The Loop</h3>
+      <p>Twenty years inside the habit — the escalation, the cost to relationships, the physical consequences, the decision to stop, and what recovery actually looks like. Written from the inside.</p>
+      <a href="https://risenowrecovery.com/#books" class="btn-cta">See the book series →</a>
+    </div>`;
+
+  showScreen('screen-alldone');
+}
+
+function restart() {
+  paid = false; completedTools = {}; activeTool = null; currentQ = 0; currentAnswers = {};
+  showScreen('screen-landing');
+}
+function downloadResult() {
+  if (!document.getElementById('print-header')) {
+    const sc = document.getElementById('screen-alldone');
+    const header = document.createElement('div');
+    header.id = 'print-header';
+    const d = new Date();
+    const dateStr = d.toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
+    header.innerHTML =
+      '<div style="text-align:center;padding-bottom:16px;margin-bottom:24px;border-bottom:2px solid #c9a84c;">' +
+      '<div style="font-family:\'DM Serif Display\',serif;font-size:26px;color:#0d1b2a;letter-spacing:1px;">RISENOW <span style="color:#c9a84c;">RECOVERY</span></div>' +
+      '<div style="font-size:13px;color:#5a6878;margin-top:4px;">Assessment Bundle — All Three Results · ' + dateStr + '</div>' +
+      '<div style="font-size:12px;color:#8a9ab0;margin-top:2px;">risenowrecovery.com</div>' +
+      '</div>';
+    sc.insertBefore(header, sc.firstChild);
+  }
+  window.print();
+}
+
+checkPaidReturn();
+</script>
+</body>
+</html>

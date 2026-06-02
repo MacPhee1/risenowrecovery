@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Porn Addiction Test — 35-Question Assessment & Recovery Roadmap | Risenow Recovery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0d1b2a;
+    --navy-mid: #1a2e42;
+    --navy-light: #243b55;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-pale: #f5e9c8;
+    --cream: #faf7f0;
+    --text: #1a1a2e;
+    --text-muted: #5a6072;
+    --text-light: #8a92a6;
+    --border: rgba(201,168,76,0.2);
+    --border-light: rgba(0,0,0,0.08);
+    --white: #ffffff;
+    --danger: #c0392b;
+    --success: #1a7a4a;
+    --warning: #b07d2a;
+    --r: 12px;
+  }
+
+  html { font-size: 16px; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 20px 80px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 680px;
+  }
+
+  /* Header */
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 48px;
+  }
+  .logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+  }
+  .logo span { color: var(--gold); }
+  .secure-badge {
+    font-size: 12px;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .secure-badge svg { width: 14px; height: 14px; opacity: 0.6; }
+
+  /* Progress */
+  .progress-wrap {
+    margin-bottom: 40px;
+  }
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .progress-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-light);
+  }
+  .progress-fraction {
+    font-size: 13px;
+    color: var(--text-light);
+  }
+  .progress-track {
+    height: 2px;
+    background: rgba(0,0,0,0.08);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    border-radius: 2px;
+    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  /* Screens */
+  .screen { display: none; }
+  .screen.active { display: block; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Intro */
+  .intro-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .intro-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 42px;
+    line-height: 1.1;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+  .intro-title em { font-style: italic; color: var(--gold); }
+  .intro-body {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    max-width: 540px;
+  }
+  .intro-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+  .feature-item {
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--r);
+    padding: 16px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .feature-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--gold-pale);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .feature-icon svg { width: 16px; height: 16px; color: var(--gold); }
+  .feature-text strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 2px;
+  }
+  .feature-text span {
+    font-size: 12px;
+    color: var(--text-light);
+    line-height: 1.4;
+  }
+  .pricing-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    background: var(--navy);
+    border-radius: var(--r);
+    margin-bottom: 16px;
+  }
+  .pricing-amount {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+  .pricing-detail {
+    flex: 1;
+  }
+  .pricing-detail strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 2px;
+  }
+  .pricing-detail span {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+  }
+  .btn-primary {
+    width: 100%;
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    border-radius: var(--r);
+    padding: 16px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.01em;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-primary:active { transform: translateY(0); }
+  .disclaimer {
+    font-size: 12px;
+    color: var(--text-light);
+    text-align: center;
+    margin-top: 14px;
+    line-height: 1.6;
+  }
+
+  /* Question */
+  .q-category {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .q-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    line-height: 1.3;
+    color: var(--navy);
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+  .q-sub {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin-bottom: 28px;
+    padding-left: 14px;
+    border-left: 2px solid var(--border);
+  }
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+  .opt {
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--r);
+    padding: 16px 20px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.18s;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .opt:hover {
+    border-color: var(--gold);
+    background: var(--gold-pale);
+    transform: translateX(3px);
+  }
+  .opt.selected {
+    border-color: var(--gold);
+    background: var(--gold-pale);
+    transform: translateX(3px);
+  }
+  .opt-indicator {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(0,0,0,0.15);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.18s;
+  }
+  .opt.selected .opt-indicator {
+    background: var(--gold);
+    border-color: var(--gold);
+  }
+  .opt.selected .opt-indicator::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--navy);
+    border-radius: 50%;
+    display: block;
+  }
+  .opt-text {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .opt.selected .opt-text { color: var(--navy); font-weight: 500; }
+
+  .nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .btn-back {
+    background: none;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-back:hover { border-color: var(--text-muted); color: var(--text); }
+  .btn-next {
+    background: var(--navy);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--white);
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+  .btn-next:hover:not(:disabled) { background: var(--navy-mid); }
+  .btn-next:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  /* Paywall */
+  .paywall-wrap {
+    text-align: center;
+  }
+  .paywall-lock {
+    width: 64px;
+    height: 64px;
+    background: var(--navy);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+  }
+  .paywall-lock svg { width: 28px; height: 28px; color: var(--gold-light); }
+  .paywall-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 30px;
+    color: var(--navy);
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+  .paywall-body {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 460px;
+    margin: 0 auto 28px;
+  }
+  .paywall-includes {
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--r);
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    text-align: left;
+  }
+  .paywall-includes h4 {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 14px;
+  }
+  .include-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .include-item:last-child { border-bottom: none; }
+  .include-check {
+    width: 18px;
+    height: 18px;
+    background: #e8f5ee;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .include-check svg { width: 10px; height: 10px; color: var(--success); }
+  .paywall-price-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .paywall-amount {
+    font-family: 'DM Serif Display', serif;
+    font-size: 48px;
+    color: var(--navy);
+    line-height: 1;
+  }
+  .paywall-amount-detail {
+    text-align: left;
+  }
+  .paywall-amount-detail strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--navy);
+  }
+  .paywall-amount-detail span {
+    font-size: 12px;
+    color: var(--text-light);
+  }
+  .stripe-form { margin-bottom: 16px; }
+  #card-element {
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--r);
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    transition: border-color 0.2s;
+  }
+  #card-element.StripeElement--focus { border-color: var(--gold); }
+  #card-errors {
+    color: var(--danger);
+    font-size: 13px;
+    margin-bottom: 12px;
+    min-height: 18px;
+  }
+  .stripe-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 10px;
+  }
+  .stripe-note svg { width: 14px; height: 14px; opacity: 0.5; }
+
+  /* Loading */
+  .loading-wrap {
+    text-align: center;
+    padding: 60px 0;
+  }
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--border-light);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 20px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-text {
+    font-size: 15px;
+    color: var(--text-muted);
+  }
+
+  /* Result */
+  .result-header { margin-bottom: 32px; }
+  .result-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .result-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 34px;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .result-subtitle {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  .score-band {
+    border-radius: var(--r);
+    padding: 24px 28px;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .score-band::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    opacity: 0.08;
+    transform: translate(30px, -30px);
+  }
+  .score-band.low { background: #eaf6f0; border: 1px solid #b8e0cc; }
+  .score-band.low::before { background: var(--success); }
+  .score-band.moderate { background: #fef6e4; border: 1px solid #f0d48a; }
+  .score-band.moderate::before { background: var(--warning); }
+  .score-band.high { background: #fdf0ee; border: 1px solid #e8bab4; }
+  .score-band.high::before { background: var(--danger); }
+  .score-band.very-high { background: #f9ebeb; border: 1px solid #dda8a6; }
+  .score-band.very-high::before { background: var(--danger); }
+
+  .band-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .score-band.low .band-label { color: var(--success); }
+  .score-band.moderate .band-label { color: var(--warning); }
+  .score-band.high .band-label, .score-band.very-high .band-label { color: var(--danger); }
+
+  .band-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .band-body {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+
+  .scores-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .score-card {
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--r);
+    padding: 16px;
+    text-align: center;
+  }
+  .score-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .score-num span { font-size: 16px; color: var(--text-light); }
+  .score-card-label {
+    font-size: 12px;
+    color: var(--text-light);
+    line-height: 1.4;
+  }
+
+  .section-heading {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .findings-list {
+    margin-bottom: 28px;
+  }
+  .finding-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .finding-item:last-child { border-bottom: none; }
+  .finding-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+  .finding-content {}
+  .finding-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 3px;
+  }
+  .finding-note {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+
+  /* Differentiation panel */
+  .diff-panel {
+    background: var(--navy);
+    border-radius: var(--r);
+    padding: 24px 28px;
+    margin-bottom: 28px;
+  }
+  .diff-panel h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+  }
+  .diff-panel p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.65;
+    margin-bottom: 16px;
+  }
+  .diff-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .diff-col {
+    background: rgba(255,255,255,0.06);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .diff-col-title {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .diff-col.pied .diff-col-title { color: var(--gold); }
+  .diff-col.pa .diff-col-title { color: #7ab8f5; }
+  .diff-col ul { list-style: none; }
+  .diff-col li {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.4;
+  }
+  .diff-col li:last-child { border-bottom: none; }
+  .diff-col li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    opacity: 0.4;
+  }
+
+  .next-steps {
+    margin-bottom: 28px;
+  }
+  .step-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .step-item:last-child { border-bottom: none; }
+  .step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--gold-pale);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .step-content {}
+  .step-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 3px;
+  }
+  .step-body {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+
+  .cta-block {
+    background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+    border-radius: var(--r);
+    padding: 28px;
+    margin-bottom: 16px;
+  }
+  .cta-block h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--white);
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .cta-block p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.65;
+    margin-bottom: 18px;
+  }
+  .btn-cta {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    border-radius: 8px;
+    padding: 13px 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.18s;
+    text-decoration: none;
+  }
+  .btn-cta:hover { background: var(--gold-light); }
+
+  .btn-restart {
+    width: 100%;
+    background: none;
+    border: 1px solid var(--border-light);
+    border-radius: var(--r);
+    padding: 13px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-restart:hover { border-color: var(--text-muted); color: var(--text); }
+
+  @media (max-width: 560px) {
+    .intro-title { font-size: 32px; }
+    .intro-features { grid-template-columns: 1fr; }
+    .scores-grid { grid-template-columns: 1fr 1fr; }
+    .diff-grid { grid-template-columns: 1fr; }
+    .q-text { font-size: 22px; }
+  }
+
+  .result-save-note {
+    background: var(--gold-pale);
+    border: 1px solid var(--gold);
+    border-radius: var(--r);
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--navy);
+    line-height: 1.55;
+    margin-bottom: 12px;
+  }
+  .result-save-note strong { font-weight: 600; }
+  .btn-download {
+    width: 100%;
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    border-radius: var(--r);
+    padding: 15px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-bottom: 10px;
+  }
+  .btn-download:hover { background: var(--gold-light); }
+  #print-header { display: none; }
+  @media print {
+    #print-header { display: block !important; }
+    body { background: #fff; }
+    .site-header .secure-badge,
+    .result-save-note,
+    .btn-download,
+    .btn-restart,
+    .cta-block { display: none !important; }
+    .container { max-width: 100%; padding: 0; }
+    .screen { display: block !important; }
+    #screen-intro, #screen-quiz, #screen-paywall { display: none !important; }
+    @page { margin: 1.5cm; }
+  }
+
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header class="site-header">
+    <div class="logo">Rise<span>now</span></div>
+    <div class="secure-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Secure assessment
+    </div>
+  </header>
+
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span class="progress-label" id="progress-label">Assessment</span>
+      <span class="progress-fraction" id="progress-fraction"></span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="screen active" id="screen-intro">
+    <div class="intro-eyebrow">Risenow Recovery · Porn Addiction Test</div>
+    <h1 class="intro-title">Do you have a <em>porn addiction</em>?</h1>
+    <p class="intro-body">This 35-question assessment measures how deep the habit has gone — across compulsion, escalation, tolerance, secrecy, and the impact on your real life — and tells you honestly where you stand and what to do next.</p>
+
+    <div class="intro-features">
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+        </div>
+        <div class="feature-text">
+          <strong>35 diagnostic questions</strong>
+          <span>Covering every dimension of pornography addiction</span>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="feature-text">
+          <strong>Five severity dimensions</strong>
+          <span>Compulsion, escalation, tolerance, secrecy, life impact</span>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <div class="feature-text">
+          <strong>Detailed written result</strong>
+          <span>Not a score — a full interpretation of your answers</span>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div class="feature-text">
+          <strong>Recovery roadmap</strong>
+          <span>Specific next steps based on your result</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pricing-row">
+      <div class="pricing-amount">$15.99</div>
+      <div class="pricing-detail">
+        <strong>One-time access · No subscription</strong>
+        <span>First 5 questions free — full result + personalised recovery roadmap</span>
+      </div>
+    </div>
+
+    <button class="btn-primary" onclick="startQuiz()">Begin free assessment →</button>
+    <p class="disclaimer">Not a medical diagnosis. This assessment is based on established markers of compulsive pornography use. It is a tool for honest self-reflection, not a clinical instrument.</p>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="screen" id="screen-quiz">
+    <div class="q-category" id="q-category"></div>
+    <h2 class="q-text" id="q-text"></h2>
+    <p class="q-sub" id="q-sub"></p>
+    <div class="options" id="options"></div>
+    <div class="nav-row">
+      <button class="btn-back" id="btn-back" onclick="goBack()">← Back</button>
+      <button class="btn-next" id="btn-next" onclick="goNext()" disabled>Continue →</button>
+    </div>
+  </div>
+
+  <!-- PAYWALL -->
+  <div class="screen" id="screen-paywall">
+    <div class="paywall-wrap">
+      <div class="paywall-lock">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <h2 class="paywall-title">Unlock your full result</h2>
+      <p class="paywall-body">You've completed the first 5 questions. Your full result — your severity score across all five dimensions plus your personalised recovery roadmap — is ready. Unlock it for a one-time payment of $15.99.</p>
+
+      <div class="paywall-includes">
+        <h4>What you unlock</h4>
+        <div class="include-item">
+          <div class="include-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span>Full 35-question assessment with your answers interpreted</span>
+        </div>
+        <div class="include-item">
+          <div class="include-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span>Severity score across compulsion, escalation, tolerance, secrecy and impact</span>
+        </div>
+        <div class="include-item">
+          <div class="include-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span>Breakdown of every key indicator in your specific responses</span>
+        </div>
+        <div class="include-item">
+          <div class="include-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span>Personalised recovery roadmap with specific next steps</span>
+        </div>
+        <div class="include-item">
+          <div class="include-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span>Recommended resources matched to your severity level</span>
+        </div>
+      </div>
+
+      <div class="paywall-price-row">
+        <div class="paywall-amount">$15.99</div>
+        <div class="paywall-amount-detail">
+          <strong>One-time payment</strong>
+          <span>No subscription · Instant access</span>
+        </div>
+      </div>
+
+      <div class="stripe-form">
+        <button class="btn-primary" id="btn-pay" onclick="handlePayment()">Unlock full result — $15.99 →</button>
+      </div>
+
+      <div class="stripe-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Secured by Stripe · One-time payment · Instant access
+      </div>
+    </div>
+  </div>
+
+  <!-- PROCESSING -->
+  <div class="screen" id="screen-loading">
+    <div class="loading-wrap">
+      <div class="spinner"></div>
+      <p class="loading-text">Analysing your responses…</p>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="screen" id="screen-result">
+    <div id="result-content"></div>
+    <div class="result-save-note">
+      <strong>Save your result.</strong> This result is not emailed to you. Download a copy to keep before you close this page.
+    </div>
+    <button class="btn-download" onclick="downloadResult()">⬇ Download my result (PDF)</button>
+    <button class="btn-restart" onclick="restart()">← Start over</button>
+  </div>
+
+</div>
+
+<script>
+// ─── STRIPE PAYMENT LINK ─────────────────────────────────────────
+const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/aFafZh2fa67udbS1YIcZa0c';
+// ─────────────────────────────────────────────────────────────────
+
+const questions = [
+  // SECTION 1: USE PATTERN (Q1-7)
+  { id:'q1', category:'Use pattern', text:'How often do you currently watch pornography?', sub:'Be honest about your typical week, not your best week.', opts:[
+    {t:'Rarely or never', c:0}, {t:'A few times a month', c:1}, {t:'A few times a week', c:2}, {t:'Daily or multiple times a day', c:3} ]},
+  { id:'q2', category:'Use pattern', text:'How long have you been using pornography regularly?', sub:'Regular meaning at least weekly.', opts:[
+    {t:'Less than a year', c:0}, {t:'1-3 years', c:1}, {t:'3-7 years', c:2}, {t:'More than 7 years', c:3} ]},
+  { id:'q3', category:'Use pattern', text:'How early in the day do you typically first think about or seek out porn?', sub:'', opts:[
+    {t:'I rarely think about it', c:0}, {t:'Only in the evening', c:1}, {t:'During the day', c:2}, {t:'First thing in the morning', c:3} ]},
+  { id:'q4', category:'Use pattern', text:'How long do your sessions typically last?', sub:'Including searching, browsing, and the time spent before and after.', opts:[
+    {t:'A few minutes', c:0}, {t:'15-30 minutes', c:1}, {t:'30-60 minutes', c:2}, {t:'Often more than an hour', c:3} ]},
+  { id:'q5', category:'Use pattern', text:'Do you watch porn in "binges" — multiple sessions in a short window?', sub:'', opts:[
+    {t:'Never', c:0}, {t:'Occasionally', c:1}, {t:'Often', c:2}, {t:'Regularly — it is my normal pattern', c:3} ]},
+  { id:'q6', category:'Use pattern', text:'Do you watch porn during activities where you should be doing something else?', sub:'During work, while with family, instead of sleeping.', opts:[
+    {t:'Never', c:0}, {t:'Rarely', c:1}, {t:'Sometimes', c:2}, {t:'Frequently', c:3} ]},
+  { id:'q7', category:'Use pattern', text:'When you are bored or have unstructured time, is porn one of the first things you turn to?', sub:'', opts:[
+    {t:'No', c:0}, {t:'Sometimes', c:1}, {t:'Often', c:2}, {t:'Almost always', c:3} ]},
+
+  // SECTION 2: COMPULSION & CONTROL (Q8-14)
+  { id:'q8', category:'Compulsion', text:'Have you tried to cut down or stop, and failed?', sub:'This is one of the clearest markers of compulsion.', opts:[
+    {t:'I have never tried to stop', c:0}, {t:'Tried once or twice, mostly fine', c:1}, {t:'Tried several times, struggled', c:2}, {t:'Tried many times and always returned', c:3} ]},
+  { id:'q9', category:'Compulsion', text:'How many times have you seriously tried to quit?', sub:'', opts:[
+    {t:'Never needed to', c:0}, {t:'Once', c:1}, {t:'A few times', c:2}, {t:'More times than I can count', c:3} ]},
+  { id:'q10', category:'Compulsion', text:'When you get an urge, how much control do you feel you have over acting on it?', sub:'', opts:[
+    {t:'Full control', c:0}, {t:'Usually in control', c:1}, {t:'Often lose the battle', c:2}, {t:'Almost no control', c:3} ]},
+  { id:'q11', category:'Compulsion', text:'Do you watch porn even when you do not actually want to?', sub:'Acting on the urge despite no real desire.', opts:[
+    {t:'Never', c:0}, {t:'Rarely', c:1}, {t:'Often', c:2}, {t:'Very often — it feels automatic', c:3} ]},
+  { id:'q12', category:'Compulsion', text:'How do you feel immediately after a session?', sub:'', opts:[
+    {t:'Neutral or fine', c:0}, {t:'Slightly empty', c:1}, {t:'Regret or shame', c:2}, {t:'Strong shame, self-disgust, or despair', c:3} ]},
+  { id:'q13', category:'Compulsion', text:'Do you make rules for yourself about porn that you then break?', sub:'"Only on weekends", "never on weekdays", etc.', opts:[
+    {t:'I do not make rules', c:0}, {t:'I keep my rules', c:1}, {t:'I break them sometimes', c:2}, {t:'I break them constantly', c:3} ]},
+  { id:'q14', category:'Compulsion', text:'How much mental energy goes into thinking about, planning, or recovering from porn use?', sub:'', opts:[
+    {t:'Almost none', c:0}, {t:'A little', c:1}, {t:'A noticeable amount', c:2}, {t:'It occupies my mind constantly', c:3} ]},
+
+  // SECTION 3: ESCALATION & TOLERANCE (Q15-21)
+  { id:'q15', category:'Escalation', text:'Has the content you watch become more extreme over time?', sub:'Escalation is the neurological hallmark of desensitisation.', opts:[
+    {t:'No, the same content works', e:0}, {t:'Slightly', e:1}, {t:'Noticeably more extreme', e:2}, {t:'Far beyond what I once would have chosen', e:3} ]},
+  { id:'q16', category:'Escalation', text:'Do you now watch content that conflicts with your real-life values or orientation?', sub:'Content that does not match who you actually are.', opts:[
+    {t:'No', e:0}, {t:'Occasionally', e:1}, {t:'Often', e:2}, {t:'Regularly, and it disturbs me', e:3} ]},
+  { id:'q17', category:'Escalation', text:'Do you need more novelty — new videos, more tabs, longer searching — to get the same effect?', sub:'', opts:[
+    {t:'No', e:0}, {t:'A little', e:1}, {t:'Yes, noticeably', e:2}, {t:'Yes — searching has become the main activity', e:3} ]},
+  { id:'q18', category:'Escalation', text:'Does ordinary pornography now feel boring or insufficient?', sub:'', opts:[
+    {t:'No', e:0}, {t:'Sometimes', e:1}, {t:'Often', e:2}, {t:'Almost always', e:3} ]},
+  { id:'q19', category:'Tolerance', text:'Compared to when you started, how much more do you need to feel satisfied?', sub:'', opts:[
+    {t:'About the same', t:0}, {t:'A little more', t:1}, {t:'Considerably more', t:2}, {t:'Vastly more', t:3} ]},
+  { id:'q20', category:'Tolerance', text:'Have you been disturbed or alarmed by content you now find arousing?', sub:'', opts:[
+    {t:'No', t:0}, {t:'Once or twice', t:1}, {t:'Several times', t:2}, {t:'Frequently', t:3} ]},
+  { id:'q21', category:'Tolerance', text:'Do you find real sexual situations less arousing than porn?', sub:'', opts:[
+    {t:'No, real is more arousing', t:0}, {t:'About equal', t:1}, {t:'Porn is often more arousing', t:2}, {t:'Porn is far more arousing than reality', t:3} ]},
+
+  // SECTION 4: SECRECY & SHAME (Q22-28)
+  { id:'q22', category:'Secrecy', text:'Do you hide your porn use from people close to you?', sub:'', opts:[
+    {t:'There is nothing to hide', s:0}, {t:'I am private but not secretive', s:1}, {t:'I actively hide it', s:2}, {t:'I go to significant lengths to conceal it', s:3} ]},
+  { id:'q23', category:'Secrecy', text:'Have you lied about your porn use when asked directly?', sub:'', opts:[
+    {t:'Never', s:0}, {t:'Once', s:1}, {t:'A few times', s:2}, {t:'Many times', s:3} ]},
+  { id:'q24', category:'Secrecy', text:'Do you clear your history, use private browsing, or hide evidence?', sub:'', opts:[
+    {t:'No', s:0}, {t:'Sometimes', s:1}, {t:'Usually', s:2}, {t:'Always, with a careful routine', s:3} ]},
+  { id:'q25', category:'Secrecy', text:'Would you be devastated if someone saw your full porn history?', sub:'', opts:[
+    {t:'Not bothered', s:0}, {t:'Mildly uncomfortable', s:1}, {t:'Very uncomfortable', s:2}, {t:'It would be catastrophic to me', s:3} ]},
+  { id:'q26', category:'Secrecy', text:'Do you feel like two different people — the public you and the private you?', sub:'', opts:[
+    {t:'No', s:0}, {t:'A little', s:1}, {t:'Often', s:2}, {t:'Constantly — the gap feels huge', s:3} ]},
+  { id:'q27', category:'Secrecy', text:'Have you paid for porn, cam sites, or content in ways you have concealed?', sub:'', opts:[
+    {t:'Never paid', s:0}, {t:'Paid openly', s:1}, {t:'Paid and hidden it', s:2}, {t:'Paid significant amounts and hidden it', s:3} ]},
+  { id:'q28', category:'Secrecy', text:'How much shame do you carry about this part of your life?', sub:'', opts:[
+    {t:'None', s:0}, {t:'A little', s:1}, {t:'A significant amount', s:2}, {t:'It is one of the heaviest things I carry', s:3} ]},
+
+  // SECTION 5: REAL-LIFE IMPACT (Q29-35)
+  { id:'q29', category:'Life impact', text:'Has porn affected your sexual function with a real partner?', sub:'Difficulty, reduced sensation, or needing porn fantasy to perform.', opts:[
+    {t:'No', i:0}, {t:'Slightly', i:1}, {t:'Noticeably', i:2}, {t:'Severely', i:3} ]},
+  { id:'q30', category:'Life impact', text:'Has it affected your interest in or attraction to real partners?', sub:'', opts:[
+    {t:'No', i:0}, {t:'A little', i:1}, {t:'Noticeably', i:2}, {t:'Severely — I prefer porn to real intimacy', i:3} ]},
+  { id:'q31', category:'Life impact', text:'Has porn use damaged a relationship?', sub:'', opts:[
+    {t:'No', i:0}, {t:'Minor strain', i:1}, {t:'Real damage', i:2}, {t:'It has ended or nearly ended a relationship', i:3} ]},
+  { id:'q32', category:'Life impact', text:'Has it affected your work, studies, or productivity?', sub:'', opts:[
+    {t:'No', i:0}, {t:'Slightly', i:1}, {t:'Noticeably', i:2}, {t:'Severely', i:3} ]},
+  { id:'q33', category:'Life impact', text:'Has it affected your mood, motivation, or energy?', sub:'', opts:[
+    {t:'No', i:0}, {t:'A little', i:1}, {t:'Noticeably', i:2}, {t:'Severely — it drives low mood or numbness', i:3} ]},
+  { id:'q34', category:'Life impact', text:'Has it affected your self-respect or sense of who you are?', sub:'', opts:[
+    {t:'No', i:0}, {t:'A little', i:1}, {t:'Noticeably', i:2}, {t:'Deeply — it conflicts with who I want to be', i:3} ]},
+  { id:'q35', category:'Life impact', text:'If nothing changed, how do you feel about the next five years of this?', sub:'The honest gut answer.', opts:[
+    {t:'Fine, it is not a problem', i:0}, {t:'Mildly concerned', i:1}, {t:'Worried', i:2}, {t:'Frightened — I need this to change', i:3} ]}
+];
+
+const PAYWALL_AFTER = 5;
+let current = 0;
+let answers = {};
+let paid = false;
+
+function startQuiz() {
+  showScreen('screen-quiz');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = questions[current];
+  document.getElementById('q-category').textContent = q.category;
+  document.getElementById('q-text').textContent = q.text;
+  document.getElementById('q-sub').textContent = q.sub;
+
+  const container = document.getElementById('options');
+  container.innerHTML = '';
+  q.opts.forEach((o, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt' + (answers[q.id] === i ? ' selected' : '');
+    btn.innerHTML = `<div class="opt-indicator"></div><span class="opt-text">${o.t}</span>`;
+    btn.onclick = () => selectOpt(i);
+    container.appendChild(btn);
+  });
+
+  document.getElementById('btn-next').disabled = answers[q.id] === undefined;
+  document.getElementById('btn-back').style.visibility = current === 0 ? 'hidden' : 'visible';
+
+  const pct = ((current + 1) / questions.length) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-label').textContent = q.category;
+  document.getElementById('progress-fraction').textContent = (current + 1) + ' / ' + questions.length;
+}
+
+function selectOpt(i) {
+  answers[questions[current].id] = i;
+  document.querySelectorAll('.opt').forEach((b, idx) => {
+    b.classList.toggle('selected', idx === i);
+  });
+  document.getElementById('btn-next').disabled = false;
+}
+
+function goNext() {
+  if (answers[questions[current].id] === undefined) return;
+
+  if (current === PAYWALL_AFTER - 1 && !paid) {
+    showScreen('screen-paywall');
+    return;
+  }
+
+  if (current < questions.length - 1) {
+    current++;
+    renderQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function goBack() {
+  if (current === 0) return;
+  current--;
+  renderQuestion();
+}
+
+// ─── STRIPE PAYMENT LINK FLOW ────────────────────────────────────
+// When the user clicks pay, we save their progress, then send them
+// to the Stripe Payment Link. After paying, Stripe redirects back
+// with ?paid=true — we detect that and unlock the full result.
+
+function handlePayment() {
+  const btn = document.getElementById('btn-pay');
+  btn.disabled = true;
+  btn.textContent = 'Redirecting to secure checkout…';
+
+  // Save answers so they survive the redirect
+  try {
+    sessionStorage.setItem('rn_porn_answers', JSON.stringify(answers));
+    sessionStorage.setItem('rn_porn_current', String(PAYWALL_AFTER));
+  } catch (e) {}
+
+  // Send to Stripe Payment Link
+  window.location.href = STRIPE_PAYMENT_LINK;
+}
+
+function onPaymentSuccess() {
+  paid = true;
+  current = PAYWALL_AFTER;
+  showScreen('screen-quiz');
+  renderQuestion();
+}
+
+// On page load, check if the user is returning from a successful payment
+function checkPaidReturn() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('paid') === 'true') {
+    paid = true;
+    // Restore their saved answers
+    try {
+      const saved = sessionStorage.getItem('rn_porn_answers');
+      if (saved) {
+        Object.assign(answers, JSON.parse(saved));
+      }
+    } catch (e) {}
+    // Clean the URL so a refresh doesn't re-trigger
+    window.history.replaceState({}, document.title, window.location.pathname);
+    // Resume at the first paid question
+    current = PAYWALL_AFTER;
+    showScreen('screen-quiz');
+    renderQuestion();
+  }
+}
+
+// ─── SCORING & RESULT ────────────────────────────────────────────
+function calcScores() {
+  let c=0, e=0, t=0, s=0, i=0;
+  questions.forEach(q => {
+    const idx = answers[q.id];
+    if (idx === undefined) return;
+    const o = q.opts[idx];
+    c += o.c || 0; e += o.e || 0; t += o.t || 0; s += o.s || 0; i += o.i || 0;
+  });
+  return { c, e, t, s, i };
+}
+
+function showResult() {
+  showScreen('screen-loading');
+  setTimeout(() => {
+    buildResult();
+    showScreen('screen-result');
+    document.getElementById('progress-fill').style.width = '100%';
+    document.getElementById('progress-fraction').textContent = 'Complete';
+  }, 1800);
+}
+
+function buildResult() {
+  const sc = calcScores();
+  // Max per dimension: compulsion 7q=21, escalation 4q=12, tolerance 3q=9, secrecy 7q=21, impact 7q=21
+  const maxC=21, maxE=12, maxT=9, maxS=21, maxI=21;
+  const total = sc.c + sc.e + sc.t + sc.s + sc.i;
+  const maxTotal = maxC+maxE+maxT+maxS+maxI; // 84
+  const pct = Math.round((total / maxTotal) * 100);
+
+  const cPct = Math.round((sc.c/maxC)*100);
+  const ePct = Math.round((sc.e/maxE)*100);
+  const tPct = Math.round((sc.t/maxT)*100);
+  const sPct = Math.round((sc.s/maxS)*100);
+  const iPct = Math.round((sc.i/maxI)*100);
+
+  let band, bandClass;
+  if (pct < 20) {
+    band = { label:'Low indicators', title:'Your use does not show an addiction pattern', body:'Your responses suggest pornography is not currently controlling your life. Use is present but does not show the compulsion, escalation, secrecy, or life-impact pattern that defines addiction. Staying aware of the early warning signs is the best thing you can do from here.' };
+    bandClass='low';
+  } else if (pct < 40) {
+    band = { label:'Mild indicators', title:'Early-stage pattern — worth addressing now', body:'Your responses show the beginnings of a compulsive pattern. This is the easiest stage to change — the habit has not yet deeply rewired your reward system or taken over your real life. Acting now is far easier than acting later.' };
+    bandClass='moderate';
+  } else if (pct < 65) {
+    band = { label:'Moderate addiction indicators', title:'A real pattern is established', body:'Your responses show a clear compulsive pattern across multiple dimensions. This is no longer just a habit — it has structure, it resists your attempts to control it, and it is affecting your real life. This is very recoverable, but it will require a genuine decision and a real plan.' };
+    bandClass='high';
+  } else {
+    band = { label:'Severe addiction indicators', title:'A deeply established addiction pattern', body:'Your responses show a severe, deeply established pattern across compulsion, escalation, secrecy, and life impact. This is not a moral failing — it is what 20 years of an escalating habit does to the brain. The author of this assessment was exactly here. It reversed. But it required a clear decision and consistent support.' };
+    bandClass='very-high';
+  }
+
+  const dims = [
+    {label:'Compulsion & control', pct:cPct},
+    {label:'Escalation', pct:ePct},
+    {label:'Tolerance', pct:tPct},
+    {label:'Secrecy & shame', pct:sPct},
+    {label:'Real-life impact', pct:iPct}
+  ];
+
+  // Findings
+  const findings = [];
+  if (cPct >= 60) findings.push({title:'Loss of control', note:'Your answers show repeated failed attempts to stop and urges you struggle to resist. This is the central feature of addiction — not how much you use, but that it uses you.', color:'#c0392b'});
+  if (ePct >= 50) findings.push({title:'Escalation to more extreme content', note:'Needing more extreme or novel content for the same effect is the neurological signature of dopamine desensitisation. It is the brain demanding more to feel the same.', color:'#c0392b'});
+  if (tPct >= 50) findings.push({title:'Tolerance — reality feels insufficient', note:'When porn becomes more arousing than real intimacy, the reward system has been recalibrated toward the screen. This is reversible, but it is a significant marker.', color:'#c0392b'});
+  if (sPct >= 60) findings.push({title:'Secrecy and shame', note:'The hiding, the concealment routines, and the gap between your public and private self are doing real damage. Secrecy is the soil the habit grows in.', color:'#b07d2a'});
+  if (iPct >= 50) findings.push({title:'Real-life impact', note:'Your answers show the habit reaching into your relationships, function, mood, or self-respect. This is the dimension that matters most — it is what makes this worth changing.', color:'#c0392b'});
+  if (findings.length === 0) findings.push({title:'No dominant risk pattern', note:'No single dimension is in the danger zone. Keep an eye on frequency and escalation as the earliest warning signs.', color:'#1a7a4a'});
+
+  // Roadmap
+  const steps = [];
+  if (pct < 20) {
+    steps.push({num:'1', title:'Stay aware of the early signs', body:'Escalation and rising frequency are the first markers. If you notice them creeping up, act early — it is far easier now than later.'});
+  } else {
+    steps.push({num:'1', title:'Make a clear decision', body:'Not a vague intention to "cut down" — a clear decision to stop. The author made 13 half-decisions before the 14th real one held. The decision is the foundation everything else is built on.'});
+    steps.push({num:'2', title:'Break the secrecy', body:'Tell one trusted person. Secrecy is the oxygen the habit breathes. An accountability partner — even one honest conversation a week — changes the entire dynamic.'});
+    steps.push({num:'3', title:'Expect the flatline', body:'When you stop, libido and mood may drop for 2-6 weeks. This is the brain recalibrating, not permanent damage. Knowing it is coming is what gets men through it.'});
+    if (iPct >= 50 || sPct >= 60) steps.push({num:'4', title:'Get real support', body:'Your scores suggest this has gone deep enough that going it alone is the hard way. Coaching or a specialist therapist dramatically improves the odds.'});
+  }
+
+  const cta = pct >= 20;
+
+  let html = `<div class="result-header">
+    <div class="result-eyebrow">Your porn addiction assessment result</div>
+    <h2 class="result-title">${band.title}</h2>
+    <p class="result-subtitle">${band.body}</p>
+  </div>`;
+
+  html += `<div class="score-band ${bandClass}">
+    <div class="band-label">${band.label} · ${pct}%</div>
+    <div class="band-title">Overall severity score</div>
+    <div class="band-body">Based on your 35 responses across five dimensions: compulsion, escalation, tolerance, secrecy, and real-life impact.</div>
+  </div>`;
+
+  html += `<div class="section-heading">Your five dimensions</div><div class="findings-list">`;
+  dims.forEach(d => {
+    const col = d.pct >= 60 ? '#c0392b' : d.pct >= 35 ? '#b07d2a' : '#1a7a4a';
+    html += `<div class="finding-item">
+      <div class="finding-dot" style="background:${col}"></div>
+      <div class="finding-content">
+        <div class="finding-title">${d.label} — ${d.pct}%</div>
+        <div class="finding-note"><div style="height:6px;background:rgba(0,0,0,0.06);border-radius:3px;margin-top:6px;overflow:hidden;"><div style="height:100%;width:${d.pct}%;background:${col};border-radius:3px;"></div></div></div>
+      </div>
+    </div>`;
+  });
+  html += `</div>`;
+
+  html += `<div class="section-heading">Key indicators in your responses</div><div class="findings-list">`;
+  findings.forEach(f => {
+    html += `<div class="finding-item">
+      <div class="finding-dot" style="background:${f.color}"></div>
+      <div class="finding-content">
+        <div class="finding-title">${f.title}</div>
+        <div class="finding-note">${f.note}</div>
+      </div>
+    </div>`;
+  });
+  html += `</div>`;
+
+  html += `<div class="section-heading">Your recovery roadmap</div><div class="next-steps">`;
+  steps.forEach(s => {
+    html += `<div class="step-item">
+      <div class="step-num">${s.num}</div>
+      <div class="step-content">
+        <div class="step-title">${s.title}</div>
+        <div class="step-body">${s.body}</div>
+      </div>
+    </div>`;
+  });
+  html += `</div>`;
+
+  if (cta) {
+    html += `<div class="cta-block">
+      <h3>You do not have to do this alone</h3>
+      <p>The Risenow Recovery Series and one-on-one coaching are built for exactly where you are. Written and run by a man who spent 20 years inside this and came out the other side.</p>
+      <a href="https://risenowrecovery.com/#coaching" class="btn-cta">Talk to a coach →</a>
+    </div>`;
+  }
+
+  document.getElementById('result-content').innerHTML = html;
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function restart() {
+  answers = {};
+  current = 0;
+  paid = false;
+  try {
+    sessionStorage.removeItem('rn_porn_answers');
+    sessionStorage.removeItem('rn_porn_current');
+  } catch (e) {}
+  document.getElementById('progress-fill').style.width = '0%';
+  document.getElementById('progress-fraction').textContent = '';
+  showScreen('screen-intro');
+}
+
+
+function downloadResult() {
+  if (!document.getElementById('print-header')) {
+    const rc = document.getElementById('result-content');
+    const header = document.createElement('div');
+    header.id = 'print-header';
+    const d = new Date();
+    const dateStr = d.toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
+    header.innerHTML =
+      '<div style="text-align:center;padding-bottom:16px;margin-bottom:24px;border-bottom:2px solid #c9a84c;">' +
+      '<div style="font-family:\'DM Serif Display\',serif;font-size:26px;color:#0d1b2a;letter-spacing:1px;">RISENOW <span style="color:#c9a84c;">RECOVERY</span></div>' +
+      '<div style="font-size:13px;color:#5a6878;margin-top:4px;">Porn Addiction Test Result · ' + dateStr + '</div>' +
+      '<div style="font-size:12px;color:#8a9ab0;margin-top:2px;">risenowrecovery.com</div>' +
+      '</div>';
+    rc.insertBefore(header, rc.firstChild);
+  }
+  window.print();
+}
+
+// Check on load whether the user is returning from a successful Stripe payment
+checkPaidReturn();
+</script>
+</body>
+</html>

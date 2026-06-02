@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PIED Self-Assessment & Recovery Roadmap — Risenow Recovery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0d1b2a;
+    --navy-mid: #1a2e42;
+    --navy-light: #243b55;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-pale: #f5e9c8;
+    --cream: #faf7f0;
+    --text: #1a1a2e;
+    --text-muted: #5a6072;
+    --text-light: #8a92a6;
+    --border: rgba(201,168,76,0.2);
+    --border-light: rgba(0,0,0,0.08);
+    --white: #ffffff;
+    --danger: #c0392b;
+    --success: #1a7a4a;
+    --warning: #b07d2a;
+    --r: 12px;
+  }
+
+  html { font-size: 16px; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 20px 80px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 680px;
+  }
+
+  /* Header */
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 48px;
+  }
+  .logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+  }
+  .logo span { color: var(--gold); }
+  .secure-badge {
+    font-size: 12px;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .secure-badge svg { width: 14px; height: 14px; opacity: 0.6; }
+
+  /* Progress */
+  .progress-wrap {
+    margin-bottom: 40px;
+  }
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .progress-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-light);
+  }
+  .progress-fraction {
+    font-size: 13px;
+    color: var(--text-light);
+  }
+  .progress-track {
+    height: 2px;
+    background: rgba(0,0,0,0.08);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    border-radius: 2px;
+    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  /* Screens */
+  .screen { display: none; }
+  .screen.active { display: block; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Intro */
+  .intro-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .intro-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 42px;
+    line-height: 1.1;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+  .intro-title em { font-style: italic; color: var(--gold); }
+  .intro-body {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    max-width: 540px;
+  }
+  .intro-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+  .feature-item {
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--r);
+    padding: 16px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .feature-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--gold-pale);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .feature-icon svg { width: 16px; height: 16px; color: var(--gold); }
+  .feature-text strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 2px;
+  }
+  .feature-text span {
+    font-size: 12px;
+    color: var(--text-light);
+    line-height: 1.4;
+  }
+  .pricing-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    background: var(--navy);
+    border-radius: var(--r);
+    margin-bottom: 16px;
+  }
+  .pricing-amount {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+  .pricing-detail {
+    flex: 1;
+  }
+  .pricing-detail strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 2px;
+  }
+  .pricing-detail span {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+  }
+  .btn-primary {
+    width: 100%;
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    border-radius: var(--r);
+    padding: 16px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.01em;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-primary:active { transform: translateY(0); }
+  .disclaimer {
+    font-size: 12px;
+    color: var(--text-light);
+    text-align: center;
+    margin-top: 14px;
+    line-height: 1.6;
+  }
+
+  /* Question */
+  .q-category {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .q-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    line-height: 1.3;
+    color: var(--navy);
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+  .q-sub {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin-bottom: 28px;
+    padding-left: 14px;
+    border-left: 2px solid var(--border);
+  }
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+  .opt {
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--r);
+    padding: 16px 20px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.18s;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .opt:hover {
+    border-color: var(--gold);
+    background: var(--gold-pale);
+    transform: translateX(3px);
+  }
+  .opt.selected {
+    border-color: var(--gold);
+    background: var(--gold-pale);
+    transform: translateX(3px);
+  }
+  .opt-indicator {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(0,0,0,0.15);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.18s;
+  }
+  .opt.selected .opt-indicator {
+    background: var(--gold);
+    border-color: var(--gold);
+  }
+  .opt.selected .opt-indicator::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--navy);
+    border-radius: 50%;
+    display: block;
+  }
+  .opt-text {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .opt.selected .opt-text { color: var(--navy); font-weight: 500; }
+
+  .nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .btn-back {
+    background: none;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-back:hover { border-color: var(--text-muted); color: var(--text); }
+  .btn-next {
+    background: var(--navy);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--white);
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+  .btn-next:hover:not(:disabled) { background: var(--navy-mid); }
+  .btn-next:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  /* Paywall */
+  .paywall-wrap {
+    text-align: center;
+  }
+  .paywall-lock {
+    width: 64px;
+    height: 64px;
+    background: var(--navy);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+  }
+  .paywall-lock svg { width: 28px; height: 28px; color: var(--gold-light); }
+  .paywall-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 30px;
+    color: var(--navy);
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+  .paywall-body {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 460px;
+    margin: 0 auto 28px;
+  }
+  .paywall-includes {
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--r);
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    text-align: left;
+  }
+  .paywall-includes h4 {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 14px;
+  }
+  .include-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .include-item:last-child { border-bottom: none; }
+  .include-check {
+    width: 18px;
+    height: 18px;
+    background: #e8f5ee;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .include-check svg { width: 10px; height: 10px; color: var(--success); }
+  .paywall-price-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .paywall-amount {
+    font-family: 'DM Serif Display', serif;
+    font-size: 48px;
+    color: var(--navy);
+    line-height: 1;
+  }
+  .paywall-amount-detail {
+    text-align: left;
+  }
+  .paywall-amount-detail strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--navy);
+  }
+  .paywall-amount-detail span {
+    font-size: 12px;
+    color: var(--text-light);
+  }
+  .stripe-form { margin-bottom: 16px; }
+  #card-element {
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--r);
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    transition: border-color 0.2s;
+  }
+  #card-element.StripeElement--focus { border-color: var(--gold); }
+  #card-errors {
+    color: var(--danger);
+    font-size: 13px;
+    margin-bottom: 12px;
+    min-height: 18px;
+  }
+  .stripe-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 10px;
+  }
+  .stripe-note svg { width: 14px; height: 14px; opacity: 0.5; }
+
+  /* Loading */
+  .loading-wrap {
+    text-align: center;
+    padding: 60px 0;
+  }
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--border-light);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 20px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-text {
+    font-size: 15px;
+    color: var(--text-muted);
+  }
+
+  /* Result */
+  .result-header { margin-bottom: 32px; }
+  .result-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .result-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 34px;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .result-subtitle {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  .score-band {
+    border-radius: var(--r);
+    padding: 24px 28px;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .score-band::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    opacity: 0.08;
+    transform: translate(30px, -30px);
+  }
+  .score-band.low { background: #eaf6f0; border: 1px solid #b8e0cc; }
+  .score-band.low::before { background: var(--success); }
+  .score-band.moderate { background: #fef6e4; border: 1px solid #f0d48a; }
+  .score-band.moderate::before { background: var(--warning); }
+  .score-band.high { background: #fdf0ee; border: 1px solid #e8bab4; }
+  .score-band.high::before { background: var(--danger); }
+  .score-band.very-high { background: #f9ebeb; border: 1px solid #dda8a6; }
+  .score-band.very-high::before { background: var(--danger); }
+
+  .band-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .score-band.low .band-label { color: var(--success); }
+  .score-band.moderate .band-label { color: var(--warning); }
+  .score-band.high .band-label, .score-band.very-high .band-label { color: var(--danger); }
+
+  .band-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .band-body {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+
+  .scores-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .score-card {
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--r);
+    padding: 16px;
+    text-align: center;
+  }
+  .score-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .score-num span { font-size: 16px; color: var(--text-light); }
+  .score-card-label {
+    font-size: 12px;
+    color: var(--text-light);
+    line-height: 1.4;
+  }
+
+  .section-heading {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .findings-list {
+    margin-bottom: 28px;
+  }
+  .finding-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .finding-item:last-child { border-bottom: none; }
+  .finding-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+  .finding-content {}
+  .finding-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 3px;
+  }
+  .finding-note {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+
+  /* Differentiation panel */
+  .diff-panel {
+    background: var(--navy);
+    border-radius: var(--r);
+    padding: 24px 28px;
+    margin-bottom: 28px;
+  }
+  .diff-panel h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+  }
+  .diff-panel p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.65;
+    margin-bottom: 16px;
+  }
+  .diff-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .diff-col {
+    background: rgba(255,255,255,0.06);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .diff-col-title {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .diff-col.pied .diff-col-title { color: var(--gold); }
+  .diff-col.pa .diff-col-title { color: #7ab8f5; }
+  .diff-col ul { list-style: none; }
+  .diff-col li {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.4;
+  }
+  .diff-col li:last-child { border-bottom: none; }
+  .diff-col li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    opacity: 0.4;
+  }
+
+  .next-steps {
+    margin-bottom: 28px;
+  }
+  .step-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .step-item:last-child { border-bottom: none; }
+  .step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--gold-pale);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .step-content {}
+  .step-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 3px;
+  }
+  .step-body {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+
+  .cta-block {
+    background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+    border-radius: var(--r);
+    padding: 28px;
+    margin-bottom: 16px;
+  }
+  .cta-block h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--white);
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .cta-block p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.65;
+    margin-bottom: 18px;
+  }
+  .btn-cta {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    border-radius: 8px;
+    padding: 13px 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.18s;
+    text-decoration: none;
+  }
+  .btn-cta:hover { background: var(--gold-light); }
+
+  .btn-restart {
+    width: 100%;
+    background: none;
+    border: 1px solid var(--border-light);
+    border-radius: var(--r);
+    padding: 13px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-restart:hover { border-color: var(--text-muted); color: var(--text); }
+
+  .result-save-note {
+    background: var(--gold-pale);
+    border: 1px solid var(--gold);
+    border-radius: var(--r);
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--navy);
+    line-height: 1.55;
+    margin-bottom: 12px;
+  }
+  .result-save-note strong { font-weight: 600; }
+  .btn-download {
+    width: 100%;
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    border-radius: var(--r);
+    padding: 15px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-bottom: 10px;
+  }
+  .btn-download:hover { background: var(--gold-light); }
+
+  #print-header { display: none; }
+  @media print {
+    #print-header { display: block !important; }
+    body { background: #fff; }
+    .site-header .secure-badge,
+    .result-save-note,
+    .btn-download,
+    .btn-restart,
+    .cta-block { display: none !important; }
+    .container { max-width: 100%; padding: 0; }
+    .screen { display: block !important; }
+    #screen-intro, #screen-quiz, #screen-paywall { display: none !important; }
+    @page { margin: 1.5cm; }
+  }
+
+  @media (max-width: 560px) {
+    .intro-title { font-size: 32px; }
+    .intro-features { grid-template-columns: 1fr; }
+    .scores-grid { grid-template-columns: 1fr 1fr; }
+    .diff-grid { grid-template-columns: 1fr; }
+    .q-text { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header class="site-header">
+    <div class="logo">Rise<span>now</span></div>
+    <div class="secure-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Secure assessment
+    </div>
+  </header>
+
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span class="progress-label" id="progress-label">Assessment</span>
+      <span class="progress-fraction" id="progress-fraction"></span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="screen active" id="screen-intro">
+    <div class="intro-eyebrow">Risenow Recovery · Clinical Self-Assessment</div>
+    <h1 class="intro-title">Do you have <em>PIED</em>?</h1>
+    <p class="intro-body">This 20-question assessment distinguishes pornography-induced erectile dysfunction from performance anxiety, stress-related ED, and physical causes — and tells you exactly what you are dealing with.</p>
+
+    <div class="intro-features">
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+        </div>
+        <div class="feature-text">
+          <strong>20 diagnostic questions</strong>
+          <span>Covering every dimension of the PIED pattern</span>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="feature-text">
+          <strong>PIED vs anxiety split</strong>
+          <span>Separates the two conditions that mimic each other</span>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <div class="feature-text">
+          <strong>Detailed written result</strong>
+          <span>Not a score — a full interpretation of your answers</span>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div class="feature-text">
+          <strong>Recovery roadmap</strong>
+          <span>Specific next steps based on your result</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pricing-row">
+      <div class="pricing-amount">$15.99</div>
+      <div class="pricing-detail">
+        <strong>One-time access · No subscription</strong>
+        <span>First 5 questions free — full result + personalised recovery roadmap</span>
+      </div>
+    </div>
+
+    <button class="btn-primary" onclick="startQuiz()">Begin free assessment →</button>
+    <p class="disclaimer">Not a medical diagnosis. This assessment is based on the documented clinical pattern of PIED. If you suspect a physical cause, consult a GP.</p>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="screen" id="screen-quiz">
+    <div class="q-category" id="q-category"></div>
+    <h2 class="q-text" id="q-text"></h2>
+    <p class="q-sub" id="q-sub"></p>
+    <div class="options" id="options"></div>
+    <div class="nav-row">
+      <button class="btn-back" id="btn-back" onclick="goBack()">← Back</button>
+      <button class="btn-next" id="btn-next" onclick="goNext()" disabled>Continue →</button>
+    </div>
+  </div>
+
+  <!-- PAYWALL -->
+  <div class="screen" id="screen-paywall">
+    <div class="paywall-wrap">
+      <div class="paywall-lock">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <h2 class="paywall-title">Unlock your full result</h2>
+      <p class="paywall-body">You've completed the first 5 questions. Your result — including the PIED vs performance anxiety breakdown and your recovery roadmap — is ready. Unlock it for a one-time payment of $15.99.</p>
+
+      <div class="paywall-includes">
+        <h4>What you unlock</h4>
+        <div class="include-item">
+          <div class="include-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span>Full 20-question assessment with your answers interpreted</span>
+        </div>
+        <div class="include-item">
+          <div class="include-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span>PIED score, performance anxiety score, and severity rating</span>
+        </div>
+        <div class="include-item">
+          <div class="include-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span>Breakdown of every key indicator in your specific responses</span>
+        </div>
+        <div class="include-item">
+          <div class="include-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span>Personalised recovery roadmap with specific next steps</span>
+        </div>
+        <div class="include-item">
+          <div class="include-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span>Recommended resources matched to your severity level</span>
+        </div>
+      </div>
+
+      <div class="paywall-price-row">
+        <div class="paywall-amount">$15.99</div>
+        <div class="paywall-amount-detail">
+          <strong>One-time payment</strong>
+          <span>No subscription · Instant access</span>
+        </div>
+      </div>
+
+      <div class="stripe-form">
+        <button class="btn-primary" id="btn-pay" onclick="handlePayment()">Unlock full result — $15.99 →</button>
+      </div>
+
+      <div class="stripe-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Secured by Stripe · One-time payment · Instant access
+      </div>
+    </div>
+  </div>
+
+  <!-- PROCESSING -->
+  <div class="screen" id="screen-loading">
+    <div class="loading-wrap">
+      <div class="spinner"></div>
+      <p class="loading-text">Analysing your responses…</p>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="screen" id="screen-result">
+    <div id="result-content"></div>
+    <div class="result-save-note" id="result-save-note">
+      <strong>Save your result.</strong> This result is not emailed to you. Download a copy to keep before you close this page.
+    </div>
+    <button class="btn-download" onclick="downloadResult()">⬇ Download my result (PDF)</button>
+    <button class="btn-restart" onclick="restart()">← Start over</button>
+  </div>
+
+</div>
+
+<script>
+// ─── STRIPE PAYMENT LINK ─────────────────────────────────────────
+const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/8x2cN5aLG7by1ta7j2cZa0e';
+// ─────────────────────────────────────────────────────────────────
+
+const questions = [
+  // SECTION 1: BACKGROUND (Q1–3)
+  {
+    id: 'use_duration',
+    category: 'Background',
+    text: 'How long have you been watching pornography regularly?',
+    sub: 'Regular means at least weekly. Your answer shapes the weight given to every response that follows.',
+    opts: [
+      { t: 'Less than 1 year', pied: 0, pa: 0 },
+      { t: '1–3 years', pied: 1, pa: 0 },
+      { t: '3–7 years', pied: 2, pa: 0 },
+      { t: 'More than 7 years', pied: 3, pa: 0 }
+    ]
+  },
+  {
+    id: 'use_frequency',
+    category: 'Background',
+    text: 'At its heaviest, how often were you watching pornography?',
+    sub: 'Think about the period of most intensive use, not necessarily right now.',
+    opts: [
+      { t: 'Less than once a week', pied: 0, pa: 0 },
+      { t: 'A few times a week', pied: 1, pa: 0 },
+      { t: 'Once a day', pied: 2, pa: 0 },
+      { t: 'Multiple times daily', pied: 3, pa: 0 }
+    ]
+  },
+  {
+    id: 'escalation',
+    category: 'Background',
+    text: 'Have you needed more extreme or different content over time to reach the same arousal level?',
+    sub: 'Escalation — needing more stimulation for the same response — is the neurological hallmark of desensitisation.',
+    opts: [
+      { t: 'No — the same content still works', pied: 0, pa: 0 },
+      { t: 'Slightly — I notice a gradual change', pied: 1, pa: 0 },
+      { t: 'Yes — noticeably more extreme content', pied: 2, pa: 0 },
+      { t: 'Yes — content I would never have chosen originally', pied: 3, pa: 0 }
+    ]
+  },
+  // SECTION 2: PHYSICAL RESPONSE (Q4–8)
+  {
+    id: 'erection_porn',
+    category: 'Physical response',
+    text: 'Do you get reliable, strong erections when watching pornography?',
+    sub: 'Strong erections with pornography but difficulty with a partner is one of the clearest distinguishing markers of PIED.',
+    opts: [
+      { t: 'No — difficulty even with pornography', pied: 0, pa: 1 },
+      { t: 'Unreliable — sometimes yes, sometimes not', pied: 1, pa: 1 },
+      { t: 'Mostly yes, occasionally not', pied: 2, pa: 0 },
+      { t: 'Yes — strong and consistently reliable', pied: 3, pa: 0 }
+    ]
+  },
+  {
+    id: 'erection_partner',
+    category: 'Physical response',
+    text: 'How do erections with a real partner compare to erections with pornography?',
+    sub: 'The gap between these two situations — not the absolute level — is the key diagnostic question.',
+    opts: [
+      { t: 'Same or stronger with a partner', pied: 0, pa: 0 },
+      { t: 'Slightly weaker with a partner', pied: 1, pa: 1 },
+      { t: 'Significantly weaker with a partner', pied: 2, pa: 2 },
+      { t: 'Little or no response with a partner', pied: 3, pa: 2 }
+    ]
+  },
+  // PAYWALL TRIGGERS AFTER Q5 ↑
+  {
+    id: 'morning_wood',
+    category: 'Physical response',
+    text: 'Do you experience morning erections (morning wood)?',
+    sub: 'Morning erections are a neurological baseline function, independent of arousal. Their consistent absence is clinically significant.',
+    opts: [
+      { t: 'Yes — most mornings, reliably', pied: 0, pa: 0 },
+      { t: 'Occasionally', pied: 1, pa: 0 },
+      { t: 'Rarely', pied: 2, pa: 0 },
+      { t: 'Almost never or never', pied: 3, pa: 0 }
+    ]
+  },
+  {
+    id: 'solo_function',
+    category: 'Physical response',
+    text: 'Can you reach orgasm through masturbation without pornography?',
+    sub: 'Difficulty climaxing without a screen points to screen-conditioned arousal, distinct from anxiety-driven difficulty.',
+    opts: [
+      { t: 'Yes — easily', pied: 0, pa: 0 },
+      { t: 'Yes but it takes significantly longer', pied: 1, pa: 0 },
+      { t: 'With difficulty — I often give up', pied: 2, pa: 0 },
+      { t: 'Rarely or never without pornography', pied: 3, pa: 0 }
+    ]
+  },
+  {
+    id: 'sensitivity',
+    category: 'Physical response',
+    text: 'Has physical sensitivity decreased over the years of pornography use?',
+    sub: 'Reduced sensitivity is a marker of desensitisation at the neurological level, not a physical or anatomical issue.',
+    opts: [
+      { t: 'No change in sensitivity', pied: 0, pa: 0 },
+      { t: 'Slightly less sensitive than before', pied: 1, pa: 0 },
+      { t: 'Noticeably reduced sensitivity', pied: 2, pa: 0 },
+      { t: 'Significantly reduced — takes much more stimulation', pied: 3, pa: 0 }
+    ]
+  },
+  // SECTION 3: MENTAL / EMOTIONAL (Q9–13)
+  {
+    id: 'fantasy_use',
+    category: 'Mental engagement',
+    text: 'During sex with a partner, do you replay pornography scenes mentally to maintain arousal?',
+    sub: 'Using screen memory as a substitute for genuine arousal is a significant PIED indicator — and absent in pure performance anxiety.',
+    opts: [
+      { t: 'Never', pied: 0, pa: 0 },
+      { t: 'Occasionally', pied: 1, pa: 0 },
+      { t: 'Often', pied: 2, pa: 0 },
+      { t: 'Almost always or always', pied: 3, pa: 0 }
+    ]
+  },
+  {
+    id: 'anticipation_anxiety',
+    category: 'Mental engagement',
+    text: 'Do you experience dread or anxiety in the hours or days before a sexual encounter?',
+    sub: 'Anticipatory anxiety — fear of failure before anything has happened — is a primary performance anxiety marker.',
+    opts: [
+      { t: 'Never', pied: 0, pa: 0 },
+      { t: 'Occasionally, when things have been difficult recently', pied: 0, pa: 1 },
+      { t: 'Often — it is a regular pattern', pied: 0, pa: 2 },
+      { t: 'Almost always — I avoid situations to avoid the fear', pied: 0, pa: 3 }
+    ]
+  },
+  {
+    id: 'in_moment_anxiety',
+    category: 'Mental engagement',
+    text: 'During sex, do you find yourself monitoring your own performance — watching yourself rather than being present?',
+    sub: 'This "spectatoring" — the internal observer watching how you are doing — is the defining cognitive pattern of performance anxiety.',
+    opts: [
+      { t: 'Never', pied: 0, pa: 0 },
+      { t: 'Occasionally', pied: 0, pa: 1 },
+      { t: 'Often', pied: 0, pa: 2 },
+      { t: 'Almost always', pied: 0, pa: 3 }
+    ]
+  },
+  {
+    id: 'arousal_real_vs_screen',
+    category: 'Mental engagement',
+    text: 'Honestly — are you more aroused by pornography than by a real partner?',
+    sub: 'Genuine preference for screen over reality reflects the recalibration of the arousal system toward pornography.',
+    opts: [
+      { t: 'No — more aroused by a real partner', pied: 0, pa: 0 },
+      { t: 'About the same', pied: 1, pa: 0 },
+      { t: 'Somewhat more aroused by pornography', pied: 2, pa: 0 },
+      { t: 'Significantly more aroused by pornography', pied: 3, pa: 0 }
+    ]
+  },
+  {
+    id: 'new_partner',
+    category: 'Mental engagement',
+    text: 'With a new or unfamiliar partner, does your erectile function improve compared to your regular partner?',
+    sub: '"Novelty erection" — better function with a new partner — is a key PIED indicator. Performance anxiety tends to be worse, not better, with unfamiliar partners.',
+    opts: [
+      { t: 'Has not happened / cannot say', pied: 0, pa: 0 },
+      { t: 'No difference', pied: 0, pa: 0 },
+      { t: 'Somewhat better with a new partner', pied: 2, pa: -1 },
+      { t: 'Significantly better with a new partner', pied: 3, pa: -2 }
+    ]
+  },
+  // SECTION 4: RELATIONSHIP PATTERNS (Q14–17)
+  {
+    id: 'post_sex_withdrawal',
+    category: 'Relationship patterns',
+    text: 'After sex with a partner, do you feel an urge to watch pornography shortly afterward?',
+    sub: 'Post-sex return to pornography suggests the real encounter did not satisfy the conditioned arousal pathway.',
+    opts: [
+      { t: 'No — sex satisfies me', pied: 0, pa: 0 },
+      { t: 'Occasionally', pied: 1, pa: 0 },
+      { t: 'Often — within the same day', pied: 2, pa: 0 },
+      { t: 'Almost always, sometimes within the hour', pied: 3, pa: 0 }
+    ]
+  },
+  {
+    id: 'emotional_absence',
+    category: 'Relationship patterns',
+    text: 'During sex with a partner, how present do you feel emotionally?',
+    sub: 'Emotional absence during sex — being physically present but mentally elsewhere — is a relational cost of PIED, less common with pure anxiety.',
+    opts: [
+      { t: 'Fully present', pied: 0, pa: 0 },
+      { t: 'Mostly present, occasionally distracted', pied: 1, pa: 0 },
+      { t: 'Often distracted or absent', pied: 2, pa: 1 },
+      { t: 'Rarely present — mentally elsewhere most of the time', pied: 3, pa: 1 }
+    ]
+  },
+  {
+    id: 'avoidance',
+    category: 'Relationship patterns',
+    text: 'Have you avoided sexual situations with a partner because you were afraid of failure?',
+    sub: 'Avoidance is present in both PIED and performance anxiety — but the reason differs. This question helps establish the pattern.',
+    opts: [
+      { t: 'Never', pied: 0, pa: 0 },
+      { t: 'Occasionally', pied: 1, pa: 1 },
+      { t: 'Often', pied: 1, pa: 2 },
+      { t: 'Regularly — it has affected the relationship', pied: 1, pa: 3 }
+    ]
+  },
+  {
+    id: 'medication',
+    category: 'Relationship patterns',
+    text: 'Have you used Viagra, Cialis, or similar medication to manage erectile difficulties?',
+    sub: 'Using ED medication under 45 without a diagnosed physical cause, especially if it only partially helps, is a strong PIED indicator.',
+    opts: [
+      { t: 'Never', pied: 0, pa: 0 },
+      { t: 'Tried it once or twice', pied: 1, pa: 1 },
+      { t: 'Used it occasionally', pied: 2, pa: 1 },
+      { t: 'Use it regularly or have relied on it', pied: 3, pa: 1 }
+    ]
+  },
+  // SECTION 5: RECOVERY SIGNALS (Q18–20)
+  {
+    id: 'abstinence_test',
+    category: 'Recovery signals',
+    text: 'Have you ever stopped watching pornography for 30 or more days and noticed improvement in sexual function?',
+    sub: 'Improvement with abstinence and decline on resumption is the most reliable self-test for PIED. It is also the strongest confirmation that recovery is possible.',
+    opts: [
+      { t: 'Never attempted stopping', pied: 0, pa: 0 },
+      { t: 'Attempted but did not manage 30 days', pied: 1, pa: 0 },
+      { t: 'Stopped but noticed no change', pied: 0, pa: 0 },
+      { t: 'Stopped and noticed clear improvement', pied: 3, pa: 0 }
+    ]
+  },
+  {
+    id: 'stress_correlation',
+    category: 'Recovery signals',
+    text: 'Does your erectile function vary noticeably with stress levels — better when relaxed, worse when under pressure?',
+    sub: 'Strong stress/performance correlation is a hallmark of anxiety-driven dysfunction. PIED tends to be more consistent regardless of stress level.',
+    opts: [
+      { t: 'No — function is similar regardless of stress', pied: 1, pa: -1 },
+      { t: 'Slight correlation', pied: 0, pa: 1 },
+      { t: 'Clear correlation — much better when relaxed', pied: -1, pa: 2 },
+      { t: 'Very strong correlation — stress almost always causes failure', pied: -1, pa: 3 }
+    ]
+  },
+  {
+    id: 'solo_vs_partner_gap',
+    category: 'Recovery signals',
+    text: 'Outside of pornography — during intimate moments with your partner — do you notice any spontaneous arousal or desire?',
+    sub: 'Spontaneous desire for a real partner, even if performance is difficult, suggests anxiety is a larger factor than PIED. Absence of spontaneous desire points more strongly to neurological conditioning.',
+    opts: [
+      { t: 'Yes — regular spontaneous desire for my partner', pied: -1, pa: 1 },
+      { t: 'Sometimes — occasional genuine desire', pied: 0, pa: 0 },
+      { t: 'Rarely — I notice I feel little spontaneous desire', pied: 2, pa: 0 },
+      { t: 'Almost never — desire is almost entirely absent', pied: 3, pa: 0 }
+    ]
+  }
+];
+
+const PAYWALL_AFTER = 5;
+let current = 0;
+let answers = {};
+let paid = false;
+
+function startQuiz() {
+  showScreen('screen-quiz');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = questions[current];
+  document.getElementById('q-category').textContent = q.category;
+  document.getElementById('q-text').textContent = q.text;
+  document.getElementById('q-sub').textContent = q.sub;
+
+  const container = document.getElementById('options');
+  container.innerHTML = '';
+  q.opts.forEach((o, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt' + (answers[q.id] === i ? ' selected' : '');
+    btn.innerHTML = `<div class="opt-indicator"></div><span class="opt-text">${o.t}</span>`;
+    btn.onclick = () => selectOpt(i);
+    container.appendChild(btn);
+  });
+
+  document.getElementById('btn-next').disabled = answers[q.id] === undefined;
+  document.getElementById('btn-back').style.visibility = current === 0 ? 'hidden' : 'visible';
+
+  const pct = ((current + 1) / questions.length) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-label').textContent = q.category;
+  document.getElementById('progress-fraction').textContent = (current + 1) + ' / ' + questions.length;
+}
+
+function selectOpt(i) {
+  answers[questions[current].id] = i;
+  document.querySelectorAll('.opt').forEach((b, idx) => {
+    b.classList.toggle('selected', idx === i);
+  });
+  document.getElementById('btn-next').disabled = false;
+}
+
+function goNext() {
+  if (answers[questions[current].id] === undefined) return;
+
+  if (current === PAYWALL_AFTER - 1 && !paid) {
+    showScreen('screen-paywall');
+    return;
+  }
+
+  if (current < questions.length - 1) {
+    current++;
+    renderQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function goBack() {
+  if (current === 0) return;
+  current--;
+  renderQuestion();
+}
+
+// ─── STRIPE PAYMENT LINK FLOW ────────────────────────────────────
+// When the user clicks pay, we save their progress, then send them
+// to the Stripe Payment Link. After paying, Stripe redirects back
+// with ?paid=true — we detect that and unlock the full result.
+
+function handlePayment() {
+  const btn = document.getElementById('btn-pay');
+  btn.disabled = true;
+  btn.textContent = 'Redirecting to secure checkout…';
+
+  // Save answers so they survive the redirect
+  try {
+    sessionStorage.setItem('rn_pied_answers', JSON.stringify(answers));
+    sessionStorage.setItem('rn_pied_current', String(PAYWALL_AFTER));
+  } catch (e) {}
+
+  // Send to Stripe Payment Link
+  window.location.href = STRIPE_PAYMENT_LINK;
+}
+
+function onPaymentSuccess() {
+  paid = true;
+  current = PAYWALL_AFTER;
+  showScreen('screen-quiz');
+  renderQuestion();
+}
+
+// On page load, check if the user is returning from a successful payment
+function checkPaidReturn() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('paid') === 'true') {
+    paid = true;
+    // Restore their saved answers
+    try {
+      const saved = sessionStorage.getItem('rn_pied_answers');
+      if (saved) {
+        Object.assign(answers, JSON.parse(saved));
+      }
+    } catch (e) {}
+    // Clean the URL so a refresh doesn't re-trigger
+    window.history.replaceState({}, document.title, window.location.pathname);
+    // Resume at the first paid question
+    current = PAYWALL_AFTER;
+    showScreen('screen-quiz');
+    renderQuestion();
+  }
+}
+
+// ─── SCORING & RESULT ────────────────────────────────────────────
+function calcScores() {
+  let pied = 0, pa = 0;
+  questions.forEach(q => {
+    const idx = answers[q.id];
+    if (idx === undefined) return;
+    const o = q.opts[idx];
+    pied += Math.max(0, o.pied || 0);
+    pa += Math.max(0, o.pa || 0);
+  });
+  return { pied, pa };
+}
+
+function showResult() {
+  showScreen('screen-loading');
+  setTimeout(() => {
+    buildResult();
+    showScreen('screen-result');
+    document.getElementById('progress-fill').style.width = '100%';
+    document.getElementById('progress-fraction').textContent = 'Complete';
+  }, 1800);
+}
+
+function buildResult() {
+  const { pied, pa } = calcScores();
+  const maxPied = 48, maxPa = 24;
+  const piedPct = Math.round((pied / maxPied) * 100);
+  const paPct = Math.round((pa / maxPa) * 100);
+
+  // Determine primary condition
+  const piedDominant = piedPct > paPct + 15;
+  const paDominant = paPct > piedPct + 15;
+  const mixed = !piedDominant && !paDominant && (piedPct > 30 || paPct > 30);
+
+  // Severity band
+  let band, bandClass;
+  if (piedPct < 25 && paPct < 25) {
+    band = { label: 'Low indicators', title: 'PIED and performance anxiety are both unlikely', body: 'Your responses do not show the established pattern for either condition. Occasional difficulty is normal and does not indicate PIED or clinical performance anxiety. If you have ongoing concerns, a GP can rule out physical causes.' };
+    bandClass = 'low';
+  } else if (piedPct < 50 && paPct < 50) {
+    band = { label: 'Moderate indicators', title: 'Some indicators present — worth taking seriously', body: 'Your responses show a partial pattern consistent with early-stage PIED and/or performance anxiety. The full breakdown below shows which signals are most prominent and what to do with them.' };
+    bandClass = 'moderate';
+  } else if (piedPct >= 50 || paPct >= 50) {
+    band = { label: 'Strong indicators', title: piedDominant ? 'Clear PIED pattern' : paDominant ? 'Strong performance anxiety pattern' : 'Combined PIED and performance anxiety', body: piedDominant ? 'Your responses are strongly consistent with pornography-induced erectile dysfunction. The key markers — the pornography/partner gap, absent morning function, escalation, and screen-conditioned arousal — are present in your answers. PIED reverses with abstinence. This is not permanent.' : paDominant ? 'Your responses point more strongly to performance anxiety than to PIED as the primary driver. The anticipatory dread, spectatoring, and stress correlation in your answers are the anxiety signature. This responds well to specific treatment and does not require the same approach as PIED.' : 'Your responses show both PIED and performance anxiety — the most common combination. They arrived together and feed each other. Both need to be addressed; treating only one will leave the other in place.' };
+    bandClass = piedPct >= 60 ? 'very-high' : 'high';
+  }
+
+  // Key findings
+  const findings = [];
+  const a = answers;
+
+  if (a['erection_porn'] === 3 && (a['erection_partner'] === 2 || a['erection_partner'] === 3)) {
+    findings.push({ title: 'The pornography/partner gap', note: 'Strong erections with pornography, significant difficulty with a partner — this is the defining PIED marker.', color: '#c0392b', type: 'pied' });
+  }
+  if (a['morning_wood'] === 2 || a['morning_wood'] === 3) {
+    findings.push({ title: 'Absent or rare morning erections', note: 'Morning function reflects neurological baseline — its absence points to deep desensitisation beyond situational anxiety.', color: '#c0392b', type: 'pied' });
+  }
+  if (a['escalation'] === 2 || a['escalation'] === 3) {
+    findings.push({ title: 'Escalation to more extreme content', note: 'Needing more stimulation for the same response is the neurological hallmark of dopamine desensitisation.', color: '#c0392b', type: 'pied' });
+  }
+  if (a['fantasy_use'] === 2 || a['fantasy_use'] === 3) {
+    findings.push({ title: 'Mental pornography use during sex', note: 'Using screen memory to substitute for genuine arousal confirms the arousal pathway has been reconditioned toward pornography.', color: '#b07d2a', type: 'pied' });
+  }
+  if (a['anticipation_anxiety'] === 2 || a['anticipation_anxiety'] === 3) {
+    findings.push({ title: 'Anticipatory anxiety before encounters', note: 'Dread before sex has even begun is the primary marker of performance anxiety — present regardless of actual physical function.', color: '#185fa5', type: 'pa' });
+  }
+  if (a['in_moment_anxiety'] === 2 || a['in_moment_anxiety'] === 3) {
+    findings.push({ title: 'Spectatoring during sex', note: 'Watching yourself perform rather than being present is the defining cognitive pattern of performance anxiety and disrupts the arousal cycle directly.', color: '#185fa5', type: 'pa' });
+  }
+  if (a['new_partner'] === 2 || a['new_partner'] === 3) {
+    findings.push({ title: 'Better function with new partners', note: 'Novelty erection — stronger response with unfamiliar partners — is a clear PIED signal. Performance anxiety typically worsens, not improves, with new partners.', color: '#c0392b', type: 'pied' });
+  }
+  if (a['stress_correlation'] === 2 || a['stress_correlation'] === 3) {
+    findings.push({ title: 'Strong stress/performance correlation', note: 'Function that clearly tracks with stress and relaxation is more consistent with anxiety than with the neurological pattern of PIED.', color: '#185fa5', type: 'pa' });
+  }
+  if (a['abstinence_test'] === 3) {
+    findings.push({ title: 'Confirmed improvement with abstinence', note: 'This is the strongest self-confirmation of PIED — and the strongest evidence that recovery is already working.', color: '#1a7a4a', type: 'positive' });
+  }
+
+  // Recovery roadmap based on dominant condition
+  const steps = [];
+  if (piedDominant || mixed) {
+    steps.push({ num: '1', title: 'Full abstinence from pornography', body: 'Not reduction — full abstinence. Partial abstinence significantly extends the recovery timeline. The neurological recalibration requires complete removal of the stimulus.' });
+    steps.push({ num: '2', title: 'Expect the flatline (weeks 2–4)', body: 'Libido may disappear almost entirely. This is the brain recalibrating — not a sign of permanent damage. The flatline ending is one of the most significant recovery milestones.' });
+    steps.push({ num: '3', title: 'Note your progress weekly', body: 'Progress is invisible day-to-day but visible over weeks. Morning function, energy, natural arousal, and mood all shift gradually. Noting them weekly in a private journal gives you evidence of recovery when your mood insists nothing is changing.' });
+  }
+  if (paDominant || mixed) {
+    steps.push({ num: mixed ? '4' : '1', title: 'Sensate focus to remove performance pressure', body: 'Sensate focus removes the outcome requirement entirely. It is the most effective intervention for performance anxiety because it breaks the monitoring cycle directly.' });
+    steps.push({ num: mixed ? '5' : '2', title: 'Address the spectatoring habit', body: 'The internal observer watching how you are doing is the core cognitive pattern to interrupt. Presence practices — not performance practices — are what resolve this.' });
+  }
+  if (!piedDominant && !paDominant && piedPct < 25 && paPct < 25) {
+    steps.push({ num: '1', title: 'No immediate action required', body: 'Your responses do not show a clinical pattern. If you have concerns about physical ED, a GP visit is the right next step.' });
+  }
+
+  const cta = piedPct > 30 || paPct > 30;
+
+  let html = '';
+
+  html += `<div class="result-header">
+    <div class="result-eyebrow">Your assessment result</div>
+    <h2 class="result-title">${band.title}</h2>
+    <p class="result-subtitle">${band.body}</p>
+  </div>`;
+
+  html += `<div class="score-band ${bandClass}">
+    <div class="band-label">${band.label}</div>
+    <div class="band-title">Score breakdown</div>
+    <div class="band-body">Based on your 20 responses across background, physical function, mental patterns, relationship dynamics, and recovery signals.</div>
+  </div>`;
+
+  html += `<div class="scores-grid">
+    <div class="score-card">
+      <div class="score-num">${piedPct}<span>%</span></div>
+      <div class="score-card-label">PIED indicators</div>
+    </div>
+    <div class="score-card">
+      <div class="score-num">${paPct}<span>%</span></div>
+      <div class="score-card-label">Performance anxiety indicators</div>
+    </div>
+    <div class="score-card">
+      <div class="score-num">${answers['use_duration'] !== undefined ? questions[0].opts[answers['use_duration']].t.split(' ')[0] + (answers['use_duration'] === 3 ? '+' : '') : '—'}</div>
+      <div class="score-card-label">Years of regular use</div>
+    </div>
+  </div>`;
+
+  if (findings.length > 0) {
+    html += `<div class="section-heading">Key indicators in your responses</div>
+    <div class="findings-list">`;
+    findings.forEach(f => {
+      html += `<div class="finding-item">
+        <div class="finding-dot" style="background:${f.color}"></div>
+        <div class="finding-content">
+          <div class="finding-title">${f.title}</div>
+          <div class="finding-note">${f.note}</div>
+        </div>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+
+  // PIED vs PA differentiation panel — shown when both are relevant
+  if (piedPct > 25 || paPct > 25) {
+    html += `<div class="diff-panel">
+      <h3>PIED vs performance anxiety — understanding the difference</h3>
+      <p>These two conditions frequently arrive together and reinforce each other, but they have different causes and require different approaches. Your score split indicates ${piedDominant ? 'PIED as the primary driver with anxiety as a secondary layer' : paDominant ? 'performance anxiety as the primary driver, with PIED playing a smaller role' : 'both conditions contributing significantly'}.</p>
+      <div class="diff-grid">
+        <div class="diff-col pied">
+          <div class="diff-col-title">PIED markers</div>
+          <ul>
+            <li>Strong with screen, absent in person</li>
+            <li>Absent morning erections</li>
+            <li>Escalation to more extreme content</li>
+            <li>Novelty erection with new partners</li>
+            <li>Mental pornography use during sex</li>
+            <li>Improves clearly with abstinence</li>
+          </ul>
+        </div>
+        <div class="diff-col pa">
+          <div class="diff-col-title">Performance anxiety markers</div>
+          <ul>
+            <li>Dread before encounters begin</li>
+            <li>Spectatoring — watching yourself</li>
+            <li>Worse with new or unfamiliar partners</li>
+            <li>Tracks strongly with stress levels</li>
+            <li>Spontaneous desire for partner is present</li>
+            <li>Morning erections often normal</li>
+          </ul>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  if (steps.length > 0) {
+    html += `<div class="section-heading">Your recovery roadmap</div>
+    <div class="next-steps">`;
+    steps.forEach(s => {
+      html += `<div class="step-item">
+        <div class="step-num">${s.num}</div>
+        <div class="step-content">
+          <div class="step-title">${s.title}</div>
+          <div class="step-body">${s.body}</div>
+        </div>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+
+  if (cta) {
+    html += `<div class="cta-block">
+      <h3>The full recovery guide</h3>
+      <p>The Road Back covers the complete PIED recovery timeline, the supplement protocol, the flatline, and the intimacy restoration work — written by someone who spent 20 years inside the habit and is further along the road.</p>
+      <a href="https://risenow.com/the-road-back" class="btn-cta">Get The Road Back — $12.99 →</a>
+    </div>`;
+  }
+
+  document.getElementById('result-content').innerHTML = html;
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function restart() {
+  answers = {};
+  current = 0;
+  paid = false;
+  try {
+    sessionStorage.removeItem('rn_pied_answers');
+    sessionStorage.removeItem('rn_pied_current');
+  } catch (e) {}
+  document.getElementById('progress-fill').style.width = '0%';
+  document.getElementById('progress-fraction').textContent = '';
+  showScreen('screen-intro');
+}
+
+function downloadResult() {
+  // Add a branded header to the printout if not already present
+  if (!document.getElementById('print-header')) {
+    const rc = document.getElementById('result-content');
+    const header = document.createElement('div');
+    header.id = 'print-header';
+    const d = new Date();
+    const dateStr = d.toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
+    header.innerHTML =
+      '<div style="text-align:center;padding-bottom:16px;margin-bottom:24px;border-bottom:2px solid #c9a84c;">' +
+      '<div style="font-family:\'DM Serif Display\',serif;font-size:26px;color:#0d1b2a;letter-spacing:1px;">RISENOW <span style="color:#c9a84c;">RECOVERY</span></div>' +
+      '<div style="font-size:13px;color:#5a6878;margin-top:4px;">PIED Self-Assessment Result · ' + dateStr + '</div>' +
+      '<div style="font-size:12px;color:#8a9ab0;margin-top:2px;">risenowrecovery.com</div>' +
+      '</div>';
+    rc.insertBefore(header, rc.firstChild);
+  }
+  window.print();
+}
+
+// Check on load whether the user is returning from a successful Stripe payment
+checkPaidReturn();
+</script>
+</body>
+</html>

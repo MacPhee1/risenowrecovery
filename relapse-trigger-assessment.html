@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relapse Trigger Assessment — Find Out Why You Keep Relapsing | Risenow Recovery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0d1b2a;
+    --navy-mid: #1a2e42;
+    --navy-light: #243b55;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-pale: #f5e9c8;
+    --cream: #faf7f0;
+    --text: #1a1a2e;
+    --text-muted: #5a6072;
+    --text-light: #8a92a6;
+    --border: rgba(201,168,76,0.2);
+    --border-light: rgba(0,0,0,0.08);
+    --white: #ffffff;
+    --danger: #c0392b;
+    --success: #1a7a4a;
+    --warning: #b07d2a;
+    --r: 12px;
+  }
+
+  html { font-size: 16px; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 20px 80px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 680px;
+  }
+
+  /* Header */
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 48px;
+  }
+  .logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+  }
+  .logo span { color: var(--gold); }
+  .secure-badge {
+    font-size: 12px;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .secure-badge svg { width: 14px; height: 14px; opacity: 0.6; }
+
+  /* Progress */
+  .progress-wrap {
+    margin-bottom: 40px;
+  }
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .progress-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-light);
+  }
+  .progress-fraction {
+    font-size: 13px;
+    color: var(--text-light);
+  }
+  .progress-track {
+    height: 2px;
+    background: rgba(0,0,0,0.08);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    border-radius: 2px;
+    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  /* Screens */
+  .screen { display: none; }
+  .screen.active { display: block; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Intro */
+  .intro-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .intro-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 42px;
+    line-height: 1.1;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+  .intro-title em { font-style: italic; color: var(--gold); }
+  .intro-body {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    max-width: 540px;
+  }
+  .intro-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+  .feature-item {
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--r);
+    padding: 16px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .feature-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--gold-pale);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .feature-icon svg { width: 16px; height: 16px; color: var(--gold); }
+  .feature-text strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 2px;
+  }
+  .feature-text span {
+    font-size: 12px;
+    color: var(--text-light);
+    line-height: 1.4;
+  }
+  .pricing-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    background: var(--navy);
+    border-radius: var(--r);
+    margin-bottom: 16px;
+  }
+  .pricing-amount {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+  .pricing-detail {
+    flex: 1;
+  }
+  .pricing-detail strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 2px;
+  }
+  .pricing-detail span {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+  }
+  .btn-primary {
+    width: 100%;
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    border-radius: var(--r);
+    padding: 16px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.01em;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-primary:active { transform: translateY(0); }
+  .disclaimer {
+    font-size: 12px;
+    color: var(--text-light);
+    text-align: center;
+    margin-top: 14px;
+    line-height: 1.6;
+  }
+
+  /* Question */
+  .q-category {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .q-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    line-height: 1.3;
+    color: var(--navy);
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+  .q-sub {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin-bottom: 28px;
+    padding-left: 14px;
+    border-left: 2px solid var(--border);
+  }
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+  .opt {
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--r);
+    padding: 16px 20px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.18s;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .opt:hover {
+    border-color: var(--gold);
+    background: var(--gold-pale);
+    transform: translateX(3px);
+  }
+  .opt.selected {
+    border-color: var(--gold);
+    background: var(--gold-pale);
+    transform: translateX(3px);
+  }
+  .opt-indicator {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(0,0,0,0.15);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.18s;
+  }
+  .opt.selected .opt-indicator {
+    background: var(--gold);
+    border-color: var(--gold);
+  }
+  .opt.selected .opt-indicator::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--navy);
+    border-radius: 50%;
+    display: block;
+  }
+  .opt-text {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .opt.selected .opt-text { color: var(--navy); font-weight: 500; }
+
+  .nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .btn-back {
+    background: none;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-back:hover { border-color: var(--text-muted); color: var(--text); }
+  .btn-next {
+    background: var(--navy);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--white);
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+  .btn-next:hover:not(:disabled) { background: var(--navy-mid); }
+  .btn-next:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  /* Paywall */
+  .paywall-wrap {
+    text-align: center;
+  }
+  .paywall-lock {
+    width: 64px;
+    height: 64px;
+    background: var(--navy);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+  }
+  .paywall-lock svg { width: 28px; height: 28px; color: var(--gold-light); }
+  .paywall-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 30px;
+    color: var(--navy);
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+  .paywall-body {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 460px;
+    margin: 0 auto 28px;
+  }
+  .paywall-includes {
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--r);
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    text-align: left;
+  }
+  .paywall-includes h4 {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 14px;
+  }
+  .include-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .include-item:last-child { border-bottom: none; }
+  .include-check {
+    width: 18px;
+    height: 18px;
+    background: #e8f5ee;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .include-check svg { width: 10px; height: 10px; color: var(--success); }
+  .paywall-price-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .paywall-amount {
+    font-family: 'DM Serif Display', serif;
+    font-size: 48px;
+    color: var(--navy);
+    line-height: 1;
+  }
+  .paywall-amount-detail {
+    text-align: left;
+  }
+  .paywall-amount-detail strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--navy);
+  }
+  .paywall-amount-detail span {
+    font-size: 12px;
+    color: var(--text-light);
+  }
+  .stripe-form { margin-bottom: 16px; }
+  #card-element {
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--r);
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    transition: border-color 0.2s;
+  }
+  #card-element.StripeElement--focus { border-color: var(--gold); }
+  #card-errors {
+    color: var(--danger);
+    font-size: 13px;
+    margin-bottom: 12px;
+    min-height: 18px;
+  }
+  .stripe-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 10px;
+  }
+  .stripe-note svg { width: 14px; height: 14px; opacity: 0.5; }
+
+  /* Loading */
+  .loading-wrap {
+    text-align: center;
+    padding: 60px 0;
+  }
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--border-light);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 20px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-text {
+    font-size: 15px;
+    color: var(--text-muted);
+  }
+
+  /* Result */
+  .result-header { margin-bottom: 32px; }
+  .result-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .result-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 34px;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .result-subtitle {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  .score-band {
+    border-radius: var(--r);
+    padding: 24px 28px;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .score-band::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    opacity: 0.08;
+    transform: translate(30px, -30px);
+  }
+  .score-band.low { background: #eaf6f0; border: 1px solid #b8e0cc; }
+  .score-band.low::before { background: var(--success); }
+  .score-band.moderate { background: #fef6e4; border: 1px solid #f0d48a; }
+  .score-band.moderate::before { background: var(--warning); }
+  .score-band.high { background: #fdf0ee; border: 1px solid #e8bab4; }
+  .score-band.high::before { background: var(--danger); }
+  .score-band.very-high { background: #f9ebeb; border: 1px solid #dda8a6; }
+  .score-band.very-high::before { background: var(--danger); }
+
+  .band-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .score-band.low .band-label { color: var(--success); }
+  .score-band.moderate .band-label { color: var(--warning); }
+  .score-band.high .band-label, .score-band.very-high .band-label { color: var(--danger); }
+
+  .band-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .band-body {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+
+  .scores-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .score-card {
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--r);
+    padding: 16px;
+    text-align: center;
+  }
+  .score-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .score-num span { font-size: 16px; color: var(--text-light); }
+  .score-card-label {
+    font-size: 12px;
+    color: var(--text-light);
+    line-height: 1.4;
+  }
+
+  .section-heading {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .findings-list {
+    margin-bottom: 28px;
+  }
+  .finding-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .finding-item:last-child { border-bottom: none; }
+  .finding-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+  .finding-content {}
+  .finding-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 3px;
+  }
+  .finding-note {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+
+  /* Differentiation panel */
+  .diff-panel {
+    background: var(--navy);
+    border-radius: var(--r);
+    padding: 24px 28px;
+    margin-bottom: 28px;
+  }
+  .diff-panel h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+  }
+  .diff-panel p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.65;
+    margin-bottom: 16px;
+  }
+  .diff-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .diff-col {
+    background: rgba(255,255,255,0.06);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .diff-col-title {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .diff-col.pied .diff-col-title { color: var(--gold); }
+  .diff-col.pa .diff-col-title { color: #7ab8f5; }
+  .diff-col ul { list-style: none; }
+  .diff-col li {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.4;
+  }
+  .diff-col li:last-child { border-bottom: none; }
+  .diff-col li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    opacity: 0.4;
+  }
+
+  .next-steps {
+    margin-bottom: 28px;
+  }
+  .step-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .step-item:last-child { border-bottom: none; }
+  .step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--gold-pale);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .step-content {}
+  .step-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 3px;
+  }
+  .step-body {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+
+  .cta-block {
+    background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+    border-radius: var(--r);
+    padding: 28px;
+    margin-bottom: 16px;
+  }
+  .cta-block h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--white);
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .cta-block p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.65;
+    margin-bottom: 18px;
+  }
+  .btn-cta {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    border-radius: 8px;
+    padding: 13px 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.18s;
+    text-decoration: none;
+  }
+  .btn-cta:hover { background: var(--gold-light); }
+
+  .btn-restart {
+    width: 100%;
+    background: none;
+    border: 1px solid var(--border-light);
+    border-radius: var(--r);
+    padding: 13px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-restart:hover { border-color: var(--text-muted); color: var(--text); }
+
+  @media (max-width: 560px) {
+    .intro-title { font-size: 32px; }
+    .intro-features { grid-template-columns: 1fr; }
+    .scores-grid { grid-template-columns: 1fr 1fr; }
+    .diff-grid { grid-template-columns: 1fr; }
+    .q-text { font-size: 22px; }
+  }
+
+  .result-save-note {
+    background: var(--gold-pale);
+    border: 1px solid var(--gold);
+    border-radius: var(--r);
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--navy);
+    line-height: 1.55;
+    margin-bottom: 12px;
+  }
+  .result-save-note strong { font-weight: 600; }
+  .btn-download {
+    width: 100%;
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    border-radius: var(--r);
+    padding: 15px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-bottom: 10px;
+  }
+  .btn-download:hover { background: var(--gold-light); }
+  #print-header { display: none; }
+  @media print {
+    #print-header { display: block !important; }
+    body { background: #fff; }
+    .site-header .secure-badge,
+    .result-save-note,
+    .btn-download,
+    .btn-restart,
+    .cta-block { display: none !important; }
+    .container { max-width: 100%; padding: 0; }
+    .screen { display: block !important; }
+    #screen-intro, #screen-quiz, #screen-paywall { display: none !important; }
+    @page { margin: 1.5cm; }
+  }
+
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header class="site-header">
+    <div class="logo">Rise<span>now</span></div>
+    <div class="secure-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Secure assessment
+    </div>
+  </header>
+
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span class="progress-label" id="progress-label">Assessment</span>
+      <span class="progress-fraction" id="progress-fraction"></span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="screen active" id="screen-intro">
+    <div class="intro-eyebrow">Risenow Recovery · Relapse Trigger Assessment</div>
+    <h1 class="intro-title">Why do you keep <em>relapsing</em>?</h1>
+    <p class="intro-body">Most men relapse without ever understanding their own pattern. This 25-question assessment identifies your specific triggers — emotional, digital, situational, physical — and gives you a targeted plan built around the exact thing that keeps pulling you back.</p>
+
+    <div class="intro-features">
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+        </div>
+        <div class="feature-text">
+          <strong>25 diagnostic questions</strong>
+          <span>Covering every known relapse trigger</span>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="feature-text">
+          <strong>Your dominant trigger</strong>
+          <span>Pinpoints what actually pulls you back</span>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <div class="feature-text">
+          <strong>Detailed written result</strong>
+          <span>Not a score — a full interpretation of your answers</span>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div class="feature-text">
+          <strong>Recovery roadmap</strong>
+          <span>Specific next steps based on your result</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pricing-row">
+      <div class="pricing-amount">$15.99</div>
+      <div class="pricing-detail">
+        <strong>One-time access · No subscription</strong>
+        <span>First 5 questions free — full result + personalised recovery roadmap</span>
+      </div>
+    </div>
+
+    <button class="btn-primary" onclick="startQuiz()">Begin free assessment →</button>
+    <p class="disclaimer">This assessment identifies behavioural and emotional relapse triggers. It is a self-reflection tool designed to help you understand and break your own relapse pattern.</p>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="screen" id="screen-quiz">
+    <div class="q-category" id="q-category"></div>
+    <h2 class="q-text" id="q-text"></h2>
+    <p class="q-sub" id="q-sub"></p>
+    <div class="options" id="options"></div>
+    <div class="nav-row">
+      <button class="btn-back" id="btn-back" onclick="goBack()">← Back</button>
+      <button class="btn-next" id="btn-next" onclick="goNext()" disabled>Continue →</button>
+    </div>
+  </div>
+
+  <!-- PAYWALL -->
+  <div class="screen" id="screen-paywall">
+    <div class="paywall-wrap">
+      <div class="paywall-lock">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <h2 class="paywall-title">Unlock your full result</h2>
+      <p class="paywall-body">You've completed the first 5 questions. Your full trigger profile — your dominant and secondary triggers plus a targeted plan for each — is ready. Unlock it for a one-time payment of $15.99.</p>
+
+      <div class="paywall-includes">
+        <h4>What you unlock</h4>
+        <div class="include-item">
+          <div class="include-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span>Full 25-question trigger analysis with your answers interpreted</span>
+        </div>
+        <div class="include-item">
+          <div class="include-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span>Your dominant trigger and secondary trigger identified</span>
+        </div>
+        <div class="include-item">
+          <div class="include-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span>All 7 trigger categories ranked, with your dominant trigger identified</span>
+        </div>
+        <div class="include-item">
+          <div class="include-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span>A targeted action plan built around your specific triggers</span>
+        </div>
+        <div class="include-item">
+          <div class="include-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span>Recommended resources matched to your severity level</span>
+        </div>
+      </div>
+
+      <div class="paywall-price-row">
+        <div class="paywall-amount">$15.99</div>
+        <div class="paywall-amount-detail">
+          <strong>One-time payment</strong>
+          <span>No subscription · Instant access</span>
+        </div>
+      </div>
+
+      <div class="stripe-form">
+        <button class="btn-primary" id="btn-pay" onclick="handlePayment()">Unlock full result — $15.99 →</button>
+      </div>
+
+      <div class="stripe-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Secured by Stripe · One-time payment · Instant access
+      </div>
+    </div>
+  </div>
+
+  <!-- PROCESSING -->
+  <div class="screen" id="screen-loading">
+    <div class="loading-wrap">
+      <div class="spinner"></div>
+      <p class="loading-text">Analysing your responses…</p>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="screen" id="screen-result">
+    <div id="result-content"></div>
+    <div class="result-save-note">
+      <strong>Save your result.</strong> This result is not emailed to you. Download a copy to keep before you close this page.
+    </div>
+    <button class="btn-download" onclick="downloadResult()">⬇ Download my result (PDF)</button>
+    <button class="btn-restart" onclick="restart()">← Start over</button>
+  </div>
+
+</div>
+
+<script>
+// ─── STRIPE PAYMENT LINK ─────────────────────────────────────────
+const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/dRm6oH6vq67ub3K46QcZa0g';
+// ─────────────────────────────────────────────────────────────────
+
+const questions = [
+  // EMOTIONAL (Q1-4)
+  { id:'q1', category:'Emotional triggers', text:'When you relapse, how often is it preceded by stress or feeling overwhelmed?', sub:'Think back to your recent relapses.', opts:[
+    {t:'Almost never', em:0}, {t:'Sometimes', em:1}, {t:'Often', em:2}, {t:'Almost every time', em:3} ]},
+  { id:'q2', category:'Emotional triggers', text:'Do you turn to porn when you feel sad, low, or empty?', sub:'', opts:[
+    {t:'Never', em:0}, {t:'Rarely', em:1}, {t:'Often', em:2}, {t:'It is my main response to low moods', em:3} ]},
+  { id:'q3', category:'Emotional triggers', text:'Do you use porn to calm anxiety or quiet a racing mind?', sub:'', opts:[
+    {t:'No', em:0}, {t:'Occasionally', em:1}, {t:'Frequently', em:2}, {t:'It is how I self-soothe', em:3} ]},
+  { id:'q4', category:'Emotional triggers', text:'After conflict, criticism, or feeling rejected, are you more likely to relapse?', sub:'', opts:[
+    {t:'No connection', em:0}, {t:'Sometimes', em:1}, {t:'Often', em:2}, {t:'Almost always', em:3} ]},
+
+  // LONELINESS (Q5-7)
+  { id:'q5', category:'Loneliness', text:'How often do you relapse when you feel lonely or disconnected?', sub:'', opts:[
+    {t:'Never', lo:0}, {t:'Sometimes', lo:1}, {t:'Often', lo:2}, {t:'Loneliness is my biggest trigger', lo:3} ]},
+  { id:'q6', category:'Loneliness', text:'Do you reach for porn as a substitute for intimacy or connection you are missing?', sub:'', opts:[
+    {t:'No', lo:0}, {t:'Rarely', lo:1}, {t:'Often', lo:2}, {t:'Yes — it fills a real gap', lo:3} ]},
+  { id:'q7', category:'Loneliness', text:'Are your relapses worse during periods when you are isolated from friends or family?', sub:'', opts:[
+    {t:'No', lo:0}, {t:'A little', lo:1}, {t:'Noticeably', lo:2}, {t:'Dramatically worse', lo:3} ]},
+
+  // IDLE / BOREDOM (Q8-10)
+  { id:'q8', category:'Idle time', text:'How often do relapses happen when you simply have nothing to do?', sub:'', opts:[
+    {t:'Never', id:0}, {t:'Sometimes', id:1}, {t:'Often', id:2}, {t:'Boredom is my main trigger', id:3} ]},
+  { id:'q9', category:'Idle time', text:'Do you relapse more on weekends, holidays, or unstructured days?', sub:'', opts:[
+    {t:'No', id:0}, {t:'A little', id:1}, {t:'Noticeably', id:2}, {t:'Almost always on empty days', id:3} ]},
+  { id:'q10', category:'Idle time', text:'When you are bored, is porn one of the first things your mind goes to?', sub:'', opts:[
+    {t:'No', id:0}, {t:'Sometimes', id:1}, {t:'Often', id:2}, {t:'Immediately', id:3} ]},
+
+  // DIGITAL / DOOMSCROLLING (Q11-15)
+  { id:'q11', category:'Digital & scrolling', text:'Do you relapse after scrolling social media or browsing aimlessly?', sub:'', opts:[
+    {t:'Never', dg:0}, {t:'Sometimes', dg:1}, {t:'Often', dg:2}, {t:'Scrolling almost always leads there', dg:3} ]},
+  { id:'q12', category:'Digital & scrolling', text:'How often does suggestive content — Instagram, TikTok, ads — pull you toward porn?', sub:'', opts:[
+    {t:'Never', dg:0}, {t:'Rarely', dg:1}, {t:'Often', dg:2}, {t:'It is a constant on-ramp', dg:3} ]},
+  { id:'q13', category:'Digital & scrolling', text:'Do you keep your phone in bed with you at night?', sub:'', opts:[
+    {t:'Never', dg:0}, {t:'Sometimes', dg:1}, {t:'Most nights', dg:2}, {t:'Always — it is the last thing I touch', dg:3} ]},
+  { id:'q14', category:'Digital & scrolling', text:'Does one "harmless" search or click tend to spiral into a relapse?', sub:'', opts:[
+    {t:'No', dg:0}, {t:'Occasionally', dg:1}, {t:'Often', dg:2}, {t:'Almost every time — one click and I am gone', dg:3} ]},
+  { id:'q15', category:'Digital & scrolling', text:'Do you relapse late at night while scrolling on your phone?', sub:'', opts:[
+    {t:'Never', dg:0}, {t:'Sometimes', dg:1}, {t:'Often', dg:2}, {t:'This is my exact pattern', dg:3} ]},
+
+  // ENVIRONMENTAL / SITUATIONAL (Q16-18)
+  { id:'q16', category:'Situational', text:'Are your relapses tied to being home alone?', sub:'', opts:[
+    {t:'No', en:0}, {t:'Sometimes', en:1}, {t:'Often', en:2}, {t:'Almost always when alone', en:3} ]},
+  { id:'q17', category:'Situational', text:'Do relapses happen most in a specific place — bedroom, bathroom, office?', sub:'', opts:[
+    {t:'No pattern', en:0}, {t:'Slight pattern', en:1}, {t:'Clear pattern', en:2}, {t:'Always the same place', en:3} ]},
+  { id:'q18', category:'Situational', text:'Are you more likely to relapse late at night than during the day?', sub:'', opts:[
+    {t:'No', en:0}, {t:'A little', en:1}, {t:'Noticeably', en:2}, {t:'Night is by far the danger zone', en:3} ]},
+
+  // PHYSICAL STATE (Q19-22)
+  { id:'q19', category:'Physical state', text:'Do you relapse more when you are tired or sleep-deprived?', sub:'', opts:[
+    {t:'No', ph:0}, {t:'Sometimes', ph:1}, {t:'Often', ph:2}, {t:'Exhaustion wipes out my willpower', ph:3} ]},
+  { id:'q20', category:'Physical state', text:'Does alcohol or being under the influence lower your resistance?', sub:'', opts:[
+    {t:'No / I do not drink', ph:0}, {t:'Slightly', ph:1}, {t:'Noticeably', ph:2}, {t:'It removes my resistance entirely', ph:3} ]},
+  { id:'q21', category:'Physical state', text:'Do waking up aroused or morning erections often lead to relapse?', sub:'', opts:[
+    {t:'No', ph:0}, {t:'Sometimes', ph:1}, {t:'Often', ph:2}, {t:'Mornings are a major trigger', ph:3} ]},
+  { id:'q22', category:'Physical state', text:'Do you relapse after the gym, or when physically restless and full of energy?', sub:'', opts:[
+    {t:'No', ph:0}, {t:'Rarely', ph:1}, {t:'Sometimes', ph:2}, {t:'Often', ph:3} ]},
+
+  // HABITUAL / RELATIONAL (Q23-25)
+  { id:'q23', category:'Habit & relationship', text:'Do you relapse at certain times as if on autopilot, with no clear feeling behind it?', sub:'Pure habit, not emotion.', opts:[
+    {t:'No', hr:0}, {t:'Sometimes', hr:1}, {t:'Often', hr:2}, {t:'It is pure automatic habit', hr:3} ]},
+  { id:'q24', category:'Habit & relationship', text:'Do you treat porn as a "reward" after finishing something hard or stressful?', sub:'', opts:[
+    {t:'No', hr:0}, {t:'Occasionally', hr:1}, {t:'Often', hr:2}, {t:'It is my go-to reward', hr:3} ]},
+  { id:'q25', category:'Habit & relationship', text:'When intimacy with a partner is lacking or strained, do you turn to porn instead?', sub:'', opts:[
+    {t:'No / not applicable', hr:0}, {t:'Sometimes', hr:1}, {t:'Often', hr:2}, {t:'Always — it replaces the intimacy I am missing', hr:3} ]}
+];
+
+const PAYWALL_AFTER = 5;
+let current = 0;
+let answers = {};
+let paid = false;
+
+function startQuiz() {
+  showScreen('screen-quiz');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = questions[current];
+  document.getElementById('q-category').textContent = q.category;
+  document.getElementById('q-text').textContent = q.text;
+  document.getElementById('q-sub').textContent = q.sub;
+
+  const container = document.getElementById('options');
+  container.innerHTML = '';
+  q.opts.forEach((o, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt' + (answers[q.id] === i ? ' selected' : '');
+    btn.innerHTML = `<div class="opt-indicator"></div><span class="opt-text">${o.t}</span>`;
+    btn.onclick = () => selectOpt(i);
+    container.appendChild(btn);
+  });
+
+  document.getElementById('btn-next').disabled = answers[q.id] === undefined;
+  document.getElementById('btn-back').style.visibility = current === 0 ? 'hidden' : 'visible';
+
+  const pct = ((current + 1) / questions.length) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-label').textContent = q.category;
+  document.getElementById('progress-fraction').textContent = (current + 1) + ' / ' + questions.length;
+}
+
+function selectOpt(i) {
+  answers[questions[current].id] = i;
+  document.querySelectorAll('.opt').forEach((b, idx) => {
+    b.classList.toggle('selected', idx === i);
+  });
+  document.getElementById('btn-next').disabled = false;
+}
+
+function goNext() {
+  if (answers[questions[current].id] === undefined) return;
+
+  if (current === PAYWALL_AFTER - 1 && !paid) {
+    showScreen('screen-paywall');
+    return;
+  }
+
+  if (current < questions.length - 1) {
+    current++;
+    renderQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function goBack() {
+  if (current === 0) return;
+  current--;
+  renderQuestion();
+}
+
+// ─── STRIPE PAYMENT LINK FLOW ────────────────────────────────────
+// When the user clicks pay, we save their progress, then send them
+// to the Stripe Payment Link. After paying, Stripe redirects back
+// with ?paid=true — we detect that and unlock the full result.
+
+function handlePayment() {
+  const btn = document.getElementById('btn-pay');
+  btn.disabled = true;
+  btn.textContent = 'Redirecting to secure checkout…';
+
+  // Save answers so they survive the redirect
+  try {
+    sessionStorage.setItem('rn_trigger_answers', JSON.stringify(answers));
+    sessionStorage.setItem('rn_trigger_current', String(PAYWALL_AFTER));
+  } catch (e) {}
+
+  // Send to Stripe Payment Link
+  window.location.href = STRIPE_PAYMENT_LINK;
+}
+
+function onPaymentSuccess() {
+  paid = true;
+  current = PAYWALL_AFTER;
+  showScreen('screen-quiz');
+  renderQuestion();
+}
+
+// On page load, check if the user is returning from a successful payment
+function checkPaidReturn() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('paid') === 'true') {
+    paid = true;
+    // Restore their saved answers
+    try {
+      const saved = sessionStorage.getItem('rn_trigger_answers');
+      if (saved) {
+        Object.assign(answers, JSON.parse(saved));
+      }
+    } catch (e) {}
+    // Clean the URL so a refresh doesn't re-trigger
+    window.history.replaceState({}, document.title, window.location.pathname);
+    // Resume at the first paid question
+    current = PAYWALL_AFTER;
+    showScreen('screen-quiz');
+    renderQuestion();
+  }
+}
+
+// ─── SCORING & RESULT ────────────────────────────────────────────
+function calcScores() {
+  let em=0, lo=0, id=0, dg=0, en=0, ph=0, hr=0;
+  questions.forEach(q => {
+    const idx = answers[q.id];
+    if (idx === undefined) return;
+    const o = q.opts[idx];
+    em+=o.em||0; lo+=o.lo||0; id+=o.id||0; dg+=o.dg||0; en+=o.en||0; ph+=o.ph||0; hr+=o.hr||0;
+  });
+  return { em, lo, id, dg, en, ph, hr };
+}
+
+function showResult() {
+  showScreen('screen-loading');
+  setTimeout(() => {
+    buildResult();
+    showScreen('screen-result');
+    document.getElementById('progress-fill').style.width = '100%';
+    document.getElementById('progress-fraction').textContent = 'Complete';
+  }, 1800);
+}
+
+const TRIGGER_INFO = {
+  em: { name:'Emotional triggers', max:12, icon:'\u{1F4A2}',
+    desc:'You relapse to manage feelings — stress, anxiety, sadness, or the sting of conflict and rejection. Porn is functioning as your emotional regulator. The relapse is not really about sex; it is about not wanting to feel what you are feeling.',
+    plan:[
+      'Name the feeling before you act. The moment an urge hits, pause and finish this sentence out loud: "I am feeling ___." Naming an emotion reduces its grip — this is documented neuroscience, not motivation.',
+      'Build a 3-item emotional toolkit. Pick three things that genuinely shift your state — a walk, cold water on the face, calling someone, intense exercise. When the urge comes, you run the toolkit first, before any decision.',
+      'Urge-surf instead of fighting. An urge is a wave — it peaks at 3 to 7 minutes and falls if you do not feed it. Set a timer for 10 minutes and do anything else. You are not resisting forever, just outlasting one wave.',
+      'Address the source. If stress or unresolved conflict is driving this, the porn is a symptom. Coaching or therapy that targets the underlying emotional load will do more than any blocker.'
+    ]},
+  lo: { name:'Loneliness', max:9, icon:'\u{1F311}',
+    desc:'You relapse when you feel alone, disconnected, or starved of intimacy. Porn is standing in for connection. This is one of the most common and most misunderstood triggers — the habit is not really after pleasure, it is after the feeling of not being alone.',
+    plan:[
+      'Reframe the urge as a signal, not a craving. When loneliness hits, the real need is connection. The porn will not meet it — it deepens the isolation afterward. Recognising "this is loneliness, not desire" changes everything.',
+      'Build one real point of contact per day. A text, a call, sitting with someone. Loneliness relapses drop sharply when there is genuine human contact in the day, even small amounts.',
+      'Protect the danger windows. Loneliness peaks at predictable times — evenings, weekends, after work. Plan those windows in advance with something involving other people.',
+      'Get an accountability partner. This trigger responds more to connection than to control. One honest weekly conversation with another man on the same path attacks the loneliness and the habit at once.'
+    ]},
+  id: { name:'Idle time & boredom', max:9, icon:'\u{1F557}',
+    desc:'You relapse when you have nothing to do. Unstructured time is your danger zone — weekends, holidays, empty evenings. Boredom creates a vacuum, and porn rushes in to fill it. This is one of the most fixable triggers because it is about structure, not emotion.',
+    plan:[
+      'Eliminate the vacuum. Identify your high-risk empty windows and pre-fill them. A vague "I will relax" becomes "I am going to the gym at 7, then cooking." Boredom relapses happen in unplanned gaps.',
+      'Make the "if bored, then ___" rule. Decide in advance exactly what you do when boredom hits — a specific activity, ready to go, no deciding in the moment. The decision must be made before the urge, not during it.',
+      'Keep your hands and mind occupied. Boredom relapses are often about understimulation. A hobby, a project, a skill being learned — something that absorbs attention — removes the vacuum the habit fills.',
+      'Protect weekends and holidays specifically. These are the classic boredom-relapse danger zones. Go in with a plan, not an open calendar.'
+    ]},
+  dg: { name:'Digital & doomscrolling', max:15, icon:'\u{1F4F1}',
+    desc:'Your relapses start on your phone. Scrolling, suggestive content, late-night browsing, the "one click that spirals" — the device itself is your primary trigger. This is the most common modern relapse pattern, and the good news is it is highly controllable through environment design.',
+    plan:[
+      'Get the phone out of the bedroom. This single change stops more relapses than any other. Charge it in another room. Buy a separate alarm clock. The late-night-scroll-to-relapse pipeline is broken the moment the phone is not in reach.',
+      'Install a blocker you do not control. Covenant Eyes, BlockerX, or your phone built-in content restrictions with a password a friend sets. The point is to put friction between the impulse and the content.',
+      'Kill the on-ramps. Unfollow suggestive accounts. Turn on grayscale mode after 9pm — it makes the phone genuinely boring. Most relapses do not start on a porn site; they start on Instagram or TikTok.',
+      'The one-click rule. Your data shows one click spirals into relapse. So the rule is: zero clicks. Not "I will be careful." The first click is the relapse — treat it as the line, not the porn site.'
+    ]},
+  en: { name:'Situational & environmental', max:9, icon:'\u{1F3E0}',
+    desc:'Your relapses are tied to specific situations — being home alone, a particular room, late nights. Your environment is cueing the behaviour. The trigger is contextual: certain places and times have become associated with the habit, and the association fires automatically.',
+    plan:[
+      'Change the environment, not just the willpower. If it always happens in one room, change that room — work somewhere else, keep the door open, move the chair. Breaking the physical context breaks the cue.',
+      'Make the danger times structured. If late nights alone are the pattern, build a fixed wind-down routine — a set bedtime, no phone, a different activity. Remove the unstructured alone-time the habit exploits.',
+      'Add friction to the high-risk setting. If it happens home alone, make a plan to be out, have someone over, or be on a call during the worst windows. Reduce the number of high-risk solo windows.',
+      'Use environment as your ally. Just as the environment can cue relapse, it can cue recovery. A visible reminder, a changed layout, a different routine in the danger zone all help retrain the association.'
+    ]},
+  ph: { name:'Physical state', max:12, icon:'\u{26A1}',
+    desc:'Your relapses track your physical state — tiredness, alcohol, mornings, restlessness. When your body is depleted or dysregulated, your resistance collapses. Willpower is a physical resource, and yours is being drained before the urge even arrives.',
+    plan:[
+      'Protect your sleep above everything. Exhaustion destroys willpower — this is measurable. Fixing your sleep is one of the highest-impact things you can do for relapse resistance. Most physical-trigger relapses trace back to being tired.',
+      'Watch alcohol carefully. If drinking removes your resistance, that is critical data. Reduce it, or have a hard plan for the hours after drinking when you are most vulnerable.',
+      'Have a morning protocol. If mornings or waking aroused is the trigger, get up immediately — do not linger in bed with the phone. Feet on the floor, out of the room, into the day. The danger window is the half-asleep lingering.',
+      'Channel physical restlessness. If energy and restlessness drive it, give the body another outlet — exercise, cold showers, physical work. Redirect the energy rather than letting it find the old channel.'
+    ]},
+  hr: { name:'Habit & relationship', max:9, icon:'\u{1F501}',
+    desc:'Your relapses are either pure automatic habit — happening on autopilot with no real feeling behind them — or tied to strained intimacy with a partner. The behaviour has either become a conditioned reflex, or it is filling a gap where real intimacy should be.',
+    plan:[
+      'Interrupt the automatic loop. Pure-habit relapses run on a cue-routine-reward loop you barely notice. Identify the cue (a time, a place, an action right before) and physically interrupt it — change what happens at that exact moment.',
+      'Replace the reward, do not just remove it. If porn is your "reward" after hard tasks, you need a real reward in its place or the brain keeps demanding the old one. Decide what the new reward is, in advance.',
+      'If intimacy is the gap: address it directly. Turning to porn when intimacy is strained deepens the distance. The honest, hard conversation with your partner does more than any blocker. This is where coaching helps most.',
+      'Make the invisible visible. Autopilot habits survive on not being noticed. Tracking, a journal, or an accountability check-in forces the unconscious pattern into the light, where it loses its power.'
+    ]}
+};
+
+function buildResult() {
+  const sc = calcScores();
+  const entries = Object.keys(TRIGGER_INFO).map(k => ({
+    key:k, score:sc[k], max:TRIGGER_INFO[k].max,
+    pct: Math.round((sc[k]/TRIGGER_INFO[k].max)*100)
+  }));
+  entries.sort((a,b) => b.pct - a.pct);
+
+  const dominant = entries[0];
+  const secondary = entries[1];
+  const totalScore = entries.reduce((s,e)=>s+e.score,0);
+  const maxTotal = entries.reduce((s,e)=>s+e.max,0);
+  const overallPct = Math.round((totalScore/maxTotal)*100);
+
+  let intensity, intensityClass;
+  if (overallPct < 25) { intensity='Low overall trigger load'; intensityClass='low'; }
+  else if (overallPct < 45) { intensity='Moderate trigger load'; intensityClass='moderate'; }
+  else if (overallPct < 65) { intensity='High trigger load'; intensityClass='high'; }
+  else { intensity='Very high trigger load'; intensityClass='very-high'; }
+
+  const dInfo = TRIGGER_INFO[dominant.key];
+  const sInfo = TRIGGER_INFO[secondary.key];
+
+  let html = '<div class="result-header">' +
+    '<div class="result-eyebrow">Your relapse trigger profile</div>' +
+    '<h2 class="result-title">Your dominant trigger: ' + dInfo.name + '</h2>' +
+    '<p class="result-subtitle">' + dInfo.desc + '</p></div>';
+
+  html += '<div class="score-band ' + intensityClass + '">' +
+    '<div class="band-label">' + intensity + ' \u00b7 ' + overallPct + '%</div>' +
+    '<div class="band-title">' + dInfo.icon + ' ' + dInfo.name + ' is what pulls you back</div>' +
+    '<div class="band-body">Based on your 25 responses. Your relapses cluster most strongly around this trigger — which means this is where your effort should go first.</div></div>';
+
+  html += '<div class="section-heading">Your triggers, ranked</div><div class="findings-list">';
+  entries.forEach((e,i) => {
+    const info = TRIGGER_INFO[e.key];
+    const col = e.pct >= 60 ? '#c0392b' : e.pct >= 35 ? '#b07d2a' : '#1a7a4a';
+    const tag = i===0 ? ' \u00b7 DOMINANT' : i===1 ? ' \u00b7 SECONDARY' : '';
+    html += '<div class="finding-item"><div class="finding-dot" style="background:' + col + '"></div>' +
+      '<div class="finding-content"><div class="finding-title">' + info.icon + ' ' + info.name + ' — ' + e.pct + '%' + tag + '</div>' +
+      '<div class="finding-note"><div style="height:6px;background:rgba(0,0,0,0.06);border-radius:3px;margin-top:6px;overflow:hidden;"><div style="height:100%;width:' + e.pct + '%;background:' + col + ';border-radius:3px;"></div></div></div></div></div>';
+  });
+  html += '</div>';
+
+  html += '<div class="section-heading">Your plan for ' + dInfo.name.toLowerCase() + '</div><div class="next-steps">';
+  dInfo.plan.forEach((step,i) => {
+    html += '<div class="step-item"><div class="step-num">' + (i+1) + '</div><div class="step-content"><div class="step-body">' + step + '</div></div></div>';
+  });
+  html += '</div>';
+
+  if (secondary.pct >= 30) {
+    html += '<div class="section-heading">Also address: ' + sInfo.name.toLowerCase() + '</div>' +
+      '<p style="font-size:14px;color:#5a6472;margin-bottom:16px;line-height:1.6;">' + sInfo.desc + '</p><div class="next-steps">';
+    sInfo.plan.slice(0,2).forEach((step,i) => {
+      html += '<div class="step-item"><div class="step-num">' + (i+1) + '</div><div class="step-content"><div class="step-body">' + step + '</div></div></div>';
+    });
+    html += '</div>';
+  }
+
+  html += '<div class="cta-block"><h3>Knowing your trigger is step one. Beating it is step two.</h3>' +
+    '<p>One-on-one coaching with a man who has been exactly where you are turns this profile into a plan that actually holds. He has mapped his own triggers and beaten them.</p>' +
+    '<a href="https://risenowrecovery.com/#coaching" class="btn-cta">Talk to a coach →</a></div>';
+
+  document.getElementById('result-content').innerHTML = html;
+}
+
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function restart() {
+  answers = {};
+  current = 0;
+  paid = false;
+  try {
+    sessionStorage.removeItem('rn_trigger_answers');
+    sessionStorage.removeItem('rn_trigger_current');
+  } catch (e) {}
+  document.getElementById('progress-fill').style.width = '0%';
+  document.getElementById('progress-fraction').textContent = '';
+  showScreen('screen-intro');
+}
+
+
+function downloadResult() {
+  if (!document.getElementById('print-header')) {
+    const rc = document.getElementById('result-content');
+    const header = document.createElement('div');
+    header.id = 'print-header';
+    const d = new Date();
+    const dateStr = d.toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
+    header.innerHTML =
+      '<div style="text-align:center;padding-bottom:16px;margin-bottom:24px;border-bottom:2px solid #c9a84c;">' +
+      '<div style="font-family:\'DM Serif Display\',serif;font-size:26px;color:#0d1b2a;letter-spacing:1px;">RISENOW <span style="color:#c9a84c;">RECOVERY</span></div>' +
+      '<div style="font-size:13px;color:#5a6878;margin-top:4px;">Relapse Trigger Assessment Result · ' + dateStr + '</div>' +
+      '<div style="font-size:12px;color:#8a9ab0;margin-top:2px;">risenowrecovery.com</div>' +
+      '</div>';
+    rc.insertBefore(header, rc.firstChild);
+  }
+  window.print();
+}
+
+// Check on load whether the user is returning from a successful Stripe payment
+checkPaidReturn();
+</script>
+</body>
+</html>
