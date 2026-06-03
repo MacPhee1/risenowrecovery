@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Disallow any system files
+Disallow: /vercel.json
+
+# Sitemap location
+Sitemap: https://risenowrecovery.com/sitemap.xml
