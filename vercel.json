@@ -1,4 +1,24 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/assessments.html", "destination": "https://www.risenowrecovery.com/assessment-bundle", "permanent": true },
+    { "source": "/assessment-bundle.html", "destination": "https://www.risenowrecovery.com/assessment-bundle", "permanent": true },
+    { "source": "/coaching.html", "destination": "https://www.risenowrecovery.com/coaching", "permanent": true },
+    { "source": "/books.html", "destination": "https://www.risenowrecovery.com/books", "permanent": true },
+    { "source": "/pied-recovery.html", "destination": "https://www.risenowrecovery.com/pied-recovery", "permanent": true },
+    { "source": "/quit-porn.html", "destination": "https://www.risenowrecovery.com/quit-porn", "permanent": true },
+    { "source": "/faq.html", "destination": "https://www.risenowrecovery.com/faq", "permanent": true },
+    { "source": "/porn-addiction-symptoms.html", "destination": "https://www.risenowrecovery.com/porn-addiction-symptoms", "permanent": true },
+    { "source": "/therapist-directory.html", "destination": "https://www.risenowrecovery.com/therapist-directory", "permanent": true },
+    { "source": "/supplements.html", "destination": "https://www.risenowrecovery.com/supplements", "permanent": true },
+    { "source": "/about.html", "destination": "https://www.risenowrecovery.com/about", "permanent": true },
+    { "source": "/privacy.html", "destination": "https://www.risenowrecovery.com/privacy", "permanent": true },
+    { "source": "/community-guidelines.html", "destination": "https://www.risenowrecovery.com/community-guidelines", "permanent": true },
+    { "source": "/porn-addiction-test.html", "destination": "https://www.risenowrecovery.com/porn-addiction-test", "permanent": true },
+    { "source": "/pied-assessment.html", "destination": "https://www.risenowrecovery.com/pied-assessment", "permanent": true },
+    { "source": "/masturbation-assessment.html", "destination": "https://www.risenowrecovery.com/masturbation-assessment", "permanent": true },
+    { "source": "/relapse-trigger-assessment.html", "destination": "https://www.risenowrecovery.com/relapse-trigger-assessment", "permanent": true },
+    { "source": "/index.html", "destination": "https://www.risenowrecovery.com/", "permanent": true }
+  ]
 }
